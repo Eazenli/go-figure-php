@@ -1,0 +1,13 @@
+# Messages of the app's own constraints, in French; Symfony brings its built-in ones.
+"Unsupported: the model wrote this number itself.": "Sans preuve : le modèle a écrit ce nombre lui-même."
+"Unsupported: the model wrote this number sign itself.": "Sans preuve : le modèle a écrit ce signe de nombre lui-même."
+"Refused: invisible formatting characters are not allowed.": "Refusé : les caractères de mise en forme invisibles sont interdits."
+"Refused: disguised letters are not allowed.": "Refusé : les lettres déguisées sont interdites."
+"Refused: web addresses are not allowed.": "Refusé : les adresses web sont interdites."
+"This period is not a year, a month or a month of the year.": "Cette période n'est ni une année, ni un mois, ni un mois de l'année."
+"Choose at least two places.": "Choisissez au moins deux lieux."
+"Choose at least one place.": "Choisissez au moins un lieu."
+"Choose at most {{ limit }} places.": "Choisissez au plus {{ limit }} lieux."
+"Choose each place once.": "Choisissez chaque lieu une seule fois."
+"Choose one month.": "Choisissez un seul mois."
+"The first period comes after the last one.": "La première période vient après la dernière."

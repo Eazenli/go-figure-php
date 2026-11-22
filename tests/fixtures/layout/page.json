@@ -1,0 +1,29 @@
+{
+    "title": "Hotel nights in France and Spain",
+    "components": [
+        {"kind": "kpi", "label": "Hotel nights in France", "figure": {"type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2024"}},
+        {"kind": "bar", "title": "Growth since the pandemic", "bars": [
+            {"type": "computed", "op": "change_pct", "operands": [
+                {"type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2019"},
+                {"type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2024"}
+            ]},
+            {"type": "measured", "dataset": "nights_hotels", "geo": "ES", "time": "2024"}
+        ]},
+        {"kind": "line", "title": "Hotel nights over time", "series": [
+            {"dataset": "nights_hotels", "geo": "FR", "from": "2015", "to": "2024"}
+        ]},
+        {"kind": "table", "title": "Side by side", "rows": [
+            {"type": "measured", "dataset": "nights_hotels", "geo": "ES", "time": "2024"}
+        ]},
+        {"kind": "note", "segments": [
+            {"kind": "text", "text": "France grew by "},
+            {"kind": "figure", "figure": {"type": "computed", "op": "change_pct", "operands": [
+                {"type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2019"},
+                {"type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2024"}
+            ]}},
+            {"kind": "text", "text": " between "},
+            {"kind": "period", "from": "2019", "to": "2024"},
+            {"kind": "text", "text": "."}
+        ]}
+    ]
+}
