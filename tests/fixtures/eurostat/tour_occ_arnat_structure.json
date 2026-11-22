@@ -1,0 +1,15 @@
+{
+  "label": "Arrivals at tourist accommodation establishments",
+  "updated": "2026-10-12T23:00:00+0200",
+  "id": ["freq", "c_resid", "unit", "nace_r2", "geo", "time"],
+  "size": [1, 3, 1, 2, 4, 1],
+  "dimension": {
+    "freq": {"label": "Time frequency", "category": {"index": {"A": 0}, "label": {"A": "Annual"}}},
+    "c_resid": {"label": "Country of residence", "category": {"index": {"DOM": 0, "FOR": 1, "TOTAL": 2}, "label": {"DOM": "Domestic country", "FOR": "Foreign country", "TOTAL": "Total"}}},
+    "unit": {"label": "Unit of measure", "category": {"index": {"NR": 0}, "label": {"NR": "Number"}}},
+    "nace_r2": {"label": "Statistical classification of economic activities", "category": {"index": ["I551-I553", "I551"], "label": {"I551-I553": "Hotels; holiday and other short-stay accommodation", "I551": "Hotels and similar accommodation"}}},
+    "geo": {"label": "Geopolitical entity", "category": {"index": {"EU27_2020": 0, "ES": 1, "FR": 2, "UK": 3}}},
+    "time": {"label": "Time", "category": {"index": {"2025": 0}}}
+  },
+  "value": {"0": 1, "1": 2}
+}

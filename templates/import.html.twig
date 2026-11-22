@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Add public data'|trans }} · Go Figure{% endblock %}
+
+{% block body %}
+    <main class="import">
+        <h1>{{ 'Add public data'|trans }}</h1>
+        <p>{{ 'import.lead'|trans }}</p>
+        <p class="hint">{{ 'import.other'|trans }} <a href="{{ path('your_data') }}">{{ 'Deposit a file'|trans }}</a>. <a href="{{ path('sources') }}">{{ 'The two ways, side by side'|trans }}</a>.</p>
+
+        {% if problems ?? false %}
+            <ul class="problem" role="alert">{% for problem in problems %}<li>{{ problem }}</li>{% endfor %}</ul>
+        {% endif %}
+
+        {% if added %}
+            <section class="added" aria-labelledby="added-title">
+                <h2 id="added-title">{{ 'Added: %title%'|trans({'%title%': added.title}) }}</h2>
+                <p>{{ 'import.added'|trans({'%places%': added.geo|length, '%from%': added.time.from, '%to%': added.time.to}) }} <code>{{ added.sourceDataset }}</code></p>
+                <p class="actions">
+                    <a class="button" href="{{ path('compose', compose[added.id]) }}">{{ 'Draw it on a page'|trans }}</a>
+                    <a href="{{ path('compare') }}">{{ 'Compare destinations'|trans }}</a>
+                    {% if live %}<a href="{{ path('ask') }}">{{ 'Ask a question about it'|trans }}</a>{% endif %}
+                </p>
+            </section>
+        {% endif %}
+
+        {% if city %}
+            <section class="added" aria-labelledby="city-title">
+                <h2 id="city-title">{{ 'Added: %title%'|trans({'%title%': city|place_name}) }}</h2>
+                <p>{{ 'import.city.added'|trans }}{% if city_off_centre ?? false %} <strong>{{ 'city.off_centre'|trans }}</strong>{% endif %}</p>
+                <p class="actions"><a class="button" href="{{ path('compare', {places: other_city ? [city, other_city] : [city], month: '09'}) }}">{{ 'Compare it with other destinations'|trans }}</a></p>
+            </section>
+        {% endif %}
+
+        {% if structure is defined %}
+            <section class="proposal" aria-labelledby="proposal-title">
+                <h2 id="proposal-title"><span lang="en">{{ structure.label }}</span> <code>{{ structure.code }}</code></h2>
+                {% if proposed_by ?? false %}<p class="note">{{ 'Proposed by %model% for “%wish%”: review it, then import it.'|trans({'%model%': proposed_by, '%wish%': wish}) }}</p>{% endif %}
+                <p class="note">{{ 'import.review'|trans }}</p>
+                {{ form_start(form, {attr: {class: 'gf-import'}}) }}
+                    {{ form_widget(form) }}
+                    <button type="submit">{{ 'Import from Eurostat'|trans }}</button>
+                {{ form_end(form) }}
+                <p><a href="{{ path('import') }}">{{ 'Choose another dataset'|trans }}</a></p>
+            </section>
+        {% else %}
+            <section class="ways" aria-label="{{ 'Two ways to find a dataset'|trans }}">
+                <form method="post" action="{{ path('import_agent') }}" class="way">
+                    <h2><label for="wish">{{ 'Describe what you look for'|trans }}</label></h2>
+                    {% if live %}
+                        <textarea id="wish" name="wish" rows="2" maxlength="300" required placeholder="{{ 'Arrivals of foreign tourists in hotels'|trans }}">{{ wish ?? '' }}</textarea>
+                        <p><button type="submit">{{ 'Ask %model% to propose a dataset'|trans({'%model%': model}) }}</button></p>
+                        <p class="note">{{ 'import.agent'|trans }}</p>
+                    {% else %}
+                        <p class="note">{{ 'import.agent.key'|trans }} <code>AI_PROVIDER</code>, <code>AI_MODEL</code>, <code>AI_API_KEY</code> (<code>.env.local</code>).</p>
+                    {% endif %}
+                </form>
+                <form method="get" action="{{ path('import') }}" class="way" role="search">
+                    <h2><label for="q">{{ 'Or look for it by its words'|trans }}</label></h2>
+                    <p><input id="q" name="q" type="search" value="{{ query }}" maxlength="120" placeholder="{{ 'arrivals tourist accommodation'|trans }}" required>
+                        <button type="submit">{{ 'Search Eurostat'|trans }}</button></p>
+                    <p class="note">{{ 'import.search'|trans }}</p>
+                </form>
+            </section>
+            <section class="way world-bank" aria-labelledby="wb-title">
+                <h2 id="wb-title"><label for="wb">{{ 'Or add an indicator of the World Bank'|trans }}</label></h2>
+                <form method="get" action="{{ path('import') }}">
+                    <p><input id="wb" name="wb" type="search" value="{{ wb_query ?? '' }}" maxlength="120" placeholder="forest area" required>
+                    <button type="submit">{{ 'Search the World Bank'|trans }}</button></p>
+                </form>
+                <p class="note">{{ 'import.world_bank'|trans }}</p>
+                {% if wb_results is defined %}
+                    {% if wb_results is empty %}
+                        <p>{{ 'No World Bank indicator has these words in its name. Try other words, in English.'|trans }}</p>
+                    {% else %}
+                        <ul class="wb-results">
+                            {% for indicator in wb_results %}
+                                <li>
+                                    <form method="post" action="{{ path('import_world_bank') }}">
+                                        <input type="hidden" name="indicator" value="{{ indicator.id }}">
+                                        <span lang="en">{{ indicator.name }}</span> <code>{{ indicator.id }}</code>
+                                        <button type="submit">{{ 'Add'|trans }}</button>
+                                    </form>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            </section>
+            <form method="post" action="{{ path('import_city') }}" class="way city">
+                <h2><label for="city">{{ 'Or add the weather of a city'|trans }}</label></h2>
+                {% if cities is empty %}
+                    <p class="note">{{ (cities_full ? 'This Go Figure already keeps as many added cities as it may.' : 'Every city of the list is in the catalog.')|trans }}</p>
+                {% else %}
+                    <p><select id="city" name="city" required>
+                        {% for code, name in cities %}<option value="{{ code }}">{{ name }}</option>{% endfor %}
+                    </select>
+                    <button type="submit">{{ 'Add its weather'|trans }}</button></p>
+                    <p class="note">{{ 'import.city'|trans }}</p>
+                {% endif %}
+            </form>
+            {% if results is defined %}
+                <section aria-labelledby="results-title">
+                    <h2 id="results-title">{{ 'Datasets of Eurostat for “%query%”'|trans({'%query%': query}) }}</h2>
+                    {% if results is empty %}
+                        <p>{{ 'No dataset of Eurostat has these words in its title. Try other words, in English.'|trans }}</p>
+                    {% else %}
+                        <ul class="results">
+                            {% for dataset in results %}
+                                <li><a href="{{ path('import', {code: dataset.code}) }}" lang="en">{{ dataset.title }}</a> <code>{{ dataset.code }}</code> <span class="years">{{ dataset.from }}–{{ dataset.to }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </section>
+            {% endif %}
+        {% endif %}
+
+        <section aria-labelledby="imported-title">
+            <h2 id="imported-title">{{ 'Added on this machine'|trans }}</h2>
+            {% if added_cities is not empty %}
+                <p>{{ 'Weather added for:'|trans }} {% for code in added_cities %}{{ code|place_name }}{{ loop.last ? '.' : ', ' }}{% endfor %}</p>
+            {% endif %}
+            {% if imported is empty and added_cities is empty %}
+                <p class="note">{{ 'None yet. An imported dataset stays with this container: the shipped ones never change.'|trans }}</p>
+            {% elseif imported is not empty %}
+                <ul class="results">
+                    {% for entry in imported %}
+                        <li><a href="{{ path('compose', compose[entry.id]) }}">{{ entry.title }}</a> <code>{{ entry.sourceDataset }}</code> <span class="years">{{ entry.time.from }}–{{ entry.time.to }}</span></li>
+                    {% endfor %}
+                </ul>
+                <p class="note">{{ 'At most %max% datasets. An import is never replaced: its figures may already be on pages.'|trans({'%max%': max}) }}</p>
+            {% endif %}
+        </section>
+    </main>
+{% endblock %}

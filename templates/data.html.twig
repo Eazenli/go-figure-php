@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Your own file'|trans }} · Go Figure{% endblock %}
+
+{% block body %}
+    <main class="gf-data">
+        <h1>{{ 'Your own file'|trans }}</h1>
+        <p>{{ 'data.lead'|trans }}</p>
+        <p class="hint">{{ 'data.other'|trans }} <a href="{{ path('import') }}">{{ 'Add public data'|trans }}</a>. <a href="{{ path('sources') }}">{{ 'The two ways, side by side'|trans }}</a>.</p>
+
+        {% for problem in problems %}<p class="problem">{{ problem }}</p>{% endfor %}
+
+        {% if kept is not empty %}
+            <section class="data-kept">
+                <h2><span class="stamp">{{ 'Proven'|trans }}</span> {{ 'data.kept'|trans }}</h2>
+                <ul class="hero-examples">
+                    {% for entry in kept %}
+                        <li><a href="{{ path('home', {ask: entry.title, words: 1}) }}#result">{{ 'Ask about %title%'|trans({'%title%': entry.title}) }}</a></li>
+                    {% endfor %}
+                </ul>
+                <p class="hint">{{ 'data.kept.hint'|trans }}</p>
+            </section>
+        {% elseif file %}
+            {#- What the server read in the file, before anything is kept: the depositor names the numbers. -#}
+            <form method="post" action="{{ path('your_data') }}" class="data-name">
+                <h2>{{ 'data.read.title'|trans }}</h2>
+                <p>{{ 'data.read.what'|trans({'%rows%': file.rows, '%places%': file.places|length, '%place%': file.headers[file.place], '%period%': file.headers[file.period], '%from%': file.periods|first, '%to%': file.periods|last}) }}</p>
+                <table class="gf-table data-sample">
+                    <thead><tr>{% for header in file.headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+                    <tbody>{% for row in file.sample %}<tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+                </table>
+                <h3>{{ 'data.name.title'|trans }}</h3>
+                <p class="hint">{{ 'data.name.hint'|trans }}</p>
+                {% for column in file.values %}
+                    {% set header = file.headers[column] %}
+                    <fieldset class="data-column">
+                        <legend>{{ 'Column %name%'|trans({'%name%': header}) }}</legend>
+                        <label>{{ 'What it counts'|trans }} <input name="columns[{{ column }}][title]" maxlength="80" value="{{ named[column].title ?? header|replace({'_': ' ', '-': ' '})|preg_words }}" placeholder="{{ 'Revenue of the store'|trans }}"></label>
+                        <label>{{ 'Its unit'|trans }} <input name="columns[{{ column }}][unit]" maxlength="40" value="{{ named[column].unit ?? '' }}" placeholder="{{ 'euros'|trans }}"></label>
+                    </fieldset>
+                {% endfor %}
+                <input type="hidden" name="name" value="{{ name }}">
+                <textarea name="csv" hidden>{{ csv }}</textarea>
+                <p><button type="submit" name="keep" value="1">{{ 'Keep these figures'|trans }}</button> <a href="{{ path('your_data') }}">{{ 'Another file'|trans }}</a></p>
+            </form>
+        {% else %}
+            <form method="post" action="{{ path('your_data') }}" enctype="multipart/form-data" class="data-drop">
+                {# The browser writes its own file control in its own language: this one says it in the page's. #}
+                <label class="file-pick" for="file">{{ 'Choose a CSV file'|trans }}<input id="file" class="visually-hidden" name="file" type="file" accept=".csv,text/csv,text/plain" required></label>
+                <span class="file-name" aria-live="polite" data-none="{{ 'No file chosen'|trans }}"></span>
+                <button type="submit">{{ 'Read this file'|trans }}</button>
+            </form>
+            {#- The file expected, shown rather than described: the same lines as the example to download. -#}
+            <section class="data-expected">
+                <h2>{{ 'How it goes'|trans }}</h2>
+                <ol class="data-steps">
+                    <li><strong>{{ 'data.step.deposit.title'|trans }}</strong> {{ 'data.step.deposit'|trans }}</li>
+                    <li><strong>{{ 'data.step.name.title'|trans }}</strong> {{ 'data.step.name'|trans }}</li>
+                    <li><strong>{{ 'data.step.ask.title'|trans }}</strong> {{ 'data.step.ask'|trans }}</li>
+                </ol>
+                <h2 id="expected-title">{{ 'The file it expects'|trans }}</h2>
+                <div class="data-sample">
+                    <table>
+                        <caption>{{ 'data.sample.caption'|trans }}</caption>
+                        <thead>
+                            <tr><th scope="col">shop</th><th scope="col">year</th><th scope="col">sales</th><th scope="col">visitors</th></tr>
+                            <tr class="roles"><td>{{ 'What each line is about'|trans }}</td><td>{{ 'When'|trans }}</td><td colspan="2">{{ 'The numbers, one column each'|trans }}</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Nantes</td><td>2023</td><td>1410.00</td><td>455</td></tr>
+                            <tr><td>Nantes</td><td>2024</td><td>1388.20</td><td>470</td></tr>
+                            <tr><td>Rennes</td><td>2023</td><td>1020.75</td><td>322</td></tr>
+                            <tr><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+                        </tbody>
+                    </table>
+                    <p><a href="/example-shops.csv" download>{{ 'Download this example'|trans }}</a> {{ 'data.sample.try'|trans }}</p>
+                </div>
+                <ul class="data-format">
+                    <li>{{ 'data.format.line'|trans }}</li>
+                    <li>{{ 'data.format.first'|trans }}</li>
+                    <li>{{ 'data.format.period'|trans }}</li>
+                    <li>{{ 'data.format.numbers'|trans({'%columns%': max_columns}) }}</li>
+                    <li>{{ 'data.format.limits'|trans({'%kb%': max_kb, '%rows%': max_rows, '%places%': max_places}) }}</li>
+                </ul>
+            </section>
+            <ul class="data-rules">
+                <li><strong>{{ 'data.rule.stays.title'|trans }}</strong> {{ 'data.rule.stays'|trans }}</li>
+                <li><strong>{{ 'data.rule.model.title'|trans }}</strong> {{ 'data.rule.model'|trans }}</li>
+                <li><strong>{{ 'data.rule.people.title'|trans }}</strong> {{ 'data.rule.people'|trans }}</li>
+            </ul>
+        {% endif %}
+
+        {% if mine is not empty %}
+            <section class="data-mine">
+                <h2>{{ 'Deposited on this machine'|trans }}</h2>
+                <ul class="hero-examples">
+                    {% for entry in mine %}
+                        <li><a href="{{ path('home', {ask: entry.title, words: 1}) }}#result">{{ entry.title }}</a> <span class="hint">{{ entry.sourceDataset }}, {{ entry.time.from }} {{ 'to'|trans }} {{ entry.time.to }}</span></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+    </main>
+    <script src="/file.js" defer></script>
+{% endblock %}

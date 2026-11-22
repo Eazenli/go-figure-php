@@ -1,0 +1,7 @@
+"title"	"code"	"type"	"last update of data"	"last table structure change"	"data start"	"data end"	"values"
+"Tourism"	"tour"	"folder"	""	""	""	""	""
+"    Arrivals at tourist accommodation establishments"	"tour_occ_arnat"	"dataset"	"12.10.2026"	"12.10.2026"	"1990"	"2025"	1000
+"    Arrivals at tourist accommodation establishments"	"tour_occ_arnat"	"dataset"	"12.10.2026"	"12.10.2026"	"1990"	"2025"	1000
+"    Nights spent at tourist accommodation establishments by NUTS 2 regions"	"tour_occ_nin2"	"dataset"	"12.10.2026"	"12.10.2026"	"2012"	"2025"	9000
+"    Air passenger transport by reporting country"	"avia_paoc"	"dataset"	"01.10.2026"	"01.10.2026"	"1993"	"2026"	9000
+"    Asylum applicants by citizenship, arrivals by month"	"migr_asyappctzm"	"dataset"	"12.10.2026"	"12.10.2026"	"2008"	"2025"	9000
