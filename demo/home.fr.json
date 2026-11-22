@@ -1,0 +1,73 @@
+{
+    "title": "Lisbonne ou Séville en septembre",
+    "components": [
+        {
+            "kind": "note",
+            "segments": [
+                {
+                    "kind": "text",
+                    "text": "Séville est la plus chaude de ces villes : "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "temp_max_city",
+                        "geo": "ES004C",
+                        "time": "M09"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": " contre "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "temp_max_city",
+                        "geo": "PT001C",
+                        "time": "M09"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": " à Lisbonne."
+                }
+            ]
+        },
+        {
+            "kind": "bar",
+            "title": "La température maximale habituelle, par ville",
+            "bars": [
+                {
+                    "type": "measured",
+                    "dataset": "temp_max_city",
+                    "geo": "PT001C",
+                    "time": "M09"
+                },
+                {
+                    "type": "measured",
+                    "dataset": "temp_max_city",
+                    "geo": "ES004C",
+                    "time": "M09"
+                },
+                {
+                    "type": "measured",
+                    "dataset": "temp_max_city",
+                    "geo": "IS",
+                    "time": "M09"
+                }
+            ]
+        },
+        {
+            "kind": "note",
+            "segments": [
+                {
+                    "kind": "text",
+                    "text": "Soit environ 5 degrés de plus à Séville."
+                }
+            ]
+        }
+    ]
+}

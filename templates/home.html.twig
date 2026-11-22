@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ (question ?? '') ? question ~ ' · ' : '' }}Go Figure{% endblock %}
+
+{% block body %}
+    {#- The first page: the question and its answer. How it works has its own page. -#}
+    <main class="home gf-one">
+        <section class="hero" aria-labelledby="home-title">
+            <div class="hero-text">
+            <h1 id="home-title">{{ 'Numbers you can stand behind.'|trans }}</h1>
+            <p class="promise">{{ 'Ask a question. Get figures you can cite, trace and verify.'|trans }}</p>
+            <form id="ask-form" class="hero-ask" method="post" action="{{ path('home') }}#result" data-stream="{{ path('ask_stream') }}"{% if typed ?? '' %} data-autostart{% endif %}>
+                <label class="visually-hidden" for="question">{{ 'Your own question'|trans }}</label>
+                <input id="question" name="question" type="text" maxlength="{{ max }}" required placeholder="{{ 'home.ask.placeholder'|trans }}" value="{{ current ? '' : (question ?: (typed ?? '')) }}">
+                <button type="submit">{{ 'Ask'|trans }}</button>
+            </form>
+            {#- Who answers: a model when this install has a key, the words of the question otherwise.
+                With a key, the visitor may still ask without AI: instant, and nothing is spent. -#}
+            {% set by_words_list %}
+                {% if by_words ?? [] %}
+                    <ul class="hero-examples by-words" aria-label="{{ 'Questions that work without AI'|trans }}">
+                        {% for q in by_words %}<li><a href="{{ path('home', {ask: q, words: 1}) }}#result" data-ask="{{ q }}">{{ q }}</a></li>{% endfor %}
+                    </ul>
+                {% endif %}
+                {% if knows ?? null %}
+                    <details class="can-ask">
+                        <summary>{{ 'What can I ask?'|trans }}</summary>
+                        <p>{{ 'home.nokey.places'|trans({'%countries%': knows.countries, '%cities%': knows.cities, '%sample%': knows.sample|join(', ')}) }}</p>
+                        <ul class="topics">{% for title in knows.indicators %}<li>{{ title }}</li>{% endfor %}</ul>
+                        {% if not live %}<p class="hint">{{ 'home.nokey.key'|trans }}</p>{% endif %}
+                    </details>
+                {% endif %}
+            {% endset %}
+            {% if live %}
+                <p class="mode on">{{ 'Answered by %model%.'|trans({'%model%': model}) }}
+                    <label class="words-switch"><input type="checkbox" name="words" value="1" form="ask-form"{% if words ?? false %} checked{% endif %}> {{ 'Answer without AI'|trans }}</label></p>
+                <details class="no-key with-key"{% if words ?? false %} open{% endif %}>
+                    <summary><span class="stamp">{{ 'No AI needed'|trans }}</span> {{ 'home.withkey.title'|trans }}</summary>
+                    <p class="no-key-how">{{ 'home.nokey.how'|trans }}</p>
+                    {{ by_words_list }}
+                </details>
+            {% else %}
+                <div class="no-key">
+                    <p class="no-key-title"><span class="stamp">{{ 'No AI needed'|trans }}</span> {{ 'home.nokey.title'|trans }}</p>
+                    <p class="no-key-how">{{ 'home.nokey.how'|trans }}{% if problem_settings %} {{ 'The AI key of this install is not read:'|trans }} <span lang="en">{{ problem_settings }}</span>{% endif %}</p>
+                    {{ by_words_list }}
+                </div>
+            {% endif %}
+            {% if questions is not empty %}
+                <p class="examples-title">{{ 'Example answers, replayed:'|trans }}</p>
+                <ul class="hero-examples gf-examples" aria-label="{{ 'Example questions'|trans }}">
+                    {% for q in questions %}
+                        <li><a href="{{ path('home', {q: q.id}) }}#result" data-stream="{{ path('ask_stream', {q: q.id}) }}"{% if q.id == (current ?? null) %} aria-current="true"{% endif %} lang="{{ q.language }}">{{ q.text }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            </div>
+            <div class="hero-proof">
+            {% if demo %}
+                {#- The thing itself, on a real cell: a claim a chat model could write about a
+                    destination, struck out, and the figure the page shows, read by the server. -#}
+                <figure class="demo" aria-label="{{ 'What a chat model writes, and what the page shows'|trans }}">
+                    <p class="who">{{ 'A chat model writes'|trans }}</p>
+                    <p class="said">{{ 'home.demo.said'|trans({'%place%': demo.fact.geo|place_name, '%month%': demo.fact.time|period_name})|e|replace({'[': '<s class="made-up">', ']': '</s>'})|raw }} <span class="stamp void">{{ 'Not proven'|trans }}</span></p>
+                    <div class="line-shown">
+                        <p class="who">{{ 'The page shows'|trans }}</p>
+                        <p class="shown">{{ demo|figure }}</p>
+                        <p class="cell">{{ demo.fact.geo|place_name }}, {{ demo.fact.time|period_name }}: {{ 'the usual daily high'|trans }}</p>
+                    </div>
+                    <span class="stamp read">{{ 'Read from the source'|trans }}</span>
+                </figure>
+            {% endif %}
+                <p class="mechanism">{{ 'AI writes the page. Every figure is read from the source.'|trans }}</p>
+                <p class="hero-links">
+                    <a class="how-link" href="{{ path('how') }}">{{ 'See how it works'|trans }}</a>
+                    <a class="how-link" href="{{ path('compose') }}">{{ 'Explore the available data'|trans }}</a>
+                </p>
+            </div>
+        </section>
+
+        {#- The answer: the page first, whole width; what the model sent is one click away. -#}
+        <section id="result" class="answer{{ (question ?? '') or (problem ?? false) ? '' : ' is-idle' }}" data-writing="{{ 'The answer is being written…'|trans }}" data-done="{{ 'Finished: the answer is below.'|trans }}" data-cut="{{ 'The answer stopped before its end.'|trans }}" data-counts="{{ 'proven'|trans }}|{{ 'refused'|trans }}|{{ 'not shown'|trans }}">
+            {% if question ?? '' %}<h2 class="asked"{% if question_language ?? null %} lang="{{ question_language }}"{% endif %}>{{ question }}</h2>{% endif %}
+            <div class="columns">
+                <div class="shown">
+                    <p class="origin column-title">{{ origin ?? '' }}</p>
+                    <p class="left-out"{% if not (left_out ?? null) %} hidden{% endif %}>{{ left_out ?? '' }}</p>
+                    <article class="gf-page"{% if question_language ?? null %} lang="{{ question_language }}"{% endif %}>
+                        {{ include('page/_style.html.twig') }}
+                        <div class="parts" data-empty="{{ 'The answer appears here, part by part.'|trans }}">{{ (html ?? '')|raw }}</div>
+                    </article>
+                    {% if problem ?? false %}<p class="problem">{{ problem }}</p>{% endif %}
+                    <p class="tally" role="status">{% if tally ?? false %}{{ tally.summary }}{% endif %}</p>
+                    <div class="link">{{ (tally.actions ?? '')|raw }}</div>
+                </div>
+                <details id="model-stream">
+                    <summary>{{ 'See what was sent to the server'|trans }}</summary>
+                    <p class="hint">{{ 'ask.stream.hint'|trans }}</p>
+                    <pre>{{ raw ?? '' }}</pre>
+                </details>
+            </div>
+        </section>
+
+        <footer>
+            <p>{{ 'home.judge'|trans }}</p>
+            <p>{{ 'Data:'|trans }}
+                {% for provider, licence in sources %}{{ licence|trans(domain: 'licences')|trim('.', 'right') }}{{ loop.last ? '.' : '; ' }}{% else %}{{ 'no catalog entry yet.'|trans }}{% endfor %}
+                {{ 'Each proof names its source, dataset and snapshot date.'|trans }}</p>
+            {#- The pages a question does not replace yet. -#}
+        </footer>
+    </main>
+    <script src="/ask.js" defer></script>
+{% endblock %}

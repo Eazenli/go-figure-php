@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Why it is different'|trans }} · Go Figure{% endblock %}
+
+{% block body %}
+    {#- What is different from an assistant that cites its sources: shown on one sentence, then said in four lines. -#}
+    <main class="home gf-one gf-why">
+        <section class="versus" id="why" aria-labelledby="why-title">
+            <h1 id="why-title">{{ 'A source is not a proof'|trans }}</h1>
+            <p class="versus-lead">{{ 'versus.lead'|trans }}</p>
+
+            {% if demo %}
+                {#- The same sentence, twice: the number a model writes, and the one the server reads. -#}
+                <div class="duel">
+                    <figure class="duel-side them">
+                        <figcaption>{{ 'An assistant that cites its sources'|trans }}</figcaption>
+                        <p class="duel-said">{{ 'why.duel.them'|trans({'%place%': demo.fact.geo|place_name, '%month%': demo.fact.time|period_name})|e|replace({'[': '<mark class="made-up">', ']': '</mark>'})|raw }} <span class="cite">{{ 'source'|trans }}</span></p>
+                        <p class="duel-what"><span class="stamp void">{{ 'Written by the model'|trans }}</span> {{ 'why.duel.them.what'|trans }}</p>
+                    </figure>
+                    <figure class="duel-side us">
+                        <figcaption>Go Figure</figcaption>
+                        <p class="duel-said">{{ 'why.duel.us'|trans({'%place%': demo.fact.geo|place_name, '%month%': demo.fact.time|period_name})|e|replace({'[figure]': '<mark class="read">' ~ demo|figure ~ '</mark>'})|raw }}</p>
+                        <p class="duel-what"><span class="stamp read">{{ 'Read from the source'|trans }}</span> {{ 'why.duel.us.what'|trans }}</p>
+                    </figure>
+                </div>
+            {% endif %}
+
+            <div class="versus-table" role="table" aria-label="{{ 'A source is not a proof'|trans }}">
+                <div class="versus-row versus-head" role="row">
+                    <span role="columnheader"></span>
+                    <span role="columnheader">{{ 'An assistant that cites its sources'|trans }}</span>
+                    <span role="columnheader">Go Figure</span>
+                </div>
+                {% for row in ['writes', 'source', 'missing', 'again'] %}
+                    <div class="versus-row" role="row">
+                        <span class="versus-what" role="rowheader">{{ ('versus.' ~ row ~ '.what')|trans }}</span>
+                        <span class="versus-them" role="cell">{{ ('versus.' ~ row ~ '.them')|trans }}</span>
+                        <span class="versus-us" role="cell">{{ ('versus.' ~ row ~ '.us')|trans }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+            <p class="versus-fair">{{ 'versus.fair'|trans }}</p>
+            <ul class="data-rules why-notes">
+                <li><strong>{{ 'And it is not retrieval (RAG).'|trans }}</strong> {{ 'versus.rag'|trans }}</li>
+                <li><strong>{{ 'What Go Figure does not do.'|trans }}</strong> {{ 'versus.limits'|trans }}</li>
+                <li><strong>{{ 'Where it matters.'|trans }}</strong> {{ 'versus.where'|trans }}</li>
+            </ul>
+            <p><a class="how-link" href="{{ path('how') }}">{{ 'See how it works'|trans }}</a></p>
+        </section>
+    </main>
+{% endblock %}

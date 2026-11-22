@@ -1,0 +1,73 @@
+{
+    "title": "Lisbon or Seville in September",
+    "components": [
+        {
+            "kind": "note",
+            "segments": [
+                {
+                    "kind": "text",
+                    "text": "Seville is the warmer of these cities: "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "temp_max_city",
+                        "geo": "ES004C",
+                        "time": "M09"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": " against "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "temp_max_city",
+                        "geo": "PT001C",
+                        "time": "M09"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": " in Lisbon."
+                }
+            ]
+        },
+        {
+            "kind": "bar",
+            "title": "The usual daily high, by city",
+            "bars": [
+                {
+                    "type": "measured",
+                    "dataset": "temp_max_city",
+                    "geo": "PT001C",
+                    "time": "M09"
+                },
+                {
+                    "type": "measured",
+                    "dataset": "temp_max_city",
+                    "geo": "ES004C",
+                    "time": "M09"
+                },
+                {
+                    "type": "measured",
+                    "dataset": "temp_max_city",
+                    "geo": "IS",
+                    "time": "M09"
+                }
+            ]
+        },
+        {
+            "kind": "note",
+            "segments": [
+                {
+                    "kind": "text",
+                    "text": "That is about 5 degrees more in Seville."
+                }
+            ]
+        }
+    ]
+}

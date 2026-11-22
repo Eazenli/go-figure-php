@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Use other data'|trans }} · Go Figure{% endblock %}
+
+{% block body %}
+    {#- Two ways to bring figures that are not shipped: who brings the values, who names them, what the proof says. -#}
+    <main class="gf-data gf-sources">
+        <h1>{{ 'Use other data'|trans }}</h1>
+        <p>{{ 'sources.lead'|trans }}</p>
+
+        <div class="two-ways">
+            <section class="way" aria-labelledby="way-own">
+                <h2 id="way-own">{{ 'Your own file'|trans }}</h2>
+                <p class="way-for">{{ 'sources.own.for'|trans }}</p>
+                <dl>
+                    <dt>{{ 'What you do'|trans }}</dt><dd>{{ 'sources.own.you'|trans }}</dd>
+                    <dt>{{ 'What the server does'|trans }}</dt><dd>{{ 'sources.own.server'|trans }}</dd>
+                    <dt>{{ 'What a proof says'|trans }}</dt><dd>{{ 'sources.own.proof'|trans }}</dd>
+                    <dt>{{ 'AI'|trans }}</dt><dd>{{ 'sources.own.ai'|trans }}</dd>
+                </dl>
+                <p><a class="how-link is-main" href="{{ path('your_data') }}">{{ 'Deposit a file'|trans }}</a></p>
+            </section>
+            <section class="way" aria-labelledby="way-public">
+                <h2 id="way-public">{{ 'Public data'|trans }}</h2>
+                <p class="way-for">{{ 'sources.public.for'|trans }}</p>
+                <dl>
+                    <dt>{{ 'What you do'|trans }}</dt><dd>{{ 'sources.public.you'|trans }}</dd>
+                    <dt>{{ 'What the server does'|trans }}</dt><dd>{{ 'sources.public.server'|trans }}</dd>
+                    <dt>{{ 'What a proof says'|trans }}</dt><dd>{{ 'sources.public.proof'|trans }}</dd>
+                    <dt>{{ 'AI'|trans }}</dt><dd>{{ 'sources.public.ai'|trans }}</dd>
+                </dl>
+                <p><a class="how-link is-main" href="{{ path('import') }}">{{ 'Add public data'|trans }}</a></p>
+            </section>
+        </div>
+
+        <ul class="data-rules">
+            <li><strong>{{ 'sources.same.title'|trans }}</strong> {{ 'sources.same'|trans }}</li>
+            <li><strong>{{ 'data.rule.stays.title'|trans }}</strong> {{ 'sources.stays'|trans }}</li>
+            <li><strong>{{ 'sources.closed.title'|trans }}</strong> {{ 'sources.closed'|trans }}</li>
+        </ul>
+    </main>
+{% endblock %}

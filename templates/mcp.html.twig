@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MCP · Go Figure{% endblock %}
+
+{% block body %}
+    {#- The same pages from an assistant: the endpoint, what the assistant can do, what it gets back. -#}
+    <main class="home gf-one gf-how gf-mcp">
+        <section class="how-head" aria-labelledby="mcp">
+            <h1 id="mcp">{{ 'From an MCP client'|trans }}</h1>
+            <p class="promise">{{ 'mcp.lead'|trans }}</p>
+            <p class="mcp-endpoint"><span>{{ 'home.mcp.endpoint'|trans }}</span> <code>{{ url('_mcp_endpoint_go_figure') }}</code></p>
+            <ol class="how-steps">
+                <li><strong>{{ 'mcp.step.connect.title'|trans }}</strong> {{ 'mcp.step.connect'|trans }}</li>
+                <li><strong>{{ 'mcp.step.ask.title'|trans }}</strong> {{ 'mcp.step.ask'|trans }}</li>
+                <li><strong>{{ 'mcp.step.page.title'|trans }}</strong> {{ 'mcp.step.page'|trans }}</li>
+            </ol>
+            <p class="mcp-hosts">{{ 'home.mcp.hosts'|trans }}</p>
+        </section>
+    </main>
+{% endblock %}

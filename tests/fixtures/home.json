@@ -1,0 +1,88 @@
+{
+  "title": "Nights: France, Spain, Italy and the United Kingdom",
+  "components": [
+    {
+      "kind": "bar",
+      "title": "Nights by country",
+      "bars": [
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "FR",
+          "time": "2024"
+        },
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "ES",
+          "time": "2024"
+        },
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "IT",
+          "time": "2024"
+        },
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "UK",
+          "time": "2024"
+        }
+      ]
+    },
+    {
+      "kind": "kpi",
+      "label": "France since the year before the pandemic",
+      "figure": {
+        "type": "computed",
+        "op": "change_pct",
+        "operands": [
+          {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "FR",
+            "time": "2019"
+          },
+          {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "FR",
+            "time": "2024"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {
+          "kind": "text",
+          "text": "Spain counted "
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "ES",
+            "time": "2024"
+          }
+        },
+        {
+          "kind": "text",
+          "text": " in "
+        },
+        {
+          "kind": "period",
+          "from": "2024",
+          "to": "2024"
+        },
+        {
+          "kind": "text",
+          "text": ", up 12% on the year before."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'How it works'|trans }} · Go Figure{% endblock %}
+
+{% block body %}
+    {#- How it works: the steps, then one answer taken apart. -#}
+    <main class="home gf-one gf-how">
+        <section class="how-head" aria-labelledby="how-title">
+            <h1 id="how-title">{{ 'How it works'|trans }}</h1>
+            <p class="promise">{{ 'how.lead'|trans }}</p>
+            <ol class="how-steps">
+                <li><strong>{{ 'how.step.ask.title'|trans }}</strong> {{ 'how.step.ask'|trans }}</li>
+                <li><strong>{{ 'how.step.name.title'|trans }}</strong> {{ 'how.step.name'|trans }}</li>
+                <li><strong>{{ 'how.step.read.title'|trans }}</strong> {{ 'how.step.read'|trans }}</li>
+                <li><strong>{{ 'how.step.prove.title'|trans }}</strong> {{ 'how.step.prove'|trans }}</li>
+            </ol>
+        </section>
+
+        {% if example %}
+            {#- How it works, on one question anyone could ask: the answer, a place the data does not
+                have, and a number the model wrote itself. Each outcome is said next to where it shows. -#}
+            <section class="example" id="how" aria-labelledby="example-title">
+                <h2 id="example-title">{{ 'See it in action'|trans }}</h2>
+                <p class="example-question">{{ 'home.example.question'|trans }}</p>
+                <p class="example-lead">{{ 'home.example.lead'|trans }}</p>
+                <div class="frame">{{ include('page/page.html.twig', {page: example, heading: 3}) }}</div>
+                {#- The three things that can happen to a number, each said in a sentence. -#}
+                <ul class="outcomes">
+                    <li><span class="outcome proven">{{ 'Proven'|trans }}</span> {{ 'home.outcome.proven'|trans }}</li>
+                    <li><span class="outcome refused">{{ 'Missing'|trans }}</span> {{ 'home.outcome.cell'|trans }}</li>
+                    <li><span class="outcome unsourced">{{ 'Unsupported'|trans }}</span> {{ 'home.outcome.text'|trans }}</li>
+                </ul>
+                {% if example_token %}
+                    <div class="example-cta">
+                        <a class="gf-attack-open" href="{{ path('lie', {page: example_token}) }}">{{ 'Try to make it lie'|trans }}</a>
+                        <p>{{ 'home.example.dare'|trans }}</p>
+                    </div>
+                {% endif %}
+            </section>
+        {% endif %}
+
+
+        <section class="how-end">
+            <a class="how-link is-main" href="{{ path('home') }}">{{ 'Ask a question'|trans }}</a>
+        </section>
+    </main>
+{% endblock %}
