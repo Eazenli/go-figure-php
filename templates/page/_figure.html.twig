@@ -1,0 +1,5 @@
+{%- if figure is proof -%}
+    {{ figure|figure }}
+{%- else -%}
+    <span class="gf-refusal" title="{{ 'Asked for: %cell%'|trans({'%cell%': figure|requested}) }}">{{ (figure.reason.missing ? 'Missing: %reason%' : 'Refused: %reason%')|trans({'%reason%': figure.reason.message|trans}) }}</span>
+{%- endif -%}

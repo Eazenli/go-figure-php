@@ -1,0 +1,7 @@
+<section class="gf-kpi">
+    {% set level = (heading ?? 1) + 1 %}<h{{ level }} class="gf-heading">{{ include('page/_words.html.twig', {words: c.label}) }}</h{{ level }}>
+    {{ include('page/_scope.html.twig') }}
+    <p>{{ include('page/_figure.html.twig', {figure: c.figure}) }}</p>
+    <p class="gf-cell">{{ include('page/_cell.html.twig', {figure: c.figure}) }}</p>
+    {{ include('page/_stamp.html.twig') }}
+</section>

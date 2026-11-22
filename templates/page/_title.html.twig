@@ -1,0 +1,4 @@
+{#- The level of the page's headings: 1 on a page of its own; deeper where the page sits inside
+    another (the home page's example, the answer on /ask). -#}
+{%- set level = heading ?? 1 -%}
+<h{{ level }} class="gf-title">{{ include('page/_words.html.twig', {words: title}) }}</h{{ level }}>

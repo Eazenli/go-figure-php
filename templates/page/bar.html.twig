@@ -1,0 +1,37 @@
+<section class="gf-bar-chart">
+    {#- When every bar read is of the same period, the period is said once, by the title, and each
+        row names its place only: "2024" on six rows says nothing more than once. -#}
+    {%- set periods = [] -%}
+    {%- for bar in c.bars %}{% if bar.figure is proof and bar.figure is not computed %}{% set periods = periods|merge([bar.figure.fact.time]) %}{% endif %}{% endfor -%}
+    {%- set shared = periods|length > 1 and periods|filter(p => p != periods[0]) is empty ? periods[0] : null -%}
+    {% set level = (heading ?? 1) + 1 %}<h{{ level }} class="gf-heading">{{ include('page/_words.html.twig', {words: c.title}) }}{% if shared and not (c.title.text matches '/(?<![\\p{L}\\d])' ~ (shared|period_name) ~ '(?![\\p{L}\\d])/iu') %} <span class="gf-period gf-code">{{ shared|period_name }}</span>{% endif %}</h{{ level }}>
+    {{ include('page/_scope.html.twig') }}
+    <ul class="gf-bars">
+        {% for bar in c.bars %}
+            <li>
+                {%- if shared and bar.figure is proof and bar.figure is not computed -%}
+                    {#- On /compare, a country's figure standing for the cities chosen in it names them. -#}
+                    {%- set cities = (stand_ins ?? {})[bar.figure.fact.geo] ?? [] -%}
+                    <span class="gf-cell"><span class="gf-code">
+                        {%- if cities is not empty -%}
+                            {{ cities|map(city => city|place_name)|join(', ') }} <span class="gf-stand-in">{{ 'figure for %country%'|trans({'%country%': bar.figure.fact.geo|place_name}) }}</span>
+                        {%- else -%}
+                            {{ bar.figure.fact.geo|place_name }}
+                        {%- endif -%}
+                    </span></span>
+                {%- else -%}
+                    <span class="gf-cell">{{ include('page/_cell.html.twig', {figure: bar.figure}) }}</span>
+                {%- endif %}
+                {#- Every row shares the same three columns (a subgrid): the track has one width for all
+                    bars, so each bar's length is its share, whatever the length of its value. -#}
+                {% if bar.figure is proof %}
+                    <div class="gf-track">{% if bar.width != '0%' %}<div class="gf-bar" style="width: {{ bar.width }}"></div>{% endif %}</div>
+                    <span class="gf-bar-value">{{ include('page/_figure.html.twig', {figure: bar.figure}) }}</span>
+                {% else %}
+                    <span class="gf-bar-refused">{{ include('page/_figure.html.twig', {figure: bar.figure}) }}</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    {{ include('page/_stamp.html.twig') }}
+</section>

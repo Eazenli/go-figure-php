@@ -1,0 +1,8 @@
+{#- Which cell a figure is, written by the server from the proof or the request. -#}
+<span class="gf-code">
+{%- if figure is proof -%}
+    {{ figure|cell_caption }}
+{%- else -%}
+    {{ figure|requested }}
+{%- endif -%}
+</span>

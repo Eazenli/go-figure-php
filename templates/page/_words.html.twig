@@ -1,0 +1,7 @@
+{%- if words.problem is not null -%}
+    {#- What the model tried, its number blanked, then why it is not shown. -#}
+    {%- if words.struck is not null %}<s class="gf-struck">{{ words.struck }}</s> {% endif -%}
+    <span class="gf-unsourced">{{ words.problem|trans }}</span>
+{%- else -%}
+    {{ words.text }}
+{%- endif -%}

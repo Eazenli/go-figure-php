@@ -1,0 +1,22 @@
+{#- The header of every page of the site: the name, the ways in, and the language. -#}
+{%- set route = app.request.attributes.get('_route') -%}
+{%- set here = app.request.requestUri -%}
+<header class="site">
+    <div class="site-inner">
+        <a class="brand" href="{{ path('home') }}"><img src="/favicon.svg" alt=""> Go Figure</a>
+        <nav aria-label="{{ 'nav.label'|trans }}">
+            <a href="{{ path('how') }}"{% if route == 'how' %} aria-current="page"{% endif %}>{{ 'How it works'|trans }}</a>
+            <a href="{{ path('why') }}"{% if route == 'why' %} aria-current="page"{% endif %}>{{ 'Why it is different'|trans }}</a>
+            <a href="{{ path('sources') }}"{% if route in ['sources', 'your_data', 'import'] %} aria-current="page"{% endif %}>{{ 'Use other data'|trans }}</a>
+            <a href="{{ path('connect') }}"{% if route == 'connect' %} aria-current="page"{% endif %}>MCP</a>
+            {#- Hidden until the French is reviewed (LANGUAGE_SWITCH); a visitor already in French keeps the way back. -#}
+            {% if language_switch or app.request.locale != 'en' %}
+            <span class="language" role="group" aria-label="{{ 'nav.language'|trans }}">
+                {%- for language in ['en', 'fr'] -%}
+                    <a href="{{ path('language', {language: language, back: here}) }}" hreflang="{{ language }}" lang="{{ language }}"{% if app.request.locale == language %} aria-current="true"{% endif %}>{{ language|upper }}</a>
+                {%- endfor -%}
+            </span>
+            {% endif %}
+        </nav>
+    </div>
+</header>

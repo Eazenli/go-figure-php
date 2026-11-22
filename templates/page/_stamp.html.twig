@@ -1,0 +1,12 @@
+{#- What a block proves, stamped once the block is whole: how many figures the server read, and
+    from where. A block without a proven figure has no stamp: its refusals speak for themselves. -#}
+{%- set tally = block_tally(c) -%}
+{%- if tally.proven > 0 -%}
+    <p class="gf-verified">
+        <span class="gf-stamp">{{ 'Proven'|trans }}</span>
+        <span class="gf-verified-what">
+            {{- (tally.proven == 1 ? 'One figure read from %sources%.' : '%count% figures read from %sources%.')|trans({'%count%': tally.proven, '%sources%': tally.sources|length > 1 ? '%list% and %last%'|trans({'%list%': tally.sources|slice(0, -1)|join(', '), '%last%': tally.sources|last}) : tally.sources|first}) -}}
+            {%- if tally.refused > 0 %} {{ (tally.refused == 1 ? 'One refused.' : '%count% refused.')|trans({'%count%': tally.refused}) }}{% endif -%}
+        </span>
+    </p>
+{%- endif -%}

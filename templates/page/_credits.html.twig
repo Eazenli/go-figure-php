@@ -1,0 +1,6 @@
+{#- What the sources of the page's figures ask to show next to them, e.g. Open-Meteo's link. A page
+    that streams in gets it with its last event. -#}
+{%- set credits = page_credits(page) -%}
+{%- if credits is not empty -%}
+<p class="gf-credits">{{ 'Sources:'|trans }} {% for credit in credits %}{% if credit.url %}<a href="{{ credit.url }}" rel="noopener noreferrer">{{ credit.text }}</a>{% else %}{{ credit.text }}{% endif %}{{ loop.last ? '.' : '; ' }}{% endfor %}</p>
+{%- endif -%}

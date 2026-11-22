@@ -1,0 +1,10 @@
+{# The page as an HTML fragment: used by the web page and by MCP Apps. Several pages on one web page
+   (/compare) need the style once: the others pass style: false. #}
+<article class="gf-page">
+    {% if style ?? true %}{{ include('page/_style.html.twig') }}{% endif %}
+    {{ include('page/_title.html.twig', {title: page.title}) }}
+    {% for component in page.components %}
+        {{ include('page/' ~ constant('KIND', component) ~ '.html.twig', {c: component}) }}
+    {% endfor %}
+    {{ include('page/_credits.html.twig', {page: page}) }}
+</article>

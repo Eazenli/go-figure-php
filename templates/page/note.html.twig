@@ -1,0 +1,16 @@
+<section class="gf-note">
+    <p>
+        {%- for s in c.segments -%}
+            {%- if s is words -%}
+                {{ include('page/_words.html.twig', {words: s|after_unit(loop.first ? null : c.segments[loop.index0 - 1])}) }}
+            {%- elseif s is period -%}
+                {%- if s.problem is not null -%}<span class="gf-unsourced">{{ s.problem|trans }}</span>
+                {%- elseif s.from == s.to -%}<span class="gf-code">{{ s.from|period_name }}</span>
+                {%- else -%}<span class="gf-code">{{ s.from|period_name }}</span> {{ 'to'|trans }} <span class="gf-code">{{ s.to|period_name }}</span>{%- endif -%}
+            {%- else -%}
+                {#- In running text, the server says which cell a figure is: the words around it cannot. -#}
+                {{ include('page/_figure.html.twig', {figure: s}) }}{% if s is proof %} <span class="gf-cell">(<span class="gf-code">{{ s|cell_caption }}</span>)</span>{% endif %}
+            {%- endif -%}
+        {%- endfor -%}
+    </p>
+</section>

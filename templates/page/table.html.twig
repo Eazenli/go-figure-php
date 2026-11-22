@@ -1,0 +1,21 @@
+<section>
+    {% set level = (heading ?? 1) + 1 %}<h{{ level }} class="gf-heading">{{ include('page/_words.html.twig', {words: c.title}) }}</h{{ level }}>
+    <table class="gf-table">
+        <thead><tr><th>{{ 'Dataset'|trans }}</th><th>{{ 'Place'|trans }}</th><th>{{ 'Period'|trans }}</th><th>{{ 'Value'|trans }}</th></tr></thead>
+        <tbody>
+            {% for row in c.rows %}
+                <tr>
+                    {% if row is computed %}
+                        <td class="gf-code">{{ row.operands[0].fact.dataset|dataset_title }}</td><td colspan="2" class="gf-code">{{ row|cell_caption }}</td>
+                    {% elseif row is proof %}
+                        <td class="gf-code">{{ row.fact.dataset|dataset_title }}</td><td class="gf-code">{{ row.fact.geo|place_name }}</td><td class="gf-code">{{ row.fact.time|period_name }}</td>
+                    {% else %}
+                        <td colspan="3" class="gf-code">{{ row|requested }}</td>
+                    {% endif %}
+                    <td class="gf-num">{{ include('page/_figure.html.twig', {figure: row}) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ include('page/_stamp.html.twig') }}
+</section>

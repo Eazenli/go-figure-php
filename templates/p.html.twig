@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page is defined and page.title.problem is null ? page.title.text ~ ' · ' : '' }}Go Figure{% endblock %}
+
+{% block body %}
+    <main>
+        {% if problem is defined %}
+            <p class="problem">{{ problem|trans }}</p>
+        {% else %}
+            {{ include('page/page.html.twig', {page: page}) }}
+            <div class="link">{{ include('_actions.html.twig', {page: page, link: url('page', {token: token}), attack: path('lie', {page: token})}) }}</div>
+            {% set tally = page.tally %}
+            <p class="tally">{{ 'Figures proven: %proven%. Figures refused: %refused%. Texts or periods not shown: %hidden%.'|trans({'%proven%': tally.proven, '%refused%': tally.refused, '%hidden%': tally.hidden}) }}
+                {{ 'p.words'|trans }} <a href="{{ path('lie') }}#limits">{{ 'this check has limits'|trans }}</a>.</p>
+        {% endif %}
+    </main>
+{% endblock %}

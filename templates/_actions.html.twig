@@ -1,0 +1,37 @@
+{#- What a reader does with an answer: take it away with its sources, keep its link. Then, quieter,
+    for the one who doubts: the same answer to tamper with. -#}
+{%- set text = page_citation(page, link) -%}
+{#- The words of the question fit a figure the model did not show: said, with the way to see it. -#}
+{% if also ?? [] %}
+    <p class="gf-also"><strong>{{ 'Your words also fit:'|trans }}</strong> {{ also|join(', ') }}. <a href="{{ path('home', {ask: asked, words: 1}) }}#result" data-ask="{{ asked }}">{{ 'See the question read by its words'|trans }}</a></p>
+{% endif %}
+{#- A question read without a model: the same one for another month or another indicator. -#}
+{% if refine ?? null %}
+    <div class="gf-refine">
+        {#- Under an answer of a model, said once: these next questions are read by their words. -#}
+        {% if asked ?? null %}<p class="gf-refine-note">{{ 'Go on from here, without AI:'|trans }}</p>{% endif %}
+        {% if refine.places is not empty %}
+            <p><span class="gf-refine-label">{{ 'Places'|trans }}</span>
+                {% for place in refine.places %}<a href="{{ path('home', {ask: place.ask, words: 1}) }}#result" data-ask="{{ place.ask }}" class="{{ place.current ? 'is-on' : 'is-more' }}" title="{{ (place.current ? 'Without %place%' : 'With %place%')|trans({'%place%': place.label}) }}">{{ place.label }}</a>{% endfor %}</p>
+        {% endif %}
+        {% if refine.months is not empty %}
+            <p><span class="gf-refine-label">{{ 'Another month'|trans }}</span>
+                {% for m in refine.months %}<a href="{{ path('home', {ask: m.ask, words: 1}) }}#result" data-ask="{{ m.ask }}"{% if m.current %} aria-current="true"{% endif %}>{{ m.label }}</a>{% endfor %}</p>
+        {% endif %}
+        {% if refine.indicators is not empty %}
+            <p><span class="gf-refine-label">{{ 'Same places, another figure'|trans }}</span>
+                {% for i in refine.indicators %}<a href="{{ path('home', {ask: i.ask, words: 1}) }}#result" data-ask="{{ i.ask }}">{{ i.label }}</a>{% endfor %}</p>
+        {% endif %}
+    </div>
+{% endif %}
+<div class="gf-actions">
+    {% if text %}
+        <details class="gf-copy" data-copied="{{ 'Copied'|trans }}">
+            <summary>{{ 'Copy with source'|trans }}</summary>
+            <p class="hint">{{ 'copy.hint'|trans }}</p>
+            <textarea readonly rows="9" aria-label="{{ 'The text that is copied'|trans }}">{{ text }}</textarea>
+        </details>
+    {% endif %}
+    <a class="gf-share" href="{{ link }}">{{ 'Link to this page'|trans }}</a>
+    {% if attack %}<a class="gf-attack-open gf-doubt" href="{{ attack }}">{{ 'attack.doubt'|trans }}</a>{% endif %}
+</div>

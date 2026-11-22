@@ -1,0 +1,4 @@
+# L'échelle d'une très grande valeur, écrite par le serveur après sa forme arrondie.
+# En français, un « billion » vaut mille milliards (le « trillion » anglais).
+"billion": "{1} milliard|]1,Inf[ milliards"
+"trillion": "{1} billion|]1,Inf[ billions"

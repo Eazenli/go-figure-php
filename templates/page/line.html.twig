@@ -1,0 +1,48 @@
+<section class="gf-line">
+    {% set level = (heading ?? 1) + 1 %}<h{{ level }} class="gf-heading">{{ include('page/_words.html.twig', {words: c.title}) }}</h{{ level }}>
+    {{ include('page/_scope.html.twig') }}
+    {#- One colour per series, in a fixed order (gf-s1 to gf-s8, _style.html.twig): the colour follows
+        the series, never its rank. The only numbers drawn are proven values, each a link to its proof:
+        the highest and the lowest point label the two hairlines of the scale. -#}
+    <svg viewBox="0 0 {{ constant('WIDTH', c) }} {{ constant('HEIGHT', c) }}" role="group" aria-label="{{ 'Line chart'|trans }}{% if c.title.problem is null %}{{ ': '|trans }}{{ c.title.text }}{% endif %}">
+        {% for line in c.grid %}
+            <line class="gf-grid" aria-hidden="true" x1="0" x2="{{ constant('WIDTH', c) }}" y1="{{ line.y }}" y2="{{ line.y }}"/>
+        {% endfor %}
+        {% for tick in c.ticks %}
+            <text class="gf-tick" aria-hidden="true" x="{{ tick.x }}" y="{{ constant('HEIGHT', c) - 8 }}" text-anchor="{{ tick.anchor }}">{{ tick.period }}</text>
+        {% endfor %}
+        {% for line in c.lines %}
+            {% set series = 'gf-s' ~ (loop.index0 % 8 + 1) %}
+            {% for run in line.runs %}
+                <polyline class="gf-stroke {{ series }}" points="{{ run }}" pathLength="1"/>
+            {% endfor %}
+            {% for m in line.marks %}
+                {%- set point = (m.proof.fact.geo|place_name) ~ ', ' ~ (m.proof.fact.time|period_name) ~ ': '|trans ~ (m.proof|figure_text) %}
+                <a href="{{ m.proof|proof_url }}" aria-label="{{ point }}"><circle class="gf-dot {{ series }}" cx="{{ m.x }}" cy="{{ m.y }}" r="4.5"><title>{{ point }}</title></circle></a>
+            {% endfor %}
+        {% endfor %}
+        {#- Last, over the lines, with a halo of the surface: the highest value above its hairline,
+            the lowest below its own, both outside the plot's points. -#}
+        {% for line in c.grid %}
+            {%- set y = line.below ? line.y + 18 : line.y - 7 %}
+            {#- A halo apart, under the label: drawn on the label itself, it painted over its dotted underline. -#}
+            <text class="gf-halo" aria-hidden="true" x="0" y="{{ y }}">{{ line.proof|figure_text }}</text>
+            <a href="{{ line.proof|proof_url }}"><text class="gf-scale" x="0" y="{{ y }}">{{ line.proof|figure_text }}</text></a>
+        {% endfor %}
+    </svg>
+    <ul class="gf-legend">
+        {% for line in c.lines %}
+            <li>
+                {% if line.points is iterable %}
+                    <span class="gf-swatch gf-s{{ loop.index0 % 8 + 1 }}"></span>
+                    {% set first = line.points|first %}{% set last = line.points|last %}
+                    <span class="gf-code">{{ line.series.geo|place_name }}</span>{{ ': '|trans }}{{ first|figure }} {{ 'in'|trans }} <span class="gf-code">{{ first.fact.time|period_name }}</span>{% if last is not same as(first) %}, {{ last|figure }} {{ 'in'|trans }} <span class="gf-code">{{ last.fact.time|period_name }}</span>{% endif %}
+                {% else %}
+                    {#- Which series was refused, as a refused bar says which cell. -#}
+                    <span class="gf-cell">{{ include('page/_cell.html.twig', {figure: line.points}) }}</span> {{ include('page/_figure.html.twig', {figure: line.points}) }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    {{ include('page/_stamp.html.twig') }}
+</section>

@@ -1,0 +1,603 @@
+# The interface in French (App\Http\Language). MCP answers and the text sent to the model stay in English.
+"site.description": "Une interface générative qui ne peut pas inventer un chiffre : le serveur lit et prouve chaque chiffre de la page."
+"nav.label": "Navigation"
+"nav.language": "Langue"
+"import.lead": "Ajoutez des données au catalogue de cette machine, puis dessinez-les, comparez-les ou posez une question dessus : un jeu de données d'Eurostat parmi quelque 2 700, un indicateur de la Banque mondiale pour le monde entier, ou la météo d'une ville. Pour Eurostat, vous choisissez le jeu de données et fixez chaque dimension sauf le lieu et la période. Le serveur vérifie chaque code et lit chaque valeur à la source, avec la date de l'import. Nécessite internet."
+"import.review": "Seuls le lieu et la période varient : choisissez un code pour chaque autre dimension. Le titre, la portée et les pièges s'affichent avec les chiffres : ni chiffre, ni nombre en lettres. Ces textes restent en anglais, comme les fiches."
+"import.added": "%places% lieux, de %from% à %to%, lus chez Eurostat à l'instant. Chaque chiffre renvoie à sa preuve, comme ceux du catalogue livré."
+"import.agent": "Un agent cherche chez Eurostat, lit les dimensions d'un jeu et propose la fiche. Il désigne des codes et écrit des mots, jamais une valeur ; vous relisez la proposition avant tout import."
+"import.agent.key": "Un agent peut proposer le jeu pour vous avec votre propre clé : renseignez"
+"import.search": "Cherche dans les titres des jeux d'Eurostat, sans IA."
+"import.help.title": "Ce que compte un chiffre, en mots simples."
+"import.help.scope": "Ce que les chiffres comptent et ce qu'ils laissent de côté."
+"import.help.unit": "Écrite après chaque chiffre, avec les mots du jeu lui-même : « arrivals », « nights ». Sans échelle : « thousand » ou « million » est ajouté d'après le code de l'unité."
+"import.help.pitfalls": "Trois au plus, un par ligne."
+"proof.panel.reading": "Lecture de la preuve…"
+"proof.panel.open": "Ouvrir la page de preuve"
+"proof.panel.close": "Fermer la preuve"
+"proof.panel.label": "Preuve d'un chiffre"
+"home.judge": "Go Figure ne juge pas ce que dit qui que ce soit. Il empêche le modèle d'écrire un chiffre : chaque chiffre de la page est lu à sa source, ou refusé."
+"Your own questions: on, answered by %model%.": "Vos propres questions : activées, réponse de %model%."
+"Your own questions: off, the key settings have a problem (see Ask).": "Vos propres questions : désactivées, les réglages de la clé ont un problème (voir Demander)."
+"Your own questions: off, no key set.": "Vos propres questions : désactivées, aucune clé."
+"Add data: Eurostat, the World Bank, a city": "Ajouter des données : Eurostat, la Banque mondiale, une ville"
+"home.mcp.endpoint": "Le serveur MCP écoute sur"
+"home.mcp.hosts": "Les hôtes qui affichent les MCP Apps montrent la page ; les autres la reçoivent en texte, où chaque chiffre renvoie à sa preuve, avec un lien vers la page entière. Le README explique comment brancher Claude Desktop, Claude Code, VS Code, Cursor ou un tiny agent de Hugging Face."
+"ask.stream.hint": "Non vérifié : les mots du modèle. Le serveur n'affiche jamais une valeur qu'il écrit ; une période qu'il cite ne s'affiche que si les données l'ont."
+"compare.lead": "Choisissez quelques destinations et un mois : tous les indicateurs du catalogue, côte à côte. Le serveur lit chaque valeur dans l'instantané des données et la relie à sa preuve. Aucune IA n'intervient."
+"compose.lead": "Choisissez un indicateur, des lieux et des périodes. Le serveur lit chaque valeur dans l'instantané des données et la relie à sa preuve. Aucune IA n'intervient."
+"lie.lead": "Un modèle dessine une page en envoyant une mise en page. Elle désigne des cellules des données (un jeu de données, un lieu, une période) et ne contient jamais de valeur. Le serveur lit chaque valeur dans l'instantané des données et la relie à sa preuve, ou la refuse. Modifiez la mise en page et essayez de faire afficher un chiffre que le serveur n'a pas prouvé."
+lie.limits.words: Les mots sont ceux du modèle.
+lie.limits.refused: les chiffres, les nombres en toutes lettres en anglais ou en français (entiers, accolés, accentués, ou écrits avec des lettres que l'Unicode tient pour des sosies, et les multiplicateurs comme « quadruplé » ou « décuplé »), les signes et les caractères invisibles, les adresses web et les codes d'emoji.
+lie.limits.through: quelques mots courants qui peuvent compter (« one », « first », « un », « premier », « half », « moitié », « double », « triple » (et donc « triplé », écrit pareil sans accent), « quarter », « quart », « score »), des abréviations comme « k » ou « grand », les chiffres romains écrits en lettres (« XII »), les graphies cassées exprès (« t w e l v e », « tvvelve »), et les nombres dans d'autres langues.
+"lie.limits.meaning": "Les mots peuvent encore changer le sens d'un chiffre : « plus de », « par nuit »."
+"lie.limits.period": "Une période s'affiche telle qu'elle est écrite, du moment que les données ont cette période."
+"lie.limits.cell": "Le serveur prouve la valeur de la cellule que le modèle a désignée, pas que c'est la bonne cellule pour la question."
+"p.words": "Chaque chiffre a été relu dans l'instantané des données à l'ouverture de cette page, et renvoie à sa preuve. Les mots autour viennent avec le lien, d'un modèle ou de qui l'a fabriqué : le serveur vérifie seulement qu'ils ne contiennent aucun nombre, et"
+"A generative UI that cannot make up a number": "Une interface générative qui ne peut pas inventer un chiffre"
+"Every number on the page is proven. What the chat model says around it is its own.": "Chaque chiffre de la page est prouvé. Ce que le modèle dit autour n'engage que lui."
+"One page, as a model would send it": "Une page, comme un modèle l'enverrait"
+"Proven": "Prouvé"
+"Refused": "Refusé"
+"Unsourced": "Sans source"
+"A figure the server read from the data. Click it to see its proof.": "Un chiffre lu par le serveur dans les données. Cliquez dessus pour voir sa preuve."
+"A cell the data does not have: never guessed.": "Une cellule absente des données : jamais devinée."
+"A number the model wrote in its own words: not shown.": "Un nombre écrit par le modèle dans ses propres mots : non affiché."
+"Try it yourself": "Essayez vous-même"
+"Ask a question": "Poser une question"
+"Try to make it lie": "Essayer de le faire mentir"
+"Compare destinations": "Comparer des destinations"
+"Compose a page": "Composer une page"
+"From an MCP client": "Depuis un client MCP"
+"Data:": "Données :"
+"no catalog entry yet.": "aucune fiche au catalogue pour l'instant."
+"Each proof names its source, dataset and snapshot date.": "Chaque preuve donne sa source, son jeu de données et la date de l'instantané."
+"Ask": "Demander"
+"Example questions": "Questions d'exemple"
+"No example question yet.": "Pas encore de question d'exemple."
+"Your own question": "Votre question"
+"Ask %model%": "Demander à %model%"
+"Free questions are off:": "Les questions libres sont coupées :"
+"The model is writing…": "Le modèle écrit…"
+"Link to this page": "Lien vers cette page"
+"What the model writes": "Ce que le modèle écrit"
+"What the server shows": "Ce que le serveur montre"
+"The page appears here, part by part, as the model writes it.": "La page apparaît ici, morceau par morceau, à mesure que le modèle l'écrit."
+"Replayed: an answer written by hand in the format a model streams, to show the page without a key.": "Rejoué : une réponse écrite à la main, au format dans lequel un modèle l'envoie, pour montrer la page sans clé."
+"Replayed: the answer %model% streamed on %date%, recorded as it was.": "Rejoué : la réponse envoyée par %model% le %date%, enregistrée telle quelle."
+"an unknown date": "une date inconnue"
+"Live: answered by %model%.": "En direct : réponse de %model%."
+"Questions are asked from the page itself.": "Les questions se posent depuis la page elle-même."
+"Free questions are off: %problem% The example questions are replayed all the same.": "Les questions libres sont coupées : %problem% Les questions d'exemple sont rejouées quand même."
+"Free questions need a key: set AI_PROVIDER, AI_MODEL and AI_API_KEY in .env.local. The example questions are replayed without one.": "Les questions libres demandent une clé : renseignez AI_PROVIDER, AI_MODEL et AI_API_KEY dans .env.local. Les questions d'exemple sont rejouées sans clé."
+"Ask a question of at most %max% characters.": "Posez une question de %max% caractères au plus."
+"Too many questions: try again after %time%.": "Trop de questions : réessayez après %time%."
+"The model wrote no page.": "Le modèle n'a écrit aucune page."
+"The server has no data snapshot yet, so no figure can be proven.": "Le serveur n'a pas encore d'instantané des données : aucun chiffre ne peut être prouvé."
+"The model could not answer. The details are in the application log.": "Le modèle n'a pas pu répondre. Le détail est dans le journal de l'application."
+"Figures proven: %proven%. Figures refused: %refused%. Texts or periods not shown: %hidden%.": "Chiffres prouvés : %proven%. Chiffres refusés : %refused%. Textes ou périodes non affichés : %hidden%."
+"Asked for: %cell%": "Demandé : %cell%"
+"Refused: %reason%": "Refusé. %reason%"
+"This dataset is not in the catalog.": "Ce jeu de données n'est pas au catalogue."
+"This source has no data for this place.": "Cette source n'a pas de données pour ce lieu."
+"This source has no data for this place and period.": "Cette source n'a pas de données pour ce lieu et cette période."
+"The source publishes no value for this place and period.": "La source ne publie aucune valeur pour ce lieu et cette période."
+"Calculations are not available yet.": "Les calculs ne sont pas encore disponibles."
+"This period is not a year, a month or a month of the year.": "Cette période n'est ni une année, ni un mois, ni un mois de l'année."
+"Another unit or another kind of period than the first figure of this chart: not on the same scale.": "Une autre unité ou une autre sorte de période que le premier chiffre de ce graphique : pas sur la même échelle."
+"This period ends before it starts.": "Cette période finit avant de commencer."
+"The data has no such period.": "Les données n'ont pas cette période."
+"to": "à"
+"in": "en"
+"Dataset": "Jeu de données"
+"Place": "Lieu"
+"Period": "Période"
+"Value": "Valeur"
+"Sources:": "Sources :"
+"Line chart": "Graphique en courbes"
+"Proof: %cell%": "Preuve : %cell%"
+"(a period outside the data)": "(une période hors des données)"
+"(not a code)": "(pas un code)"
+"a calculation": "un calcul"
+"%from% to %to%": "%from% à %to%"
+"the whole country": "tout le pays"
+"a city in %country%": "une ville, %country%"
+"a city in the %country%": "une ville, %country%"
+"a group of countries": "un groupe de pays"
+"European Union (without the United Kingdom)": "Union européenne (sans le Royaume-Uni)"
+"European Union (with the United Kingdom)": "Union européenne (avec le Royaume-Uni)"
+"Euro area": "Zone euro"
+"this check has limits": "cette vérification a des limites"
+"This link does not hold a page.": "Ce lien ne contient pas de page."
+"One indicator over time": "Un indicateur dans le temps"
+"instead.": "à la place."
+"An example to start with: change the destinations or the month, the page follows.": "Un exemple pour commencer : changez les destinations ou le mois, la page suit."
+"Compare destinations for a month": "Comparer des destinations sur un mois"
+"Show the page": "Afficher la page"
+"Destinations": "Destinations"
+"Month": "Mois"
+"Indicator": "Indicateur"
+"Places": "Lieux"
+"From": "De"
+"To": "À"
+"Two to six.": "De deux à six."
+"Two to six. A city shows the figures of its country where the source has no figure for the city.": "De deux à six. Une ville prend les chiffres de son pays quand la source n'en a pas pour la ville."
+"Up to six. A place the indicator does not cover is refused, not guessed.": "Jusqu'à six. Un lieu que l'indicateur ne couvre pas est refusé, pas deviné."
+"Countries": "Pays"
+"Cities": "Villes"
+"Groups of countries": "Groupes de pays"
+"Other places": "Autres lieux"
+"How much does it cost?": "Combien ça coûte ?"
+"Will it be crowded?": "Y aura-t-il du monde ?"
+"What will the weather be like?": "Quel temps fera-t-il ?"
+"How do you get there?": "Comment y aller ?"
+"What else is there to know?": "Que savoir d'autre ?"
+"Destinations side by side": "Destinations côte à côte"
+"%title%, %month%, average over many years": "%title%, %month%, moyenne sur de nombreuses années"
+"%title%, %month%": "%title%, %month%"
+"%title%, whole year": "%title%, année entière"
+"%list% and %last%": "%list% et %last%"
+", country figure for %cities%": ", chiffre du pays pour %cities%"
+", country figures for %cities%": ", chiffres du pays pour %cities%"
+"Over time": "Dans le temps"
+"First and last period": "Première et dernière période"
+"Proof": "Preuve"
+"Not a valid proof": "Preuve non valide"
+"This figure matches the snapshot it was read from.": "Ce chiffre correspond à l'instantané dans lequel il a été lu."
+"Scope": "Périmètre"
+"Computed by Go Figure": "Calculé par Go Figure"
+"Unit": "Unité"
+"averaged over %normal% (a climate normal)": "moyenne sur %normal% (une normale climatique)"
+"Source flag": "Indicateur de la source"
+"Updated at the source": "Mis à jour à la source"
+"Downloaded from the source": "Téléchargé à la source"
+"Snapshot taken": "Instantané pris le"
+"Source": "Source"
+"Open on %provider%": "Ouvrir sur %provider%"
+"Licence": "Licence"
+"Attribution": "Attribution"
+"Canonical form": "Forme canonique"
+"This proof link is malformed.": "Ce lien de preuve est mal formé."
+"This link does not match the data of this snapshot.": "Ce lien ne correspond pas aux données de cet instantané."
+"break in series": "rupture de série"
+"estimated": "estimé"
+"provisional": "provisoire"
+"revised": "révisé"
+"low reliability": "fiabilité faible"
+"confidential": "confidentiel"
+"definition differs": "définition différente"
+"forecast": "prévision"
+"not significant": "non significatif"
+"Eurostat estimate": "estimation d'Eurostat"
+"not applicable": "sans objet"
+"imputed": "imputé"
+"missing, cannot exist": "manquant, ne peut exister"
+"source flag": "indicateur de la source"
+"Start over": "Recommencer"
+"What the model sends": "Ce que le modèle envoie"
+"What it does not stop": "Ce qu'il n'empêche pas"
+"Slip a number into the text": "Glisser un nombre dans le texte"
+"The title now says \"three countries\", and the note \"up 12%\".": "Le titre dit maintenant « trois pays », et la note « en hausse de 12 % »."
+"Ask for a cell the data does not have": "Demander une cellule absente des données"
+"The tile asks for the United Kingdom, and a new bar for Ireland in 2017, a year Eurostat did not publish.": "La tuile demande le Royaume-Uni, et une nouvelle barre pour l'Irlande en 2017, une année qu'Eurostat n'a pas publiée."
+"Write the value yourself": "Écrire la valeur soi-même"
+"The tile carries its own value, next to the cell it names.": "La tuile porte sa propre valeur, à côté de la cellule qu'elle désigne."
+"This layout is longer than any page needs (over %kb% KB).": "Cette mise en page est plus longue que ce dont une page a besoin (plus de %kb% Ko)."
+"This is not valid JSON: %error%.": "Ce n'est pas du JSON valide : %error%."
+"Refused before any figure is read: this layout does not follow the page schema. An MCP call to render_page goes through the same check.": "Refusée avant la lecture de tout chiffre : cette mise en page ne suit pas le schéma de page. Un appel MCP à render_page passe par la même vérification."
+"This layout does not follow the page schema: %error%": "Cette mise en page ne suit pas le schéma de page : %error%"
+": ": " : "
+"Unsupported: the model wrote this number itself.": "Sans preuve : le modèle a écrit ce nombre lui-même."
+"Unsupported: the model wrote this number sign itself.": "Sans preuve : le modèle a écrit ce signe de nombre lui-même."
+"Refused: invisible formatting characters are not allowed.": "Refusé : les caractères de mise en forme invisibles sont interdits."
+"Refused: disguised letters are not allowed.": "Refusé : les lettres déguisées sont interdites."
+"Refused: web addresses are not allowed.": "Refusé : les adresses web sont interdites."
+"lie.limits.places": "Un nom de lieu qui contient un nombre en toutes lettres (« Pont-Neuf », « Les Deux Alpes ») est masqué aussi, comme un mot courant qui est aussi un nombre (« neuf », l'adjectif ; « seize », le verbe anglais) : le refus pèche par prudence."
+"Object contains properties the page schema does not have.": "L'objet contient des propriétés que le schéma de page n'a pas."
+"This does not follow the page schema.": "Ceci ne suit pas le schéma de page."
+"proof.canonical.hint": "Le lien porte cette forme de la preuve ; le serveur la recalcule depuis son instantané et n'affiche la preuve que si les deux concordent. Son empreinte l'identifie."
+"Missing required properties: %names%.": "Propriétés requises manquantes : %names%."
+"Properties the page schema does not have: %names%.": "Propriétés que le schéma de page n'a pas : %names%."
+"Invalid type: %expected% expected, %received% received.": "Type invalide : %expected% attendu, %received% reçu."
+"a syntax error": "une erreur de syntaxe"
+"nested too deep": "trop d'imbrications"
+"characters that are not valid UTF-8": "des caractères qui ne sont pas de l'UTF-8 valide"
+"a control character": "un caractère de contrôle"
+"an error the parser cannot place": "une erreur que l'analyseur ne sait pas situer"
+# The extended mode (/import).
+Add a dataset: Ajouter un jeu de données
+'Added: %title%': 'Ajouté : %title%'
+Draw it on a page: Le dessiner sur une page
+Ask a question about it: Poser une question dessus
+'Proposed by %model% for “%wish%”: review it, then import it.': 'Proposé par %model% pour « %wish% » : relisez-le, puis importez-le.'
+Import from Eurostat: Importer depuis Eurostat
+Choose another dataset: Choisir un autre jeu
+Two ways to find a dataset: Deux façons de trouver un jeu
+Describe what you look for: Décrivez ce que vous cherchez
+Arrivals of foreign tourists in hotels: Les arrivées de touristes étrangers dans les hôtels
+Ask %model% to propose a dataset: Demander à %model% de proposer un jeu
+Or look for it by its words: Ou cherchez-le par ses mots
+Search Eurostat: Chercher chez Eurostat
+Datasets of Eurostat for “%query%”: Jeux d'Eurostat pour « %query% »
+No dataset of Eurostat has these words in its title. Try other words, in English.: Aucun jeu d'Eurostat n'a ces mots dans son titre. Essayez d'autres mots, en anglais.
+Added on this machine: Ajoutés sur cette machine
+'None yet. An imported dataset stays with this container: the shipped ones never change.': 'Aucun pour l''instant. Un jeu importé reste dans ce conteneur : ceux du catalogue livré ne changent jamais.'
+What each figure counts: Ce que compte chaque chiffre
+Title: Titre
+The question it answers: La question à laquelle il répond
+Pitfalls: Pièges
+Eurostat has no dataset "%code%".: Eurostat n'a pas de jeu « %code% ».
+'Eurostat does not answer right now: try again in a moment.': 'Eurostat ne répond pas pour l''instant : réessayez dans un moment.'
+? 'The agent needs a key of your own: set AI_PROVIDER, AI_MODEL and AI_API_KEY in .env.local. Without one, look for a dataset by its words.'
+: 'L''agent demande votre propre clé : renseignez AI_PROVIDER, AI_MODEL et AI_API_KEY dans .env.local. Sans clé, cherchez un jeu par ses mots.'
+Describe what you look for in at most %max% characters.: Décrivez ce que vous cherchez en %max% caractères au plus.
+'The agent proposed "%code%", which is not a Eurostat dataset: try other words.': 'L''agent a proposé « %code% », qui n''est pas un jeu d''Eurostat : essayez d''autres mots.'
+Datasets are added from the page itself.: Les jeux de données s'ajoutent depuis la page elle-même.
+'Too many imports: try again after %time%.': 'Trop d''imports : réessayez après %time%.'
+The proposal is for %code%, not for this dataset.: La proposition porte sur %code%, pas sur ce jeu.
+The dataset has no dimension %dimension% to fix (geo and time stay free).: Le jeu n'a pas de dimension %dimension% à fixer (geo et time restent libres).
+The dimension %dimension% is fixed twice.: La dimension %dimension% est fixée deux fois.
+'%code% is not a code of the dimension %dimension%.': '%code% n''est pas un code de la dimension %dimension%.'
+'Choose one code for the dimension %dimension% (%label%): only the place and the period may vary.': 'Choisissez un code pour la dimension %dimension% (%label%) : seuls le lieu et la période peuvent varier.'
+Only yearly or monthly figures can be imported, not the frequency %code%.: Seuls des chiffres annuels ou mensuels peuvent être importés, pas la fréquence %code%.
+This Go Figure keeps at most %max% imported datasets.: Ce Go Figure garde %max% jeux importés au plus.
+'Too many cells for one import: fix more dimensions.': 'Trop de cellules pour un seul import : fixez plus de dimensions.'
+Only yearly or monthly figures can be imported.: Seuls des chiffres annuels ou mensuels peuvent être importés.
+Eurostat has no value for these choices in the places of Go Figure.: Eurostat n'a aucune valeur pour ces choix dans les lieux de Go Figure.
+# The home page (editorial pass).
+Symfony AI · MCP · Eurostat · Open-Meteo: Symfony AI · MCP · Eurostat · Open-Meteo
+How it works: Comment ça marche
+Trust the process: Le chemin d'un chiffre
+The model composes: Le modèle compose
+The server reads the cell: Le serveur lit la cellule
+Every number has its proof: Chaque chiffre a sa preuve
+Snapshot of %date%: Instantané du %date%
+An example: Un exemple
+Destinations in %month%: Destinations en %month%
+September: septembre
+Side by side, every figure proven: Côte à côte, chaque chiffre prouvé
+Compare them, indicator by indicator: Les comparer, indicateur par indicateur
+Your turn: À vous
+Model Context Protocol: Model Context Protocol
+Daily high: Maximale du jour
+Rain in the month: Pluie du mois
+Restaurants and hotels: Restaurants et hôtels
+Tourism intensity: Intensité touristique
+"in %month%": "en %month%"
+proof.imported: Importé d'Eurostat le %date% sur cette machine. La valeur est celle d'Eurostat ; le titre, la portée et l'unité ont été écrits par un visiteur ou un modèle, pas par Go Figure.
+Fixed codes: Codes fixés
+What to know before reading it: Ce qu'il faut savoir avant de le lire
+'Go Figure does not add this dataset: it takes the economy, businesses, agriculture, energy, the environment, transport, tourism, prices and culture, and no subject about people''s lives (health, migration, justice, living conditions).': 'Go Figure n''ajoute pas ce jeu de données : il prend l''économie, les entreprises, l''agriculture, l''énergie, l''environnement, les transports, le tourisme, les prix et la culture, et aucun sujet sur la vie des personnes (santé, migrations, justice, conditions de vie).'
+'unit: this dataset has no unit of its own, so write one with the words of its title or of the codes chosen.': 'unité : ce jeu de données n''a pas d''unité propre, écrivez-en une avec les mots de son titre ou des codes choisis.'
+'unit: "%word%" is a scale: write the unit without it, the server adds the scale of the unit code.': 'unité : « %word% » est une échelle : écrivez l''unité sans elle, le serveur ajoute l''échelle d''après le code de l''unité.'
+'unit: use the words of the dataset itself (as in its title and codes); "%word%" is not one.': 'unité : utilisez les mots du jeu lui-même (ceux de son titre et de ses codes) ; « %word% » n''en fait pas partie.'
+Go Figure cannot ask Eurostat for %dimension%=%code%.: Go Figure ne peut pas demander %dimension%=%code% à Eurostat.
+This choice is already imported, as "%title%".: Ce choix est déjà importé, sous le titre « %title% ».
+This choice is already imported, or this Go Figure already keeps %max% imported datasets.: Ce choix est déjà importé, ou ce Go Figure garde déjà %max% jeux importés.
+'The import failed: nothing was kept. Try again in a moment.': 'L''import a échoué : rien n''a été gardé. Réessayez dans un moment.'
+Invent a source: Inventer une source
+The note cites a ministry and a web address of its own.: La note cite un ministère et une adresse web de son cru.
+Pick a flattering cell: Choisir une cellule flatteuse
+Portugal's bar names January, under a title about September.: La barre du Portugal désigne janvier, sous un titre qui parle de septembre.
+'The dataset "%code%" is not given by place and period (by currency, for instance): a page of Go Figure cannot draw it.': 'Le jeu « %code% » n''est pas donné par lieu et par période (par devise, par exemple) : une page de Go Figure ne peut pas le dessiner.'
+'Refused:': 'Refusés :'
+'Let through:': 'Laissés passer :'
+'At most %max% datasets. An import is never replaced: its figures may already be on pages.': '%max% jeux au plus. Un import n''est jamais remplacé : ses chiffres sont peut-être déjà sur des pages.'
+'The agent could not propose a dataset: try again, or look for it by its words.': 'L''agent n''a pas pu proposer de jeu : réessayez, ou cherchez-le par ses mots.'
+By place: Par lieu
+'%cities% takes the figures of its country here: the source publishes them by country.': '%cities% prend ici les chiffres de son pays : la source les publie par pays.'
+'%cities% take the figures of their country here: the source publishes them by country.': '%cities% prennent ici les chiffres de leur pays : la source les publie par pays.'
+This is not a Eurostat dataset code, such as tour_occ_arnat.: Ce n'est pas un code de jeu d'Eurostat, comme tour_occ_arnat.
+'Too many searches: try again in a few minutes.': 'Trop de recherches : réessayez dans quelques minutes.'
+This dataset cannot be added.: Ce jeu ne peut pas être ajouté.
+'The agent proposed "%code%", which Go Figure cannot add: try other words.': 'L''agent a proposé « %code% », que Go Figure ne peut pas ajouter : essayez d''autres mots.'
+'unit: use the words of the dataset itself (its title and the codes chosen); "%word%" is not one.': 'unité : utilisez les mots du jeu lui-même (son titre et les codes choisis) ; « %word% » n''en fait pas partie.'
+import.city: 'Une requête à Open-Meteo, depuis cette machine : trente ans de valeurs journalières, dont le serveur fait ici la normale de chaque mois. Elle compte sur le quota gratuit de votre adresse : une douzaine de villes par jour. Sans IA.'
+city.off_centre: Le point de cette ville est connu pour être nettement hors du centre ; ces chiffres peuvent donc différer de la météo du centre.
+import.city.added: Ses normales ont été calculées ici à partir des valeurs journalières d'Open-Meteo, et chaque chiffre renvoie à la requête qui les redonne.
+Or add the weather of a city: Ou ajoutez la météo d'une ville
+Add its weather: Ajouter sa météo
+Every city of the list is in the catalog.: Toutes les villes de la liste sont dans le catalogue.
+This Go Figure already keeps as many added cities as it may.: Ce Go Figure garde déjà autant de villes ajoutées qu'il le peut.
+'This Go Figure already keeps %max% added cities: no room for one more.': 'Ce Go Figure garde déjà %max% villes ajoutées : plus de place pour une autre.'
+Compare it with other destinations: La comparer à d'autres destinations
+'Open-Meteo does not answer right now: try again in a moment.': 'Open-Meteo ne répond pas pour l''instant : réessayez dans un moment.'
+'This city cannot be added: it is not in the list, or it is there already.': 'Cette ville ne peut pas être ajoutée : elle n''est pas dans la liste, ou elle y est déjà.'
+This Go Figure has no weather dataset to add a city to.: Ce Go Figure n'a pas de jeu météo auquel ajouter une ville.
+'Open-Meteo answers that its free quota is used up from this address: try again in an hour, or tomorrow.': 'Open-Meteo répond que son quota gratuit est épuisé pour cette adresse : réessayez dans une heure, ou demain.'
+Open-Meteo has too few daily values for this city.: Open-Meteo a trop peu de valeurs journalières pour cette ville.
+This city is there already, or this Go Figure already keeps %max% added cities.: Cette ville y est déjà, ou ce Go Figure garde déjà %max% villes ajoutées.
+proof.city: La météo de cette ville a été ajoutée sur cette machine le %date%, par une requête à Open-Meteo ; son point est le point d'étiquette de la ville, parfois à distance du centre.
+'Weather added for:': 'Météo ajoutée pour :'
+Proof of a calculation: Preuve d'un calcul
+'Computed again from the snapshot just now: it matches.': 'Recalculé à l''instant depuis l''instantané : il concorde.'
+by rank, highest first: au classement, du plus haut au plus bas
+'%rank% of %count%': '%rank% sur %count%'
+'%cell% to %period%': '%cell% à %period%'
+'%cell%: %part% in %whole%': '%cell% : %part% dans %whole%'
+'%cell%, among %places%': '%cell%, parmi %places%'
+This calculation does not have the number of cells it needs.: Ce calcul n'a pas le nombre de cellules qu'il lui faut.
+A cell of this calculation cannot be proven.: Une cellule de ce calcul ne peut pas être prouvée.
+This dataset does not allow this calculation.: Ce jeu de données ne permet pas ce calcul.
+'Not a change: it needs one place at two periods, from the same dataset.': 'Pas une évolution : il faut un lieu à deux périodes, dans le même jeu de données.'
+'Not a rank: it needs several places at one period, from the same dataset.': 'Pas un rang : il faut plusieurs lieux à une période, dans le même jeu de données.'
+'Not a share: it needs a part and its whole, for one place and one period.': 'Pas une part : il faut une partie et son tout, pour un lieu et une période.'
+'This calculation has no result: a division by zero, or a part larger than its whole.': 'Ce calcul n''a pas de résultat : une division par zéro, ou une partie plus grande que son tout.'
+proof.computed.note: 'Chaque cellule ci-dessus renvoie à sa propre preuve : sa source, ses dates, son empreinte. Le résultat n''est pas arrondi dans la preuve ; la page l''arrondit pour l''affichage.'
+percentage points: points de pourcentage
+'%dataset%: %caption%': '%dataset% : %caption%'
+Ask for a calculation that means nothing: Demander un calcul qui ne veut rien dire
+The second tile asks for the growth from Portugal, then, to Spain, now.: La seconde tuile demande la croissance entre le Portugal d'alors et l'Espagne d'aujourd'hui.
+Computed: Calculé
+'A figure the server calculated from proven cells: its proof shows how.': 'Un chiffre que le serveur a calculé à partir de cellules prouvées : sa preuve montre comment.'
+"No figure of the catalog answers this. An agent looks for a dataset on Eurostat…": "Aucun chiffre du catalogue ne répond. Un agent cherche un jeu de données sur Eurostat…"
+"Too many imports today on this Go Figure: try again tomorrow.": "Trop d'imports aujourd'hui sur ce Go Figure : réessayez demain."
+"The agent searches Eurostat: \"%words%\"": "L'agent cherche sur Eurostat : « %words% »"
+"The agent reads the dimensions of %code%": "L'agent lit les dimensions de %code%"
+"The agent found no dataset to add.": "L'agent n'a trouvé aucun jeu de données à ajouter."
+"The agent proposes %code%. The server checks its codes and reads every value from Eurostat…": "L'agent propose %code%. Le serveur vérifie ses codes et lit chaque valeur sur Eurostat…"
+"Not added:": "Non ajouté :"
+"Not added: the import failed, nothing was kept.": "Non ajouté : l'import a échoué, rien n'a été gardé."
+"Added: %title% (%places% places, %from% to %to%). The question is asked again…": "Ajouté : %title% (%places% lieux, de %from% à %to%). La question est reposée…"
+"home.ask.placeholder": "Une question sur les pays d'Europe : tourisme, prix, énergie, économie…"
+"The agent searches the World Bank: \"%words%\"": "L'agent cherche à la Banque mondiale : « %words% »"
+"The agent proposes %code%. The server reads every value from the World Bank…": "L'agent propose %code%. Le serveur lit chaque valeur à la Banque mondiale…"
+"No figure of the catalog answers this. An agent looks for a dataset on Eurostat or at the World Bank…": "Aucun chiffre du catalogue ne répond. Un agent cherche un jeu de données sur Eurostat ou à la Banque mondiale…"
+proof.imported.world_bank: "Importé de la Banque mondiale le %date% sur cette machine. La valeur est celle de la Banque mondiale ; le titre et l'unité viennent du nom qu'elle donne à l'indicateur, la portée de sa note. Rien ici n'a été écrit par un visiteur ou un modèle."
+"import.world_bank": "Le monde entier, par pays et par année (World Development Indicators) : économie, énergie, environnement, agriculture, commerce, science. Le serveur lit chaque valeur à la Banque mondiale, et écrit le titre et l'unité avec les mots de la Banque mondiale. Sans IA."
+"Or add an indicator of the World Bank": "Ou ajouter un indicateur de la Banque mondiale"
+"Search the World Bank": "Chercher à la Banque mondiale"
+"Add": "Ajouter"
+"No World Bank indicator has these words in its name. Try other words, in English.": "Aucun indicateur de la Banque mondiale n'a ces mots dans son nom. Essayez d'autres mots, en anglais."
+"The World Bank does not answer right now: try again in a moment.": "La Banque mondiale ne répond pas pour l'instant : réessayez dans un instant."
+"The World Bank has no such indicator among its World Development Indicators.": "La Banque mondiale n'a pas cet indicateur dans ses World Development Indicators."
+"The name of this indicator holds a number: Go Figure cannot show it as a title.": "Le nom de cet indicateur contient un nombre : Go Figure ne peut pas l'afficher comme titre."
+"The World Bank has no value for this indicator.": "La Banque mondiale n'a aucune valeur pour cet indicateur."
+"Not added: Go Figure does not take this dataset.": "Non ajouté : Go Figure ne prend pas ce jeu de données."
+"%code% carries a scale (\"%label%\") and this dataset has no unit code to check it: Go Figure cannot add this choice.": "%code% porte une échelle (« %label% ») et ce jeu de données n'a pas de code d'unité pour la vérifier : Go Figure ne peut pas ajouter ce choix."
+"The name of this indicator does not give a unit Go Figure can show without a number: it cannot be added.": "Le nom de cet indicateur ne donne pas d'unité que Go Figure puisse afficher sans nombre : il ne peut pas être ajouté."
+"This indicator is in the currency of each country: its figures cannot be compared, Go Figure does not add it.": "Cet indicateur est dans la monnaie de chaque pays : ses chiffres ne se comparent pas, Go Figure ne l'ajoute pas."
+"Updating…": "Mise à jour…"
+"Done": "Terminé"
+"Type to filter": "Tapez pour filtrer"
+"proven": "prouvés"
+"refused": "refusés"
+"not shown": "non affichés"
+"Added: %title% (%places% places, %from% to %to%).": "Ajouté : %title% (%places% lieux, de %from% à %to%)."
+"The question is asked again…": "La question est reposée…"
+"home.demo.said": "Prenez votre maillot de bain : il fait [24 °C, un temps bien doux] à %place% en %month%."
+"A chat model writes": "Un modèle de chat écrit"
+"The page shows": "La page affiche"
+"Not proven": "Non prouvé"
+"Read from the source": "Lu à la source"
+"What a chat model writes, and what the page shows": "Ce qu'un modèle de chat écrit, et ce que la page affiche"
+"the usual daily high": "la température maximale habituelle"
+"figure for %country%": "chiffre du pays : %country%"
+"This choice cannot be drawn.": "Ce choix ne peut pas être dessiné."
+"The answer stopped before its end.": "La réponse s'est arrêtée avant la fin."
+"Highest:": "Le plus haut :"
+"Lowest:": "Le plus bas :"
+"One figure read from %sources%.": "Un chiffre lu chez %sources%."
+"%count% figures read from %sources%.": "%count% chiffres lus chez %sources%."
+"One refused.": "Un refusé."
+"%count% refused.": "%count% refusés."
+
+"What this figure counts": "Ce que compte ce chiffre"
+"Technical details": "Détails techniques"
+"Read from %provider% on %date%.": "Lu chez %provider% le %date%."
+"Computed by Go Figure from the values of %provider%, downloaded on %date%.": "Calculé par Go Figure à partir des valeurs de %provider%, téléchargées le %date%."
+"Try to make this answer lie": "Essayez de faire mentir cette réponse"
+"attack.lead": "Voici ce que le modèle a envoyé pour la réponse que vous lisiez. Choisissez une attaque, ou modifiez-la à la main : le serveur la vérifie de nouveau, sans aucune IA."
+"The answer as it was": "La réponse d'origine"
+"Edit by hand": "Modifier à la main"
+"Close": "Fermer"
+"attack.here": "Choisissez une attaque : le serveur vérifie de nouveau la réponse modifiée, sans aucune IA."
+"Copy with source": "Copier avec la source"
+"Copied": "Copié"
+"The text that is copied": "Le texte copié"
+"copy.hint": "Du texte brut pour un rapport ou une diapositive : les chiffres tels que le serveur les a lus, leur provenance et le lien qui les prouve de nouveau."
+"attack.doubt": "Ne nous croyez pas sur parole : essayez de la faire mentir"
+"Every figure, with its proof: %link%": "Chaque chiffre, avec sa preuve : %link%"
+"Proof: %link%": "Preuve : %link%"
+"Source: %provider%, %title% (%code%), read on %date%.": "Source : %provider%, %title% (%code%), lu le %date%."
+"Numbers you can stand behind.": "Des chiffres que vous pouvez défendre."
+"Ask a question. Get figures you can cite, trace and verify.": "Posez une question. Obtenez des chiffres à citer, à tracer et à vérifier."
+"AI writes the page. Every figure is read from the source.": "L'IA écrit la page. Chaque chiffre est lu à la source."
+"Answered by %model%.": "Réponse de %model%."
+"The AI key of this install is not read:": "La clé d'IA de cette installation n'est pas lue :"
+"Or replay an answer a model gave:": "Ou rejouez une réponse donnée par un modèle :"
+"The answer is being written…": "La réponse s'écrit…"
+"The answer appears here, part by part.": "La réponse apparaît ici, partie par partie."
+"See what was sent to the server": "Voir ce qui a été envoyé au serveur"
+"Build a page without AI": "Construire une page sans IA"
+"Answered without a model: matched %words%.": "Réponse sans modèle : mots reconnus, %words%."
+"The words of this question name no indicator of the data.": "Les mots de cette question ne désignent aucun indicateur des données."
+"The words of this question name no place of the data.": "Les mots de cette question ne désignent aucun lieu des données."
+"The data has this indicator, but not for these places or this period.": "Les données ont cet indicateur, mais pas pour ces lieux ou cette période."
+"The data has: %list%.": "Les données ont : %list%."
+"%title%, month by month, average over many years": "%title%, mois par mois, moyenne sur de nombreuses années"
+"%title%, over time": "%title%, au fil du temps"
+
+"No AI needed": "Sans IA"
+"home.nokey.title": "Cette installation n'a pas de clé d'IA, et elle répond quand même."
+"home.nokey.how": "Nommez un lieu, un sujet et, si vous voulez, un mois ou une année. Vos mots sont rapprochés des statistiques officielles, et chaque chiffre est lu et prouvé de la même façon."
+"home.nokey.places": "%countries% pays et %cities% villes, par exemple %sample%. Sujets :"
+"home.nokey.key": "Avec une clé d'IA (voir le README), un modèle comprend des questions plus libres, écrit quelques lignes autour des chiffres et va chercher les données qui manquent ici."
+"Questions that work without AI": "Des questions qui marchent sans IA"
+"What can I ask?": "Que puis-je demander ?"
+"Recorded answers of a model, replayed:": "Réponses enregistrées d'un modèle, rejouées :"
+"Another month": "Un autre mois"
+"Same places, another figure": "Mêmes lieux, un autre chiffre"
+"home.withkey.title": "Marche aussi sans IA : immédiat, et rien n'est dépensé."
+"Answer without AI": "Répondre sans IA"
+"Without %place%": "Sans %place%"
+"With %place%": "Avec %place%"
+"This question can be read in more than one way: %first%, or %second%. Both are shown, and each says what it counts.": "Cette question peut se lire de plusieurs façons : %first%, ou %second%. Chaque lecture est affichée, et dit ce qu'elle compte."
+"The data has no place called %name%: a page without it would answer another question.": "Les données n'ont aucun lieu nommé %name% : une page sans lui répondrait à une autre question."
+"Not understood, and left out: %words%.": "Non compris, et laissé de côté : %words%."
+"The data does not know \"%name%\": a page without it would answer another question.": "Les données ne connaissent pas « %name% » : une page sans lui répondrait à une autre question."
+"Not understood: %name%. Without it, the rest of the question is too vague to answer.": "Non compris : %name%. Sans cela, le reste de la question est trop vague pour y répondre."
+"Your words also fit:": "Vos mots correspondent aussi à :"
+"See the question read by its words": "Voir la question lue par ses mots"
+"Example answers, replayed:": "Exemples de réponses, rejoués :"
+"ask.declined": "Cette question sort de ce à quoi Go Figure répond : il lit des statistiques officielles par lieu et par période (prix, tourisme, transports, météo, économie, énergie), et laisse de côté les sujets qui touchent à la vie des personnes."
+"The server refused a number the model wrote itself. The model writes its answer again…": "Le serveur a refusé un nombre que le modèle a écrit lui-même. Le modèle réécrit sa réponse…"
+"No place was named: these are the highest of all the places the data has for this figure.": "Aucun lieu n'était nommé : voici les plus hauts de tous les lieux que les données ont pour ce chiffre."
+"No place was named: these are the lowest of all the places the data has for this figure.": "Aucun lieu n'était nommé : voici les plus bas de tous les lieux que les données ont pour ce chiffre."
+"The data has no figure for %name%.": "Les données n'ont aucun chiffre pour %name%."
+"This figure is by month of the year: name a month, or a place.": "Ce chiffre est par mois de l'année : nommez un mois, ou un lieu."
+"Why it is different": "Ce qui change"
+"A source is not a proof": "Une source n'est pas une preuve"
+"An assistant that cites its sources": "Un assistant qui cite ses sources"
+"What Go Figure does not do.": "Ce que Go Figure ne fait pas."
+"Where it matters.": "Là où cela compte."
+"versus.lead": "On ne prouve pas qu'une IA a toujours raison. On prouve que les nombres qu'elle a le droit d'afficher ont une provenance vérifiable."
+"versus.writes.what": "Qui écrit le chiffre"
+"versus.writes.them": "Le modèle, après avoir lu des pages."
+"versus.writes.us": "Le serveur. Le modèle dit seulement où le lire."
+"versus.source.what": "Ce que montre la source"
+"versus.source.them": "Une page d'où le chiffre est dit venir."
+"versus.source.us": "L'endroit exact où il a été lu : le jeu de données, le lieu, la période, le jour."
+"versus.missing.what": "Quand les données n'ont pas la réponse"
+"versus.missing.them": "Il peut tout de même donner un chiffre plausible."
+"versus.missing.us": "Un refus, bien en vue."
+"versus.again.what": "Comment vérifier un chiffre"
+"versus.again.them": "On ouvre la page et on cherche le nombre."
+"versus.again.us": "Un clic : où il a été lu, la source, le jour."
+"versus.fair": "Un tel assistant a le plus souvent raison. Ce qu'on ne peut pas faire, c'est savoir quand il a tort, à moins de vérifier chaque chiffre à la main."
+"versus.limits": "Il ne répond pas sur tous les sujets, seulement sur ce que ses données contiennent. Et il ne peut pas promettre que le chiffre lu est le bon pour votre question : il dit ce que chaque chiffre compte, et lesquels de vos mots il n'a pas compris."
+"versus.where": "Un rapport que personne ne relit ligne à ligne, un tableau de bord, un assistant branché sur les données d'une entreprise : partout où un chiffre faux coûte plus cher que pas de chiffre."
+"No place was named: for each figure, these are the highest of all the places the data has.": "Aucun lieu n'était nommé : pour chaque chiffre, voici les plus hauts de tous les lieux que les données ont."
+"No place was named: for each figure, these are the lowest of all the places the data has.": "Aucun lieu n'était nommé : pour chaque chiffre, voici les plus bas de tous les lieux que les données ont."
+"This compares places the data does not have.": "Cette question compare des lieux que les données n'ont pas."
+"This compares places, and the data has only %name% of them.": "Cette question compare des lieux, et les données n'ont que %name%."
+"See it on a real question": "Voyez-le sur une vraie question"
+"home.example.lead": "Une page telle qu'un modèle l'enverrait, vérifiée contre les données de la source."
+"home.outcome.proven": "Le nombre a été lu à une vraie source. Cliquez dessus pour voir d'où il vient, et le jour où il a été lu."
+"home.outcome.cell": "La source n'a pas de donnée pour ce lieu. Aucun nombre n'est inventé pour combler le vide."
+"home.outcome.text": "Le modèle a écrit un nombre lui-même, sans rien dans les données où le lire. Le serveur l'a bloqué avant qu'il ne s'affiche."
+"home.example.dare": "Changez ce que le modèle envoie. Ajoutez de faux nombres. Regardez ce que le serveur laisse passer."
+"See it in action": "Voyez-le à l'œuvre"
+"Missing": "Absent"
+"Unsupported": "Sans preuve"
+"home.example.question": "Séville est-elle plus chaude que Lisbonne en septembre ?"
+"Missing: %reason%": "Absent. %reason%"
+"Your own data": "Vos propres données"
+"data.lead": "Déposez un fichier CSV et interrogez-le comme les statistiques publiques : le serveur lit chaque valeur dans votre fichier et la prouve, ou dit qu'elle manque. Un modèle n'écrit jamais un chiffre, et n'en reçoit jamais."
+"data.kept": "Ces chiffres sont maintenant ici."
+"data.kept.hint": "Interrogez-les sur la page d'accueil, par leur titre : avec un lieu ou une période du fichier, ou sans, pour voir les plus hauts et les plus bas."
+"Ask about %title%": "Interroger « %title% »"
+"data.read.title": "Voici ce que le serveur a lu"
+"data.read.what": "%rows% lignes, %places% lieux dans la colonne « %place% », des périodes dans la colonne « %period% », de %from% à %to%."
+"data.name.title": "Nommez les chiffres"
+"data.name.hint": "Des mots seulement, comme le titre d'un graphique : les chiffres viennent du fichier. Une colonne laissée sans titre n'est pas gardée."
+"Column %name%": "Colonne %name%"
+"What it counts": "Ce qu'elle compte"
+"Its unit": "Son unité"
+"Revenue of the store": "Chiffre d'affaires du magasin"
+"euros": "euros"
+"Keep these figures": "Garder ces chiffres"
+"Another file": "Un autre fichier"
+"A CSV file": "Un fichier CSV"
+"Read this file": "Lire ce fichier"
+"Deposited on this machine": "Déposés sur cette machine"
+"data.rule.stays.title": "Il reste ici."
+"data.rule.stays": "Le fichier est lu et gardé sur la machine qui fait tourner cette page, avec les autres jeux ajoutés. Il disparaît quand le conteneur est recréé."
+"data.rule.model.title": "Ce que voit un modèle."
+"data.rule.model": "Avec une clé d'IA, un modèle reçoit le nom du fichier, le titre que vous donnez à chaque colonne, son unité, les lieux et les périodes. Jamais une valeur : le serveur les lit lui-même."
+"data.rule.people.title": "Pas de fichier sur des personnes."
+"data.rule.people": "Ne déposez pas un fichier où une ligne est une personne. Un fichier dont une colonne en nomme une (un nom, une adresse, une date de naissance) est refusé ; ce contrôle n'est pas une garantie."
+"proof.imported.file": "Du fichier %file%, colonne « %column% », déposé sur cette machine le %date%. La valeur est celle du fichier, lue telle qu'écrite ; son titre et son unité sont les mots du déposant. Empreinte du fichier (SHA-256) : %sha%."
+"And it is not retrieval (RAG).": "Et ce n'est pas du RAG."
+"versus.rag": "Avec le RAG, on donne au modèle des extraits qui contiennent les chiffres, et il les recopie dans sa réponse. Ici on lui donne des titres, des lieux et des périodes, jamais une valeur : il ne peut ni mal recopier un chiffre qu'il n'a pas vu, ni le faire fuiter."
+"Go on from here, without AI:": "Continuer à partir d'ici, sans IA :"
+'%countries%: the data has this figure by city, not by country. Some of its cities are shown instead.': '%countries% : les données ont ce chiffre par ville, pas par pays. Quelques-unes de ses villes sont affichées à la place.'
+'Finished: the answer is below.': 'Terminé : la réponse est ci-dessous.'
+'Finished. This answer shows no figure.': "Terminé. Cette réponse n'affiche aucun chiffre."
+'Choose a CSV file': 'Choisir un fichier CSV'
+'No file chosen': 'Aucun fichier choisi'
+"See how it works": "Voir comment ça marche"
+"Use other data": "Utiliser d'autres données"
+"how.lead": "Un modèle de conversation sait écrire une page et se trompe sur les chiffres. Ici il écrit donc la page, et jamais un chiffre."
+"how.step.ask.title": "Vous demandez."
+"how.step.ask": "Une question avec vos mots."
+"how.step.name.title": "La réponse dit quoi chercher."
+"how.step.name": "Un modèle (ou, sans clé, les mots de votre question) choisit les chiffres dont la réponse a besoin, par exemple « température, Séville, septembre ». Il n'écrit jamais le nombre."
+"how.step.read.title": "Le serveur va le lire."
+"how.step.read": "Chaque chiffre est lu dans les données, ou calculé à partir de chiffres lus. Celui que les données n'ont pas est dit manquant ; un nombre écrit par le modèle n'est pas affiché."
+"how.step.prove.title": "Chaque chiffre a sa preuve."
+"how.step.prove": "Un clic sur un chiffre montre d'où il vient : la source, le jeu de données, la date de lecture."
+"sources.lead": "Les chiffres livrés ici sont des statistiques publiques sur l'Europe. Il y a deux façons d'en utiliser d'autres, et elles ne marchent pas pareil : un fichier à vous, ou d'autres données publiques."
+"sources.own.for": "Des chiffres que vous êtes seul à avoir : les ventes de vos magasins, les visites de vos sites, les relevés de vos capteurs."
+"sources.own.you": "Vous déposez un fichier CSV, puis vous donnez un titre et une unité à chaque colonne de nombres."
+"sources.own.server": "Il lit les valeurs dans votre fichier, telles qu'elles sont écrites. Il ne télécharge rien."
+"sources.own.proof": "Le nom de votre fichier, la colonne, le jour du dépôt et l'empreinte du fichier."
+"sources.own.ai": "Aucune n'est nécessaire. Avec une clé, un modèle reçoit les titres, les lieux et les périodes, jamais une valeur."
+"sources.public.for": "Des chiffres qu'une source publique publie : un jeu de données d'Eurostat, un indicateur de la Banque mondiale, la météo d'une ville de plus."
+"sources.public.you": "Vous cherchez un jeu de données par ses mots et vous le choisissez. Pour Eurostat, vous choisissez aussi ce qu'il compte (un code par dimension)."
+"sources.public.server": "Il télécharge chaque valeur à la source, vérifie chaque code, et écrit le titre et l'unité avec les mots de la source."
+"sources.public.proof": "La source, le jeu de données, la date du téléchargement, et un lien vers le même chiffre à la source."
+"sources.public.ai": "Aucune n'est nécessaire. Avec une clé, un agent peut chercher le jeu de données et proposer les codes ; le serveur lit quand même chaque valeur."
+"sources.same.title": "La même règle pour les deux."
+"sources.same": "Une fois ajoutés, ces chiffres s'interrogent comme les autres et se prouvent de la même façon : le serveur lit chacun, un modèle ne l'écrit jamais."
+"sources.stays": "Ce que vous ajoutez est gardé sur la machine qui fait tourner cette page. Tout disparaît quand le conteneur est recréé."
+"sources.closed.title": "Tout n'est pas accepté."
+"sources.closed": "Aucun fichier sur des personnes, et aucun jeu de données public sur la vie des personnes (santé, migration, justice et sujets voisins)."
+"data.other": "Cette page sert à un fichier à vous. Pour une source publique (Eurostat, la Banque mondiale, la météo d'une ville) :"
+"import.other": "Cette page sert aux sources publiques. Pour des chiffres que vous êtes seul à avoir, dans un fichier CSV :"
+"data.step.deposit.title": "Déposer."
+"data.step.deposit": "Choisissez un fichier CSV. Le serveur dit ce qu'il y a lu : rien n'est encore gardé."
+"data.step.name.title": "Nommer."
+"data.step.name": "Donnez un titre et une unité à chaque colonne de nombres, avec des mots. Une colonne sans titre n'est pas gardée."
+"data.step.ask.title": "Demander."
+"data.step.ask": "Sur la page d'accueil, posez une question avec un titre que vous avez donné : avec un lieu ou une période du fichier, ou sans, pour voir les plus hauts."
+"data.sample.caption": "Un exemple : les ventes et les visiteurs de quelques magasins, par année."
+"data.sample.try": "et déposez-le pour voir tout le parcours."
+"data.format.line": "Une première ligne de noms de colonnes, puis une ligne par lieu et par période (Nantes en 2023, Nantes en 2024…)."
+"data.format.first": "Une colonne dit de quoi parle chaque ligne : un lieu, un produit, une catégorie. C'est la première colonne qui ne contient ni périodes ni nombres."
+"data.format.period": "Une colonne contient la période, et rien d'autre : des années (2024) ou des mois (2024-03)."
+"data.format.numbers": "Toute autre colonne qui ne contient que des nombres est un chiffre, jusqu'à %columns%. Point ou virgule pour les décimales, espaces entre les milliers ; ni signe monétaire ni unité dans une cellule. Une cellule vide s'affiche comme manquante."
+"data.format.limits": "Colonnes séparées par des points-virgules, des virgules ou des tabulations. Jusqu'à %kb% Ko, %rows% lignes et %places% lieux."
+"Your own file": "Votre fichier"
+"Public data": "Données publiques"
+"What you do": "Ce que vous faites"
+"What the server does": "Ce que fait le serveur"
+"What a proof says": "Ce que dit une preuve"
+"AI": "IA"
+"Deposit a file": "Déposer un fichier"
+"Add public data": "Ajouter des données publiques"
+"The two ways, side by side": "Les deux façons, côte à côte"
+"The file it expects": "Le fichier attendu"
+"What each line is about": "De quoi parle chaque ligne"
+"When": "Quand"
+"The numbers, one column each": "Les nombres, une colonne chacun"
+"Download this example": "Télécharger cet exemple"
+'How it goes': 'Comment ça se passe'
+"why.duel.them": "%place% atteint [24 °C, un vrai printemps] en %month%."
+"why.duel.them.what": "Le nombre est celui du modèle. Le lien mène à une page : à vous d'y chercher le nombre."
+"why.duel.us": "%place%, %month% : [figure], la maximale habituelle."
+"why.duel.us.what": "Le nombre vient des données. Le serveur l'a lu ; un clic montre où."
+"Written by the model": "Écrit par le modèle"
+"source": "source"
+"Explore the available data": "Explorer les données disponibles"
+"mcp.lead": "Votre propre assistant peut interroger Go Figure. Il reçoit des pages, jamais un nombre à répéter de mémoire."
+"mcp.step.connect.title": "Brancher."
+"mcp.step.connect": "Donnez l'adresse ci-dessus à votre client MCP. Ni clé, ni compte."
+"mcp.step.ask.title": "Demander à votre assistant."
+"mcp.step.ask": "Il liste les données, dit de quels chiffres il a besoin, et peut ajouter un jeu de données public. Il n'envoie jamais une valeur."
+"mcp.step.page.title": "Recevoir une page."
+"mcp.step.page": "Le serveur lit et prouve chaque chiffre. Votre assistant affiche la page, ou un texte où chaque chiffre renvoie à sa preuve."
+'The agent was not sent: it has reached its limit of runs for now. Try again later.': "L'agent n'est pas parti : il a atteint sa limite de passages pour le moment. Réessayez plus tard."
+
+proof.op.change: La seconde valeur moins la première.
+proof.op.change_pct: La seconde valeur moins la première, en pourcentage de la première.
+proof.op.share: La partie divisée par le tout, en pourcentage.
+proof.op.rank: La place de la première valeur parmi toutes les valeurs ci-dessous, la plus haute en tête.
+proof.operand.change.first: Première valeur
+proof.operand.change.next: Seconde valeur
+proof.operand.change_pct.first: Première valeur
+proof.operand.change_pct.next: Seconde valeur
+proof.operand.share.first: La partie
+proof.operand.share.next: Le tout
+proof.operand.rank.first: La valeur classée
+proof.operand.rank.next: Comparée à

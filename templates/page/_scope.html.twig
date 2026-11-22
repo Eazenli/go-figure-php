@@ -1,0 +1,4 @@
+{#- What the figures of a block count, said under its title: a value can be exact and still not be
+    the figure the question was about. -#}
+{%- set scope = block_scope(c) -%}
+{% if scope != '' %}<p class="gf-scope">{{ scope }}</p>{% endif %}
