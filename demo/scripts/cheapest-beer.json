@@ -1,0 +1,20 @@
+{
+  "title": "No beer prices here, but the price level of restaurants and hotels",
+  "components": [
+    {"kind": "note", "segments": [
+      {"kind": "text", "text": "These datasets hold no beer prices, and the price level of food leaves out alcohol. The closest proven figure is the price level of restaurants and hotels, compared with the EU average, here for some popular destinations in "},
+      {"kind": "period", "from": "2024", "to": "2024"},
+      {"kind": "text", "text": ". It is not a ranking of every country, and a country cheaper than the average for restaurants and hotels may still charge more for a beer."}
+    ]},
+    {"kind": "bar", "title": "Price level of restaurants and hotels", "bars": [
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "EU27_2020", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "BG", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "CZ", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "PT", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "ES", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "EL", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "HR", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "IT", "time": "2024"}
+    ]}
+  ]
+}

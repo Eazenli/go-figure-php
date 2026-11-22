@@ -1,0 +1,164 @@
+{
+    "title": "Les nuitées d'hôtel au Portugal depuis la pandémie",
+    "components": [
+        {
+            "kind": "note",
+            "segments": [
+                {
+                    "kind": "text",
+                    "text": "Oui. Les nuitées d'hôtel au Portugal dépassent leur niveau de l'année d'avant la pandémie : "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "computed",
+                        "op": "change_pct",
+                        "operands": [
+                            {
+                                "type": "measured",
+                                "dataset": "nights_hotels",
+                                "geo": "PT",
+                                "time": "2019"
+                            },
+                            {
+                                "type": "measured",
+                                "dataset": "nights_hotels",
+                                "geo": "PT",
+                                "time": "2025"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": " entre "
+                },
+                {
+                    "kind": "period",
+                    "from": "2019",
+                    "to": "2019"
+                },
+                {
+                    "kind": "text",
+                    "text": " et "
+                },
+                {
+                    "kind": "period",
+                    "from": "2025",
+                    "to": "2025"
+                },
+                {
+                    "kind": "text",
+                    "text": "."
+                }
+            ]
+        },
+        {
+            "kind": "kpi",
+            "label": "L'année avant la pandémie",
+            "figure": {
+                "type": "measured",
+                "dataset": "nights_hotels",
+                "geo": "PT",
+                "time": "2019"
+            }
+        },
+        {
+            "kind": "kpi",
+            "label": "Après la pandémie",
+            "figure": {
+                "type": "measured",
+                "dataset": "nights_hotels",
+                "geo": "PT",
+                "time": "2025"
+            }
+        },
+        {
+            "kind": "kpi",
+            "label": "Évolution depuis l'année d'avant la pandémie",
+            "figure": {
+                "type": "computed",
+                "op": "change_pct",
+                "operands": [
+                    {
+                        "type": "measured",
+                        "dataset": "nights_hotels",
+                        "geo": "PT",
+                        "time": "2019"
+                    },
+                    {
+                        "type": "measured",
+                        "dataset": "nights_hotels",
+                        "geo": "PT",
+                        "time": "2025"
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "line",
+            "title": "Les nuitées d'hôtel au Portugal",
+            "series": [
+                {
+                    "dataset": "nights_hotels",
+                    "geo": "PT",
+                    "from": "2019",
+                    "to": "2025"
+                }
+            ]
+        },
+        {
+            "kind": "note",
+            "segments": [
+                {
+                    "kind": "text",
+                    "text": "Comparez "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "nights_hotels",
+                        "geo": "PT",
+                        "time": "2019"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": " nuitées en "
+                },
+                {
+                    "kind": "period",
+                    "from": "2019",
+                    "to": "2019"
+                },
+                {
+                    "kind": "text",
+                    "text": " avec "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "nights_hotels",
+                        "geo": "PT",
+                        "time": "2025"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": " nuitées en "
+                },
+                {
+                    "kind": "period",
+                    "from": "2025",
+                    "to": "2025"
+                },
+                {
+                    "kind": "text",
+                    "text": "."
+                }
+            ]
+        }
+    ]
+}

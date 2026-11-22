@@ -1,0 +1,128 @@
+{
+    "title": "Hotel nights in Spain, Italy and Greece",
+    "components": [
+        {
+            "kind": "note",
+            "segments": [
+                {
+                    "kind": "text",
+                    "text": "Spain is the busiest of these countries for hotels: "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "nights_hotels",
+                        "geo": "ES",
+                        "time": "2025"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": " in "
+                },
+                {
+                    "kind": "period",
+                    "from": "2025",
+                    "to": "2025"
+                },
+                {
+                    "kind": "text",
+                    "text": ", ahead of Italy, "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "nights_hotels",
+                        "geo": "IT",
+                        "time": "2025"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": ", and Greece, "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "nights_hotels",
+                        "geo": "EL",
+                        "time": "2025"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": "."
+                }
+            ]
+        },
+        {
+            "kind": "bar",
+            "title": "Nights spent in hotels",
+            "bars": [
+                {
+                    "type": "measured",
+                    "dataset": "nights_hotels",
+                    "geo": "ES",
+                    "time": "2025"
+                },
+                {
+                    "type": "measured",
+                    "dataset": "nights_hotels",
+                    "geo": "IT",
+                    "time": "2025"
+                },
+                {
+                    "type": "measured",
+                    "dataset": "nights_hotels",
+                    "geo": "EL",
+                    "time": "2025"
+                }
+            ]
+        },
+        {
+            "kind": "line",
+            "title": "Hotel nights over time",
+            "series": [
+                {
+                    "dataset": "nights_hotels",
+                    "geo": "ES",
+                    "from": "2015",
+                    "to": "2025"
+                },
+                {
+                    "dataset": "nights_hotels",
+                    "geo": "IT",
+                    "from": "2015",
+                    "to": "2025"
+                },
+                {
+                    "dataset": "nights_hotels",
+                    "geo": "EL",
+                    "from": "2015",
+                    "to": "2025"
+                }
+            ]
+        },
+        {
+            "kind": "note",
+            "segments": [
+                {
+                    "kind": "text",
+                    "text": "Hotels and similar accommodation only: holiday homes and campsites are not counted. The bars show "
+                },
+                {
+                    "kind": "period",
+                    "from": "2025",
+                    "to": "2025"
+                },
+                {
+                    "kind": "text",
+                    "text": "."
+                }
+            ]
+        }
+    ]
+}

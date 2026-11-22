@@ -1,0 +1,20 @@
+{
+  "title": "Pas de prix de la bière ici, mais le niveau des prix des restaurants et des hôtels",
+  "components": [
+    {"kind": "note", "segments": [
+      {"kind": "text", "text": "Ces jeux de données ne contiennent aucun prix de la bière, et le niveau des prix de l'alimentation laisse l'alcool de côté. Le chiffre prouvé le plus proche est le niveau des prix des restaurants et des hôtels, comparé à la moyenne de l'UE, ici pour quelques destinations courues, en "},
+      {"kind": "period", "from": "2024", "to": "2024"},
+      {"kind": "text", "text": ". Ce n'est pas un classement de tous les pays, et un pays moins cher que la moyenne pour les restaurants et les hôtels peut tout de même vendre la bière plus cher."}
+    ]},
+    {"kind": "bar", "title": "Niveau des prix des restaurants et des hôtels", "bars": [
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "EU27_2020", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "BG", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "CZ", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "PT", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "ES", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "EL", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "HR", "time": "2024"},
+      {"type": "measured", "dataset": "prices_restaurants_hotels", "geo": "IT", "time": "2024"}
+    ]}
+  ]
+}

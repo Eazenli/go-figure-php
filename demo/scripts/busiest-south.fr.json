@@ -1,0 +1,128 @@
+{
+    "title": "Nuitées d'hôtel en Espagne, en Italie et en Grèce",
+    "components": [
+        {
+            "kind": "note",
+            "segments": [
+                {
+                    "kind": "text",
+                    "text": "L'Espagne est le plus fréquenté de ces pays pour les hôtels : "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "nights_hotels",
+                        "geo": "ES",
+                        "time": "2025"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": " en "
+                },
+                {
+                    "kind": "period",
+                    "from": "2025",
+                    "to": "2025"
+                },
+                {
+                    "kind": "text",
+                    "text": ", devant l'Italie, "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "nights_hotels",
+                        "geo": "IT",
+                        "time": "2025"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": ", et la Grèce, "
+                },
+                {
+                    "kind": "figure",
+                    "figure": {
+                        "type": "measured",
+                        "dataset": "nights_hotels",
+                        "geo": "EL",
+                        "time": "2025"
+                    }
+                },
+                {
+                    "kind": "text",
+                    "text": "."
+                }
+            ]
+        },
+        {
+            "kind": "bar",
+            "title": "Nuitées dans les hôtels",
+            "bars": [
+                {
+                    "type": "measured",
+                    "dataset": "nights_hotels",
+                    "geo": "ES",
+                    "time": "2025"
+                },
+                {
+                    "type": "measured",
+                    "dataset": "nights_hotels",
+                    "geo": "IT",
+                    "time": "2025"
+                },
+                {
+                    "type": "measured",
+                    "dataset": "nights_hotels",
+                    "geo": "EL",
+                    "time": "2025"
+                }
+            ]
+        },
+        {
+            "kind": "line",
+            "title": "Les nuitées d'hôtel dans le temps",
+            "series": [
+                {
+                    "dataset": "nights_hotels",
+                    "geo": "ES",
+                    "from": "2015",
+                    "to": "2025"
+                },
+                {
+                    "dataset": "nights_hotels",
+                    "geo": "IT",
+                    "from": "2015",
+                    "to": "2025"
+                },
+                {
+                    "dataset": "nights_hotels",
+                    "geo": "EL",
+                    "from": "2015",
+                    "to": "2025"
+                }
+            ]
+        },
+        {
+            "kind": "note",
+            "segments": [
+                {
+                    "kind": "text",
+                    "text": "Hôtels et hébergements similaires seulement : les locations de vacances et les campings ne sont pas comptés. Les barres montrent l'année "
+                },
+                {
+                    "kind": "period",
+                    "from": "2025",
+                    "to": "2025"
+                },
+                {
+                    "kind": "text",
+                    "text": "."
+                }
+            ]
+        }
+    ]
+}

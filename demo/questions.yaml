@@ -1,0 +1,69 @@
+# The example questions of the first page, replayed from their cassette: no key, no network.
+#
+# A cassette holds the exact request (prompt, schema, catalog) and the answer streamed back. Any
+# change to the request makes the replay fail rather than show a stale answer: re-record.
+#   recorded: live      a model wrote the answer: `make cassette q=<id>`, with a key in .env.local
+#   recorded: scripted  the answer was written by hand (`script`), streamed in the format of the
+#                       provider, to show the page before a model is recorded:
+#                       `make cassette q=<id> scripted=1`
+- id: busiest-south
+  text: "Which is busiest for hotels: Spain, Italy or Greece?"
+  provider: anthropic
+  model: "claude-sonnet-5-5"
+  cassette: demo/cassettes/busiest-south.json
+  recorded: live
+  recorded_on: '2026-11-21'
+  script: demo/scripts/busiest-south.json
+
+- id: portugal-recovery
+  text: "Are hotel nights in Portugal back to where they were before the pandemic?"
+  provider: anthropic
+  model: "claude-sonnet-5-5"
+  cassette: demo/cassettes/portugal-recovery.json
+  recorded: live
+  recorded_on: '2026-11-21'
+  script: demo/scripts/portugal-recovery.json
+
+- id: cheapest-beer
+  text: "Where in Europe is beer cheapest?"
+  provider: anthropic
+  model: "claude-sonnet-5-5"
+  cassette: demo/cassettes/cheapest-beer.json
+  recorded: live
+  recorded_on: '2026-11-21'
+  script: demo/scripts/cheapest-beer.json
+
+# The same three questions, asked in French: shown when the interface is in French. The answers are
+# written in French too, and the rule of the page refuses numbers written in French words.
+- id: busiest-south-fr
+  language: fr
+  twin: busiest-south
+  text: "Où les hôtels sont-ils les plus fréquentés : Espagne, Italie ou Grèce ?"
+  provider: anthropic
+  model: "claude-sonnet-5-5"
+  cassette: demo/cassettes/busiest-south-fr.json
+  recorded: live
+  recorded_on: '2026-11-21'
+  script: demo/scripts/busiest-south.fr.json
+
+- id: portugal-recovery-fr
+  language: fr
+  twin: portugal-recovery
+  text: "Les nuitées d'hôtel au Portugal sont-elles revenues à leur niveau d'avant la pandémie ?"
+  provider: anthropic
+  model: "claude-sonnet-5-5"
+  cassette: demo/cassettes/portugal-recovery-fr.json
+  recorded: live
+  recorded_on: '2026-11-21'
+  script: demo/scripts/portugal-recovery.fr.json
+
+- id: cheapest-beer-fr
+  language: fr
+  twin: cheapest-beer
+  text: "Où la bière est-elle la moins chère en Europe ?"
+  provider: anthropic
+  model: "claude-sonnet-5-5"
+  cassette: demo/cassettes/cheapest-beer-fr.json
+  recorded: live
+  recorded_on: '2026-11-21'
+  script: demo/scripts/cheapest-beer.fr.json
