@@ -1,0 +1,19 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+
+parameters:
+    # Level 8 everywhere. Above it, nearly every report is a decoded JSON array in a test.
+    level: 8
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/
+    tmpDir: var/phpstan
+    symfony:
+        # The container the tests read services from (make stan builds it first).
+        containerXmlPath: var/cache/test/App_KernelTestDebugContainer.xml

@@ -1,0 +1,23 @@
+mcp:
+    servers:
+        # Symfony normalizes dashes in configuration keys to underscores,
+        # so the advertised name and the HTTP path are set explicitly.
+        go_figure:
+            name: 'go-figure'
+            version: '0.1.0'
+            description: 'A generative UI that cannot make up a number.'
+
+            # Only the app's own MCP services are exposed.
+            registry: 'App\Mcp\'
+
+            transports:
+                http: true
+                # STDIO for Claude Desktop: docker exec -i go-figure php bin/console mcp:server
+                stdio: true
+
+            http:
+                path: /mcp/go-figure
+                # Hosts stay limited to localhost (SDK default). Origins of local inspectors:
+                allowed_origins:
+                    - 'http://localhost:6274' # MCP Inspector and MCPJam
+                    - 'http://127.0.0.1:6274'

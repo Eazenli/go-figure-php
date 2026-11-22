@@ -1,0 +1,69 @@
+# Logs never go to standard output: over STDIO (Claude Desktop), standard output carries the MCP
+# protocol and one log line there breaks it (tests/Mcp/StdioTest.php). The "console" handlers
+# write to standard error too.
+monolog:
+    channels:
+        - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
+        - go_figure # Each page shown (render_page, the composer, /lie), what it refused, and refused tool calls
+
+when@dev:
+    monolog:
+        handlers:
+            # Everything, refusals included: make app-logs
+            main:
+                type: stream
+                path: "%kernel.logs_dir%/%kernel.environment%.log"
+                level: debug
+                channels: ["!event", "!request"]
+            # The "request" channel only for what goes wrong: its "Matched route" line would come
+            # every 5 seconds from the healthcheck.
+            request:
+                type: stream
+                path: "%kernel.logs_dir%/%kernel.environment%.log"
+                level: warning
+                channels: [request]
+            console:
+                type: console
+                process_psr_3_messages: false
+                channels: ["!event", "!doctrine", "!console"]
+
+when@test:
+    monolog:
+        handlers:
+            main:
+                type: fingers_crossed
+                action_level: error
+                handler: nested
+                excluded_http_codes: [404, 405]
+                channels: ["!event"]
+            nested:
+                type: stream
+                path: "%kernel.logs_dir%/%kernel.environment%.log"
+                level: debug
+            # Lets the tests read what the app logged.
+            go_figure:
+                type: test
+                channels: [go_figure]
+
+# The demo container: `docker logs go-figure` shows errors only, each with the messages that led to
+# it. A visitor's mistyped address (404) is not an error. Deprecations stay in the dev log. No
+# "console" handler: it would print every error of a command twice.
+when@prod:
+    monolog:
+        handlers:
+            main:
+                type: fingers_crossed
+                action_level: error
+                handler: nested
+                # A mistyped address (404) or a request for another host name (400) is not an error.
+                excluded_http_codes: [400, 404, 405]
+                channels: ["!deprecation"]
+                buffer_size: 50 # How many messages should be saved? Prevent memory leaks
+                # The STDIO server is one long process: after an error, keep buffering instead of
+                # passing every later message through.
+                stop_buffering: false
+            nested:
+                type: stream
+                path: php://stderr
+                level: debug
+                formatter: monolog.formatter.json

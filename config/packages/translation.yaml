@@ -1,0 +1,8 @@
+framework:
+    default_locale: en
+    # The interface in English (the default) or in French, chosen by the visitor (App\Http\Language).
+    # MCP answers, the text sent back to the model and the logs stay in English.
+    enabled_locales: [en, fr]
+    translator:
+        default_path: '%kernel.project_dir%/translations'
+        fallbacks: [en]

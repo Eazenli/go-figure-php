@@ -1,0 +1,32 @@
+# The demo: a prebuilt image, no build, no bind mount, plain HTTP.
+#   docker compose up -d --wait   ->   http://localhost:8080
+# Port taken? HTTP_PORT=8081 docker compose up -d --wait
+# Development uses compose.dev.yaml (see the Makefile).
+name: go-figure
+
+services:
+  app:
+    image: ghcr.io/eazenli/go-figure-php:${GO_FIGURE_TAG:-latest}
+    pull_policy: missing
+    container_name: go-figure
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      APP_ENV: prod
+      SERVER_NAME: ":8080"
+      # Base of the proof links in MCP over STDIO (Claude Desktop), where no HTTP request gives it.
+      DEFAULT_URI: "http://localhost:${HTTP_PORT:-8080}"
+    # Optional: your own AI provider key (AI_PROVIDER, AI_MODEL, AI_API_KEY).
+    env_file:
+      - path: .env.local
+        required: false
+    # This machine only: with an AI key set, nobody else on the network can spend it.
+    ports:
+      - "127.0.0.1:${HTTP_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s

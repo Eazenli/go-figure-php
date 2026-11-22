@@ -1,0 +1,169 @@
+# Smoke CI: the test suite in the development container, then the production image started the way
+# the demo starts it. Raw docker commands rather than make, so each step reads on its own.
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Run the container as the runner user
+        run: |
+          echo "HOST_UID=$(id -u)" >> "$GITHUB_ENV"
+          echo "HOST_GID=$(id -g)" >> "$GITHUB_ENV"
+
+      - name: Install dependencies
+        run: docker compose -f compose.dev.yaml run --rm --no-deps -T app composer install --no-interaction --no-progress
+
+      # Fails on a known vulnerability in composer.lock; an abandoned package is only reported.
+      - name: Audit dependencies
+        run: docker compose -f compose.dev.yaml run --rm --no-deps -T app composer audit --locked --no-interaction --abandoned=report
+
+      - name: Start the development container
+        run: docker compose -f compose.dev.yaml up -d --wait
+
+      # Reads the test container, to know the type of each service the tests fetch.
+      - name: PHPStan
+        run: |
+          docker compose -f compose.dev.yaml exec -T app php bin/console cache:warmup --env=test --quiet
+          docker compose -f compose.dev.yaml exec -T app php vendor/bin/phpstan analyse --memory-limit=1G --no-progress
+
+      - name: PHPUnit
+        run: docker compose -f compose.dev.yaml exec -T app php bin/phpunit
+
+      - name: Logs on failure
+        if: failure()
+        run: |
+          docker compose -f compose.dev.yaml logs
+          tail -n 200 var/log/*.log || true
+
+  image:
+    name: Production image
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build
+        run: docker build --target prod -t go-figure:ci .
+
+      - name: Image size (target at most 250 MB compressed)
+        run: |
+          size=$(docker save go-figure:ci | gzip | wc -c)
+          echo "Compressed image size: $((size / 1000000)) MB" | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ "$size" -gt 250000000 ]; then echo "::warning::The image is above the 250 MB target."; fi
+
+      - name: Start it as the demo does
+        run: docker run -d --name go-figure -p 8080:8080 go-figure:ci
+
+      - name: Runs as an unprivileged user
+        run: test "$(docker exec go-figure id -u)" != 0
+
+      - name: Healthcheck
+        run: |
+          for _ in $(seq 1 30); do
+            curl -fsS http://localhost:8080/healthz && exit 0
+            sleep 1
+          done
+          exit 1
+
+      - name: Home page, proof route, an example question replayed
+        run: |
+          curl -fsS http://localhost:8080/ | grep -q 'Go Figure'
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/proof/not-a-proof)" = 404
+          curl -fsS 'http://localhost:8080/ask/stream?q=cheapest-beer' | grep -q '^event: end'
+
+      - name: No secret baked into the image
+        run: |
+          ! docker exec go-figure grep -q generated-on-first-start /app/.env.local.php
+
+      - name: MCP over HTTP
+        run: |
+          curl -fsS http://localhost:8080/mcp/go-figure \
+            -H 'Content-Type: application/json' \
+            -H 'Accept: application/json, text/event-stream' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}' \
+            | grep -q '"name":"go-figure"'
+
+      # Standard output carries the protocol only, even while the server logs an error (here, a
+      # call to an unknown tool): every line of it is JSON-RPC, and the error is on standard error.
+      - name: MCP over STDIO
+        run: |
+          printf '%s\n' \
+            '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}' \
+            '{"jsonrpc":"2.0","method":"notifications/initialized"}' \
+            '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"no_such_tool","arguments":{}}}' \
+            | timeout 20 docker exec -i go-figure php bin/console mcp:server >"$RUNNER_TEMP/stdio.out" 2>"$RUNNER_TEMP/stdio.err"
+          grep -q '"name":"go-figure"' "$RUNNER_TEMP/stdio.out"
+          jq -e -s 'length == 2 and all(.[]; .jsonrpc == "2.0")' "$RUNNER_TEMP/stdio.out"
+          grep -q 'Tool not found' "$RUNNER_TEMP/stdio.err"
+
+      - name: Logs on failure
+        if: failure()
+        run: docker logs go-figure
+
+  # The image of compose.yaml, for amd64 and arm64 (Apple silicon), published by the public
+  # repository only: on main as "latest", on a tag v* under that version.
+  publish:
+    name: Publish the image
+    needs: [tests, image]
+    if: github.repository == 'Eazenli/go-figure-php' && github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v5
+
+      # Pinned to commits: this job can write packages.
+      - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
+
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: meta
+        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
+        with:
+          images: ghcr.io/eazenli/go-figure-php
+          # "latest" follows main only, never a tag.
+          flavor: latest=false
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}}
+          labels: |
+            org.opencontainers.image.title=Go Figure
+            org.opencontainers.image.description=A generative UI that cannot make up a number: every figure on the page is read and proven by the server.
+            org.opencontainers.image.licenses=MIT
+
+      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          target: prod
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

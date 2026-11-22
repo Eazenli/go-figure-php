@@ -1,0 +1,21 @@
+.git
+.idea
+.vscode
+.cursor
+.mcp.json
+vendor/
+var/
+.env.local
+.env.*.local
+.env.local.php
+public/bundles/
+.phpunit.cache/
+tests/
+phpunit.dist.xml
+phpstan.dist.neon
+.github/
+# The image only needs the data the app reads, not the Python pipeline that builds it.
+data/*
+!data/facts.sqlite
+# The cities a visitor may add the weather of (the extended mode): codes, names and points.
+!data/cities.csv

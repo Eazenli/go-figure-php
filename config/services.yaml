@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
+
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+# See also https://symfony.com/doc/current/service_container/import.html
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    # Off when the variable is not set at all (an image built without .env): the switch stays hidden.
+    env(LANGUAGE_SWITCH): '0'
+    # The clean table written by the Python extraction. FACTS_PATH overrides it, to
+    # try a snapshot kept outside the repository.
+    app.default_facts_path: '%kernel.project_dir%/data/facts.sqlite'
+    app.facts_path: '%env(default:app.default_facts_path:FACTS_PATH)%'
+    # The datasets imported on this machine (the extended mode, /import): written by the server,
+    # apart from the shipped snapshot.
+    app.imported_path: '%kernel.project_dir%/var/data/imported.sqlite'
+    # The cities whose weather a visitor may add (/import): Eurostat code, name, point.
+    app.cities_file: '%kernel.project_dir%/data/cities.csv'
+    # One YAML file per catalog entry.
+    app.catalog_dir: '%kernel.project_dir%/catalog'
+    # The layouts of "Try to make it lie" (/lie): where the visitor starts, and the prepared attacks.
+    app.lie_dir: '%kernel.project_dir%/demo/lie'
+    # The example page of the home page: a real layout, read and proven like any other.
+    app.home_layout: '%kernel.project_dir%/demo/home.json'
+    # The example questions of /ask and their cassettes.
+    app.questions_file: '%kernel.project_dir%/demo/questions.yaml'
+    # The pause between two chunks of a replayed answer, in microseconds: the pace of a model.
+    app.replay_pause_us: 15000
+    # The cassettes and results of app:eval.
+    app.eval_dir: '%kernel.project_dir%/eval'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    App\Ai\AiSettings:
+        factory: [App\Ai\AiSettings, fromEnv]
+        arguments: ['%env(AI_PROVIDER)%', '%env(AI_MODEL)%', '%env(AI_API_KEY)%']
+
+when@test:
+    parameters:
+        app.facts_path: '%kernel.project_dir%/var/test/facts.sqlite'
+        app.imported_path: '%kernel.project_dir%/var/test/imported.sqlite'
+        app.cities_file: '%kernel.project_dir%/tests/fixtures/cities.csv'
+        app.catalog_dir: '%kernel.project_dir%/tests/fixtures/catalog'
+        app.lie_dir: '%kernel.project_dir%/tests/fixtures/lie'
+        app.home_layout: '%kernel.project_dir%/tests/fixtures/home.json'
+        app.questions_file: '%kernel.project_dir%/var/test/questions.yaml'
+        app.replay_pause_us: 0
+        app.eval_dir: '%kernel.project_dir%/var/test/eval'

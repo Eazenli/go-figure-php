@@ -1,0 +1,55 @@
+# Development: builds the "dev" stage and bind-mounts the source tree.
+# Use it through the Makefile (make up, make sh, make console c=...).
+name: go-figure-dev
+
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    image: go-figure:dev
+    container_name: go-figure
+    # Runs as the host user so that files created in the bind mount stay yours.
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    environment:
+      APP_ENV: dev
+      # Base of the proof links in MCP over STDIO, where no HTTP request gives it.
+      DEFAULT_URI: "http://localhost:${HTTP_PORT:-8080}"
+      # Unprivileged user: listen on 8080 inside the container, keep Caddy state in /tmp.
+      SERVER_NAME: ":8080"
+      XDG_CONFIG_HOME: /tmp/caddy/config
+      XDG_DATA_HOME: /tmp/caddy/data
+      COMPOSER_HOME: /tmp/composer
+    env_file:
+      - path: .env.local
+        required: false
+    volumes:
+      - ./:/app
+    # This machine only, like the demo.
+    ports:
+      - "127.0.0.1:${HTTP_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  # Data pipeline (Python): downloads Eurostat data and the daily weather of Open-Meteo (make weather),
+  # and writes data/facts.sqlite.
+  # Run on demand through the Makefile (make refresh, make data-test). The "data" profile keeps
+  # it out of "make up", and it is never part of the demo image: the app only reads the file.
+  refresh:
+    image: python:3.13-slim
+    profiles: [data]
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    working_dir: /app/data
+    environment:
+      HOME: /tmp
+      PIP_CACHE_DIR: /tmp/pip-cache
+      PYTHONDONTWRITEBYTECODE: "1"
+    volumes:
+      - ./data:/app/data
+      # refresh.py reads the catalog entries; the evaluation questions are checked from here too.
+      - ./catalog:/app/catalog:ro
+      - ./eval:/app/eval:ro

@@ -1,0 +1,53 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    secret: '%env(APP_SECRET)%'
+
+    # No HTTP session: every page and proof link is stateless, so no cookie is ever set. MCP keeps
+    # its sessions in files (the MCP bundle's default store; its "framework" store would need
+    # this session back).
+    session: false
+
+    # A request for another host name is refused: links to proofs are absolute, built from it.
+    trusted_hosts: '%env(TRUSTED_HOSTS)%'
+
+    # Free questions spend the key of whoever runs the app: per visitor, and in all.
+    rate_limiter:
+        ask_visitor:
+            policy: sliding_window
+            limit: 10
+            interval: '10 minutes'
+        ask_all:
+            policy: fixed_window
+            limit: 200
+            interval: '1 day'
+        # Imports download from Eurostat, and a proposal by the agent spends the key: per visitor, and in all.
+        import_visitor:
+            policy: sliding_window
+            limit: 30
+            interval: '1 hour'
+        import_all:
+            policy: fixed_window
+            limit: 100
+            interval: '1 day'
+        # The agent a question sends for data: each of its runs spends several calls of the key. Far
+        # fewer than questions: one visitor, or one crafted question, cannot spend the day's worth.
+        scout_visitor:
+            policy: sliding_window
+            limit: 4
+            interval: '1 hour'
+        scout_all:
+            policy: fixed_window
+            limit: 40
+            interval: '1 day'
+        # Searching Eurostat or reading a dataset on /import downloads too.
+        eurostat_read:
+            policy: sliding_window
+            limit: 120
+            interval: '1 hour'
+
+    #esi: true
+    #fragments: true
+
+when@test:
+    framework:
+        test: true

@@ -1,0 +1,27 @@
+# Local IDE settings (paths, deployment servers): specific to each machine.
+/.idea/
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> data pipeline (Python) ###
+/data/.venv/
+/data/.pytest_cache/
+__pycache__/
+###< data pipeline (Python) ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

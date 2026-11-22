@@ -1,0 +1,4 @@
+# The platform of /ask is built at run time from AI_PROVIDER, AI_MODEL and AI_API_KEY
+# (App\Ai\Platforms), so that a replayed question can pass its cassette as the HTTP client. The
+# bundle still provides the structured output (response_format) and the profiler panel.
+ai: ~

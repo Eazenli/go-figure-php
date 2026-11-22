@@ -1,0 +1,9 @@
+twig:
+    file_name_pattern: '*.twig'
+    globals:
+        # The EN / FR switch of the header (LANGUAGE_SWITCH): off until the French is reviewed.
+        language_switch: '%env(bool:LANGUAGE_SWITCH)%'
+
+when@test:
+    twig:
+        strict_variables: true
