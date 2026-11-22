@@ -1,0 +1,32 @@
+{
+  "title": "Le Portugal en septembre : plus calme que l'Espagne",
+  "components": [
+    {
+      "kind": "bar",
+      "title": "Nuitées touristiques en septembre",
+      "bars": [
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "PT",
+          "time": "2023"
+        },
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "ES",
+          "time": "2024"
+        }
+      ]
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {
+          "kind": "text",
+          "text": "Le Portugal est bien plus calme que l'Espagne en septembre."
+        }
+      ]
+    }
+  ]
+}

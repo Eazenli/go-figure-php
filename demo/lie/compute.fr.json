@@ -1,0 +1,58 @@
+{
+  "title": "Le Portugal face à l'Espagne",
+  "components": [
+    {
+      "kind": "kpi",
+      "label": "Le Portugal depuis l'année d'avant la pandémie",
+      "figure": {
+        "type": "computed",
+        "op": "change_pct",
+        "operands": [
+          {
+            "type": "measured",
+            "dataset": "nights_hotels",
+            "geo": "PT",
+            "time": "2019"
+          },
+          {
+            "type": "measured",
+            "dataset": "nights_hotels",
+            "geo": "PT",
+            "time": "2024"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "kpi",
+      "label": "Le Portugal d'alors, l'Espagne d'aujourd'hui",
+      "figure": {
+        "type": "computed",
+        "op": "change_pct",
+        "operands": [
+          {
+            "type": "measured",
+            "dataset": "nights_hotels",
+            "geo": "PT",
+            "time": "2019"
+          },
+          {
+            "type": "measured",
+            "dataset": "nights_hotels",
+            "geo": "ES",
+            "time": "2024"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {
+          "kind": "text",
+          "text": "L'autre tuile compare le Portugal d'alors à l'Espagne d'aujourd'hui : une croissance qui ne veut rien dire."
+        }
+      ]
+    }
+  ]
+}

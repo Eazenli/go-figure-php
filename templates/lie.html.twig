@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Try to make it lie'|trans }} · Go Figure{% endblock %}
+
+{% block body %}
+    <main class="gf-lie{{ answer ? ' gf-lie-answer' }}">
+        {% if answer %}
+            <h1>{{ 'Try to make this answer lie'|trans }}</h1>
+            <p>{{ 'attack.lead'|trans }}</p>
+        {% else %}
+            <h1>{{ 'Try to make it lie'|trans }}</h1>
+            <p>{{ 'lie.lead'|trans }}</p>
+        {% endif %}
+
+        {#- Everything one can press: also what "Attack this answer" loads under an answer, in place
+            (public/attack.js). -#}
+        <div id="attack" class="gf-attack-zone">
+        <ul class="gf-attacks">
+            {% for key, a in attacks %}
+                <li><a href="{{ path('lie', answer ? {page: answer, attack: key} : {attack: key}) }}#result"{% if key == attack %} aria-current="page"{% endif %}>{{ a[0]|trans }}</a></li>
+            {% endfor %}
+            <li><a href="{{ path('lie', answer ? {page: answer} : {}) }}{{ answer ? '#result' }}">{{ (answer ? 'The answer as it was' : 'Start over')|trans }}</a></li>
+        </ul>
+        {% if attack %}<p class="hint">{{ attacks[attack][1]|trans }}</p>{% endif %}
+
+        <div class="gf-lie-grid">
+            {% set form %}
+            <form method="post" action="{{ path('lie') }}#result">
+                {% if answer %}<input type="hidden" name="page" value="{{ answer }}">{% endif %}
+                <h2><label for="layout">{{ 'What the model sends'|trans }}</label></h2>
+                <textarea id="layout" name="layout" rows="{{ answer ? 18 : 34 }}" spellcheck="false" autocomplete="off" autocapitalize="off">{{ layout }}</textarea>
+                <p><button type="submit">{{ 'Show the page'|trans }}</button></p>
+            </form>
+            {% endset %}
+            {% if not answer %}{{ form }}{% endif %}
+            <section id="result">
+                <h2>{{ 'What the server shows'|trans }}</h2>
+                {% if problem %}
+                    <p class="problem">{{ problem }}</p>
+                    {% if errors %}
+                        <ul class="errors">
+                            {% for error in errors %}<li><code>{{ error }}</code></li>{% endfor %}
+                        </ul>
+                    {% endif %}
+                {% elseif page %}
+                    {% set tally = page.tally %}
+                    <p class="tally">{{ 'Figures proven: %proven%. Figures refused: %refused%. Texts or periods not shown: %hidden%.'|trans({'%proven%': tally.proven, '%refused%': tally.refused, '%hidden%': tally.hidden}) }}</p>
+                    {{ include('page/page.html.twig', {page: page, heading: 3}) }}
+                {% endif %}
+            </section>
+            {#- Under an answer, the result comes first; writing one's own attack is a step further. -#}
+            {% if answer %}
+                <details class="gf-by-hand"{% if app.request.method == 'POST' %} open{% endif %}>
+                    <summary>{{ 'Edit by hand'|trans }}</summary>
+                    {{ form }}
+                </details>
+            {% endif %}
+        </div>
+        </div>
+
+        <section class="callout" aria-labelledby="limits">
+        <h2 id="limits">{{ 'What it does not stop'|trans }}</h2>
+        <ul class="limits">
+            <li>{{ 'lie.limits.words'|trans }}
+                <ul>
+                    <li><strong>{{ 'Refused:'|trans }}</strong> {{ 'lie.limits.refused'|trans }}</li>
+                    <li><strong>{{ 'Let through:'|trans }}</strong> {{ 'lie.limits.through'|trans }}</li>
+                </ul>
+            </li>
+            <li>{{ 'lie.limits.meaning'|trans }}</li>
+            <li>{{ 'lie.limits.period'|trans }}</li>
+            <li>{{ 'lie.limits.cell'|trans }}</li>
+            <li>{{ 'lie.limits.places'|trans }}</li>
+        </ul>
+        </section>
+    </main>
+{% endblock %}

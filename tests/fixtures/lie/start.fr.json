@@ -1,0 +1,31 @@
+{
+  "title": "Nuitées en France et en Espagne",
+  "components": [
+    {
+      "kind": "kpi",
+      "label": "Nuitées en France",
+      "figure": {"type": "measured", "dataset": "nights_total", "geo": "FR", "time": "2024"}
+    },
+    {
+      "kind": "bar",
+      "title": "Nuitées par pays",
+      "bars": [
+        {"type": "measured", "dataset": "nights_total", "geo": "FR", "time": "2024"},
+        {"type": "measured", "dataset": "nights_total", "geo": "ES", "time": "2024"}
+      ]
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {"kind": "text", "text": "La France a compté "},
+        {
+          "kind": "figure",
+          "figure": {"type": "measured", "dataset": "nights_total", "geo": "FR", "time": "2024"}
+        },
+        {"kind": "text", "text": " en "},
+        {"kind": "period", "from": "2024", "to": "2024"},
+        {"kind": "text", "text": "."}
+      ]
+    }
+  ]
+}

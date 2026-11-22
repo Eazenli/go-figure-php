@@ -1,0 +1,58 @@
+{
+  "title": "La France face à l'Espagne",
+  "components": [
+    {
+      "kind": "kpi",
+      "label": "La France depuis l'année d'avant la pandémie",
+      "figure": {
+        "type": "computed",
+        "op": "change_pct",
+        "operands": [
+          {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "FR",
+            "time": "2019"
+          },
+          {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "FR",
+            "time": "2024"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "kpi",
+      "label": "La France d'alors, l'Espagne d'aujourd'hui",
+      "figure": {
+        "type": "computed",
+        "op": "change_pct",
+        "operands": [
+          {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "FR",
+            "time": "2019"
+          },
+          {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "ES",
+            "time": "2024"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {
+          "kind": "text",
+          "text": "L'autre tuile compare la France d'alors à l'Espagne d'aujourd'hui : une croissance qui ne veut rien dire."
+        }
+      ]
+    }
+  ]
+}

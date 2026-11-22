@@ -1,0 +1,35 @@
+{
+  "title": "Hotel nights in France, Spain and Italy",
+  "components": [
+    {
+      "kind": "kpi",
+      "label": "Hotel nights in France",
+      "figure": {
+        "type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2024",
+        "value": 999000000
+      }
+    },
+    {
+      "kind": "bar",
+      "title": "Hotel nights by country",
+      "bars": [
+        {"type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2024"},
+        {"type": "measured", "dataset": "nights_hotels", "geo": "ES", "time": "2024"},
+        {"type": "measured", "dataset": "nights_hotels", "geo": "IT", "time": "2024"}
+      ]
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {"kind": "text", "text": "France counted "},
+        {
+          "kind": "figure",
+          "figure": {"type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2024"}
+        },
+        {"kind": "text", "text": " hotel nights in "},
+        {"kind": "period", "from": "2024", "to": "2024"},
+        {"kind": "text", "text": "."}
+      ]
+    }
+  ]
+}

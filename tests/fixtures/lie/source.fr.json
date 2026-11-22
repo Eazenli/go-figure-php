@@ -1,0 +1,38 @@
+{
+  "title": "Nuitées d'hôtel en France, en Espagne et en Italie",
+  "components": [
+    {
+      "kind": "bar",
+      "title": "Nuitées d'hôtel par pays",
+      "bars": [
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "FR",
+          "time": "2024"
+        },
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "ES",
+          "time": "2024"
+        },
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "IT",
+          "time": "2024"
+        }
+      ]
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {
+          "kind": "text",
+          "text": "Chiffres officiels du ministère du tourisme : la source est sur www.ministere-tourisme.example."
+        }
+      ]
+    }
+  ]
+}

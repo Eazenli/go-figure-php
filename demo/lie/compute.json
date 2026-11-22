@@ -1,0 +1,58 @@
+{
+  "title": "Portugal against Spain",
+  "components": [
+    {
+      "kind": "kpi",
+      "label": "Portugal since the year before the pandemic",
+      "figure": {
+        "type": "computed",
+        "op": "change_pct",
+        "operands": [
+          {
+            "type": "measured",
+            "dataset": "nights_hotels",
+            "geo": "PT",
+            "time": "2019"
+          },
+          {
+            "type": "measured",
+            "dataset": "nights_hotels",
+            "geo": "PT",
+            "time": "2024"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "kpi",
+      "label": "Portugal then, Spain now",
+      "figure": {
+        "type": "computed",
+        "op": "change_pct",
+        "operands": [
+          {
+            "type": "measured",
+            "dataset": "nights_hotels",
+            "geo": "PT",
+            "time": "2019"
+          },
+          {
+            "type": "measured",
+            "dataset": "nights_hotels",
+            "geo": "ES",
+            "time": "2024"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {
+          "kind": "text",
+          "text": "The other tile compares Portugal then with Spain now: a growth that means nothing."
+        }
+      ]
+    }
+  ]
+}

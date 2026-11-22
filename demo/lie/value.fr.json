@@ -1,0 +1,35 @@
+{
+  "title": "Nuitées d'hôtel en France, en Espagne et en Italie",
+  "components": [
+    {
+      "kind": "kpi",
+      "label": "Nuitées d'hôtel en France",
+      "figure": {
+        "type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2024",
+        "value": 999000000
+      }
+    },
+    {
+      "kind": "bar",
+      "title": "Nuitées d'hôtel par pays",
+      "bars": [
+        {"type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2024"},
+        {"type": "measured", "dataset": "nights_hotels", "geo": "ES", "time": "2024"},
+        {"type": "measured", "dataset": "nights_hotels", "geo": "IT", "time": "2024"}
+      ]
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {"kind": "text", "text": "La France a compté "},
+        {
+          "kind": "figure",
+          "figure": {"type": "measured", "dataset": "nights_hotels", "geo": "FR", "time": "2024"}
+        },
+        {"kind": "text", "text": " en "},
+        {"kind": "period", "from": "2024", "to": "2024"},
+        {"kind": "text", "text": "."}
+      ]
+    }
+  ]
+}

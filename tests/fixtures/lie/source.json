@@ -1,0 +1,38 @@
+{
+  "title": "Hotel nights in France, Spain and Italy",
+  "components": [
+    {
+      "kind": "bar",
+      "title": "Hotel nights by country",
+      "bars": [
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "FR",
+          "time": "2024"
+        },
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "ES",
+          "time": "2024"
+        },
+        {
+          "type": "measured",
+          "dataset": "nights_total",
+          "geo": "IT",
+          "time": "2024"
+        }
+      ]
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {
+          "kind": "text",
+          "text": "Official figures of the ministry of tourism: see www.tourism-ministry.example for the source."
+        }
+      ]
+    }
+  ]
+}

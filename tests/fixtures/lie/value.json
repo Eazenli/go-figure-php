@@ -1,0 +1,34 @@
+{
+  "title": "Nights in France and Spain",
+  "components": [
+    {
+      "kind": "kpi",
+      "label": "Nights in France",
+      "figure": {
+        "type": "measured", "dataset": "nights_total", "geo": "FR", "time": "2024",
+        "value": 999000000
+      }
+    },
+    {
+      "kind": "bar",
+      "title": "Nights by country",
+      "bars": [
+        {"type": "measured", "dataset": "nights_total", "geo": "FR", "time": "2024"},
+        {"type": "measured", "dataset": "nights_total", "geo": "ES", "time": "2024"}
+      ]
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {"kind": "text", "text": "France counted "},
+        {
+          "kind": "figure",
+          "figure": {"type": "measured", "dataset": "nights_total", "geo": "FR", "time": "2024"}
+        },
+        {"kind": "text", "text": " nights in "},
+        {"kind": "period", "from": "2024", "to": "2024"},
+        {"kind": "text", "text": "."}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "title": "Portugal in September: quieter than Spain",
+  "components": [
+    {
+      "kind": "bar",
+      "title": "Nights in tourist accommodation in September",
+      "bars": [
+        {
+          "type": "measured",
+          "dataset": "nights_monthly",
+          "geo": "PT",
+          "time": "2025-01"
+        },
+        {
+          "type": "measured",
+          "dataset": "nights_monthly",
+          "geo": "ES",
+          "time": "2025-09"
+        }
+      ]
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {
+          "kind": "text",
+          "text": "Portugal is much calmer than Spain in September."
+        }
+      ]
+    }
+  ]
+}

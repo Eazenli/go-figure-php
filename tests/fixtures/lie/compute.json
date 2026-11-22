@@ -1,0 +1,58 @@
+{
+  "title": "France against Spain",
+  "components": [
+    {
+      "kind": "kpi",
+      "label": "France since the year before the pandemic",
+      "figure": {
+        "type": "computed",
+        "op": "change_pct",
+        "operands": [
+          {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "FR",
+            "time": "2019"
+          },
+          {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "FR",
+            "time": "2024"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "kpi",
+      "label": "France then, Spain now",
+      "figure": {
+        "type": "computed",
+        "op": "change_pct",
+        "operands": [
+          {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "FR",
+            "time": "2019"
+          },
+          {
+            "type": "measured",
+            "dataset": "nights_total",
+            "geo": "ES",
+            "time": "2024"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "note",
+      "segments": [
+        {
+          "kind": "text",
+          "text": "The other tile compares France then with Spain now: a growth that means nothing."
+        }
+      ]
+    }
+  ]
+}
