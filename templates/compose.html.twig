@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ (compare ? 'Compare destinations' : 'Explore the available data')|trans }} · Go Figure{% endblock %}
+
+{% form_theme form 'form/chips.html.twig' %}
+
+{% block body %}
+    <main class="gf-composer">
+        {% if compare %}
+            <h1>{{ 'Compare destinations'|trans }}</h1>
+            <p>{{ 'compare.lead'|trans }} <a href="{{ path('compose') }}">{{ 'One indicator over time'|trans }}</a> {{ 'instead.'|trans }}</p>
+            {% if example %}<p class="hint">{{ 'An example to start with: change the destinations or the month, the page follows.'|trans }}</p>{% endif %}
+        {% else %}
+            <h1>{{ 'Explore the available data'|trans }}</h1>
+            <p>{{ 'compose.lead'|trans }} <a href="{{ path('compare') }}">{{ 'Compare destinations for a month'|trans }}</a> {{ 'instead.'|trans }}</p>
+        {% endif %}
+
+        {{ form_start(form, {attr: {class: 'gf-compose'}}) }}
+            {{ form_widget(form) }}
+            <button type="submit">{{ 'Show the page'|trans }}</button>
+        {{ form_end(form) }}
+
+        {#- Redrawn in place by compose.js at each choice; the button does the same without JavaScript. -#}
+        <div id="gf-result" aria-live="polite" data-add="{{ 'Add'|trans }}" data-done="{{ 'Done'|trans }}" data-filter="{{ 'Type to filter'|trans }}" data-failed="{{ 'This choice cannot be drawn.'|trans }}"{% if coverage is defined %} data-coverage="{{ coverage|json_encode }}"{% endif %}>
+        {% if problem %}
+            <p class="problem">{{ problem|trans }}</p>
+        {% elseif pages %}
+            <hr>
+            {% if compare %}
+                {#- A page per question of the traveller, under one heading. #}
+                <h2>{{ 'Destinations side by side'|trans }}</h2>
+                <div class="gf-themes">
+                    {% for page in pages %}{{ include('page/page.html.twig', {page: page, heading: 3, style: loop.first}) }}{% endfor %}
+                </div>
+            {% else %}
+                {{ include('page/page.html.twig', {page: pages|first, heading: 2}) }}
+            {% endif %}
+        {% endif %}
+        </div>
+    </main>
+    <script src="/compose.js" defer></script>
+{% endblock %}
