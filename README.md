@@ -140,6 +140,11 @@ Such an assistant is usually right; what you cannot do is tell when it is not. I
 (RAG) either: with retrieval the model is handed passages that hold the figures and copies them;
 here it is handed titles, places and periods, never a value (a test checks it).
 
+Prior art: *Proof-Carrying Numbers* ([arXiv:2509.06902](https://arxiv.org/abs/2509.06902)) lets a
+model write numbers in its text, then checks each one against its source before it is shown. Go
+Figure takes the other way round: the model never writes a value, it names where to read it, and
+the server writes every figure.
+
 ## What it does not do, and what was measured
 
 - It answers only on what its data holds, and cannot promise that the figure it read is the right
@@ -167,6 +172,10 @@ here it is handed titles, places and periods, never a value (a test checks it).
 `make up` starts a development container with the source mounted, `make test` and `make stan` check
 it, and nothing runs on the host PHP. How the data, the catalog, the example questions, the
 evaluation and the tests fit together: [DEVELOP.md](DEVELOP.md).
+
+## Team
+
+Built by [@Eazenli](https://github.com/Eazenli) (data) and [@StephenF13](https://github.com/StephenF13) (Symfony and MCP), for the Symfony AI & MCP hackathon.
 
 ## License
 
