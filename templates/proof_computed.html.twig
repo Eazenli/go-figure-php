@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Proof'|trans }} · Go Figure{% endblock %}
+
+{% block body %}
+    <main class="proof-page">
+        {#- The proof of a figure the server computed: how, from which cells, each with its own proof. -#}
+        <article class="proof">
+            <h1 class="proof-eyebrow">{{ 'Proof of a calculation'|trans }}</h1>
+            <p class="value">{{ proof|figure_number }}{% if proof|figure_unit %} <span class="unit">{{ proof|figure_unit }}</span>{% endif %}</p>
+            <p class="cell">{{ proof|cell_caption }}</p>
+            <p class="match">{{ 'Computed again from the snapshot just now: it matches.'|trans }}</p>
+            <dl>
+                <dt>{{ 'Computed by Go Figure'|trans }}</dt>
+                <dd class="method">{{ ('proof.op.' ~ proof.op.value)|trans }}</dd>
+                {% for operand in proof.operands %}
+                    <dt>{{ ('proof.operand.' ~ proof.op.value ~ (loop.first ? '.first' : '.next'))|trans }}</dt>
+                    <dd class="operand">{{ operand|figure }} <span class="caption">{{ operand|cell_caption }} · <code>{{ operand.fact.dataset }}</code></span></dd>
+                {% endfor %}
+            </dl>
+            <p class="note">{{ 'proof.computed.note'|trans }}</p>
+            <details class="check">
+                <summary><h2>{{ 'Technical details'|trans }}</h2></summary>
+                <h3>{{ 'Canonical form'|trans }}</h3>
+                <p class="hint">{{ 'proof.canonical.hint'|trans }}</p>
+                <pre><code class="canonical">{{ canonical }}</code></pre>
+                <p>SHA-256{{ ': '|trans }}<code class="fingerprint">{{ fingerprint }}</code></p>
+            </details>
+        </article>
+    </main>
+{% endblock %}

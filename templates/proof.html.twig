@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Proof'|trans }} · Go Figure{% endblock %}
+
+{% block body %}
+    <main class="proof-page">
+        {% if problem is defined %}
+            <h1>{{ 'Not a valid proof'|trans }}</h1>
+            <p class="problem">{{ problem|trans }}</p>
+        {% else %}
+            {% set fact = proof.fact %}
+            {#- One card, here and in the panel that opens beside a page (public/proof.js): the value
+                first, what it is, then where it comes from and how to check it. -#}
+            <article class="proof">
+            <h1 class="proof-eyebrow">{{ 'Proof'|trans }}</h1>
+            {#- What a reader wants first: the value, what it counts, where it was read. The codes
+                and the canonical form come last, folded. -#}
+            {%- set foreign = entry.titles[app.request.locale] is not defined and app.request.locale != 'en' -%}
+            {%- set provider = proof.source.provider|trans(domain: 'providers') -%}
+            {%- set method = entry.methodIn(app.request.locale) -%}
+            {%- set scale = fact.geo|place_scale %}
+            <p class="value">{{ proof|figure_number }}{% if proof|figure_unit %} <span class="unit">{{ proof|figure_unit }}</span>{% endif %}</p>
+            <p class="cell"><strong{% if foreign %} lang="en"{% endif %}>{{ entry.titleIn(app.request.locale) }}</strong><br>{{ fact.geo|place_name }}, {{ fact.time|period_name }}{% if entry.time.normal %}, {{ 'averaged over %normal% (a climate normal)'|trans({'%normal%': entry.time.normal}) }}{% endif %}</p>
+            <p class="match">{{ 'This figure matches the snapshot it was read from.'|trans }}</p>
+            {%- set from_file = entry.provider == 'your_file' -%}
+            <p class="see">{% if not from_file %}<a class="button" href="{{ proof.source.url }}" rel="noopener noreferrer">{{ 'Open on %provider%'|trans({'%provider%': provider}) }}</a> {% endif %}<span class="read-on">{{ (method ? 'Computed by Go Figure from the values of %provider%, downloaded on %date%.' : 'Read from %provider% on %date%.')|trans({'%provider%': provider, '%date%': fact.snapshotDate}) }}</span></p>
+            {% if fact.dataset starts with 'x_' %}
+                {#- Imported on this machine: the value is the source's, the words around it are not ours. -#}
+                <p class="imported">{% if from_file %}{{ 'proof.imported.file'|trans({'%date%': fact.snapshotDate, '%file%': entry.dimensions.file ?? entry.sourceDataset, '%column%': entry.dimensions.column ?? '', '%sha%': entry.dimensions.sha256 ?? ''}) }}{% else %}{{ (entry.provider == 'world_bank' ? 'proof.imported.world_bank' : 'proof.imported')|trans({'%date%': fact.snapshotDate}) }}{% endif %}</p>
+            {% endif %}
+            {% if added_here ?? false %}
+                <p class="imported">{{ 'proof.city'|trans({'%date%': fact.snapshotDate}) }}{% if off_centre ?? false %} <strong>{{ 'city.off_centre'|trans }}</strong>{% endif %}</p>
+            {% endif %}
+            <details class="gf-copy" data-copied="{{ 'Copied'|trans }}">
+                <summary>{{ 'Copy with source'|trans }}</summary>
+                <textarea readonly rows="5" aria-label="{{ 'The text that is copied'|trans }}">{{ proof|figure_citation }}</textarea>
+            </details>
+            <section class="counts">
+                <h2>{{ 'What this figure counts'|trans }}</h2>
+                <p class="scope"{% if entry.scopes[app.request.locale] is not defined and app.request.locale != 'en' %} lang="en"{% endif %}>{{ entry.scopeIn(app.request.locale) }}</p>
+                {% if method %}
+                    {#- The source publishes the values this one is computed from: the link above returns them. #}
+                    <p class="how"><strong>{{ 'Computed by Go Figure'|trans }}{{ ': '|trans }}</strong><span class="method"{% if entry.methods[app.request.locale] is not defined %} lang="en"{% endif %}>{{ method }}</span></p>
+                {% endif %}
+                {% if fact.status %}
+                    <p class="flag"><strong>{{ 'Source flag'|trans }}{{ ': '|trans }}</strong><code>{{ fact.status }}</code> {{ fact.status|flag_label }}</p>
+                {% endif %}
+            </section>
+            <p class="terms"><span class="licence">{{ entry.licence|trans(domain: 'licences') }}</span>
+                {%- if entry.attributions is not empty %} <span class="attribution">{% for credit in entry.attributions %}{% if credit.url %}<a href="{{ credit.url }}" rel="noopener noreferrer">{{ credit.text }}</a>{% else %}{{ credit.text }}{% endif %}{{ loop.last ? '.' : '; ' }}{% endfor %}</span>{% endif %}</p>
+            {#- The pitfalls stay notes for the model: they hold hand-written numbers, never on a page. -#}
+            <details class="check">
+                <summary><h2>{{ 'Technical details'|trans }}</h2></summary>
+                <dl>
+                    <dt>{{ 'Dataset'|trans }}</dt><dd><span{% if foreign %} lang="en"{% endif %}>{{ entry.titleIn(app.request.locale) }}</span> <code>{{ fact.dataset }}</code></dd>
+                    {% if entry.dimensions is not empty %}
+                        <dt>{{ 'Fixed codes'|trans }}</dt><dd class="codes">{% for dimension, code in entry.dimensions %}<code>{{ dimension }}={{ code }}</code>{{ loop.last ? '' : ' ' }}{% endfor %}</dd>
+                    {% endif %}
+                    <dt>{{ 'Place'|trans }}</dt><dd class="place">{% if (fact.geo|place_name) != fact.geo %}{{ fact.geo|place_name }} {% endif %}<code>{{ fact.geo }}</code>{% if scale %}{{ ': '|trans }}{{ scale }}{% endif %}</dd>
+                    <dt>{{ 'Period'|trans }}</dt><dd><code>{{ fact.time }}</code></dd>
+                    <dt>{{ 'Unit'|trans }}</dt><dd>{{ entry.unitLabel|trans(domain: 'units') }}{% if fact.unit != 'NONE' %} <code>{{ fact.unit }}</code>{% endif %}</dd>
+                    {#- A figure we compute: the date its daily values were downloaded. #}
+                    <dt>{{ (method ? 'Downloaded from the source' : 'Updated at the source')|trans }}</dt><dd>{{ fact.sourceUpdated }}</dd>
+                    <dt>{{ 'Snapshot taken'|trans }}</dt><dd>{{ fact.snapshotDate }}</dd>
+                    <dt>{{ 'Source'|trans }}</dt><dd>{{ provider }} <code>{{ entry.sourceDataset }}</code></dd>
+                </dl>
+                <h3>{{ 'Canonical form'|trans }}</h3>
+                <p class="hint">{{ 'proof.canonical.hint'|trans }}</p>
+                <pre><code class="canonical">{{ canonical }}</code></pre>
+                <p>SHA-256{{ ': '|trans }}<code class="fingerprint">{{ fingerprint }}</code></p>
+            </details>
+            </article>
+        {% endif %}
+    </main>
+{% endblock %}
