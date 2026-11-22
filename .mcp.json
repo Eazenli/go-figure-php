@@ -1,0 +1,8 @@
+{
+    "mcpServers": {
+        "go-figure": {
+            "type": "http",
+            "url": "http://localhost:8080/mcp/go-figure"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{% extends '@Mcp/app/base.html.twig' %}
+
+{% block title %}Go Figure{% endblock %}
+
+{% block style %}
+    body { margin: 0; padding: 16px; background: #fff; }
+    .muted { font-family: system-ui, sans-serif; color: #59636e; font-size: 0.875rem; }
+{% endblock %}
+
+{% block body %}
+    {# The page fragment (templates/page/page.html.twig) lands here, from structuredContent.html. #}
+    <div id="root"><p class="muted">Waiting for the page…</p></div>
+{% endblock %}
+
+{% block app_script %}
+    // The sandbox blocks plain links: a proof link, in the page or in a chart, is opened by the host.
+    document.addEventListener('click', (event) => {
+        const link = event.target.closest('a[href]');
+        if (!link) return;
+        event.preventDefault();
+        openLink(link.getAttribute('href'));
+    });
+{% endblock %}
