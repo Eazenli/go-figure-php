@@ -1,0 +1,31 @@
+# Catalog entry.
+# Factual fields (source, dimensions, geo, time, unit) drafted from the Eurostat API with
+# data/catalog_draft.py on 2026-11-18 (dataset updated 2026-10-12). Title, scope and pitfalls are
+# written by hand.
+id: nights_total
+title:
+  en: "Nights spent in tourist accommodation"
+  fr: "Nuitées dans les hébergements touristiques"
+source:
+  provider: eurostat
+  dataset: tour_occ_ninat
+  url: "https://ec.europa.eu/eurostat/databrowser/view/tour_occ_ninat/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:            # frozen: the model only ever picks geo and time
+  c_resid: TOTAL       # residents and non-residents
+  nace_r2: I551-I553   # hotels, holiday and other short-stay accommodation, campsites
+  unit: NR             # number of nights
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: annual, from: 2008, to: 2025 }
+unit: { code: NR, label: "nights" }
+scope:
+  en: "Nights spent by residents and non-residents in all tourist accommodation: hotels, holiday and other short-stay accommodation, campsites (NACE I55.1 to I55.3). Short-term rentals booked through platforms are not included."
+  fr: "Nuitées des résidents et des non-résidents dans tous les hébergements touristiques : hôtels, hébergements de vacances et de courte durée, campings (NACE I55.1 à I55.3), hors locations réservées via des plateformes."
+pitfalls:
+  - "All tourist accommodation: nights_hotels counts hotels only. The two can move apart (Ireland 2019-2024: -9.8% in hotels, +27.9% in all accommodation, estimated)."
+  - "Missing cells are refused, never filled in: Ireland 2017, Slovenia 2018, Switzerland 2008-2015 and 2020, Norway 2017-2019, Iceland 2017, 2018 and 2024."
+  - "Türkiye starts in 2013 (2017 missing); Montenegro starts in 2011 with gaps (2013, 2014, 2018-2021), and its series jumps in 2012 and falls in 2017 (break in series): compare Montenegro over time with care."
+  - "No United Kingdom: Eurostat has no data after 2016."
+  - "Some values carry an Eurostat flag (estimated, provisional, break in series…): the flag is shown next to the figure."
+theme: crowds
+operations: [change, change_pct, rank]

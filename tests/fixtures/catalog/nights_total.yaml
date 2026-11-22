@@ -1,0 +1,23 @@
+# Test catalog: the entry behind tests/Support/FactsFixture.php. DE is left out on purpose, to test
+# a place the entry does not cover; the table has rows for ES, FR and MT only.
+id: nights_total
+title:
+  en: "Nights spent in tourist accommodation"
+source:
+  provider: eurostat
+  dataset: tour_occ_ninat
+  url: "https://ec.europa.eu/eurostat/databrowser/view/tour_occ_ninat/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  c_resid: TOTAL
+  nace_r2: I551-I553
+  unit: NR
+geo: [AT, EL, ES, FR, IT, MT, NL, PT]
+time: { granularity: annual, from: 2019, to: 2025 }
+unit: { code: NR, label: "nights" }
+scope:
+  en: "Hotels, holiday homes and campsites; residents and non-residents."
+pitfalls:
+  - "Not hotels only: nights_hotels counts hotels alone."
+theme: crowds
+operations: [change, change_pct, share, rank]

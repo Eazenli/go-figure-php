@@ -1,0 +1,28 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-18 (dataset
+# updated 2025-07-10). Title, scope and pitfalls are written by hand.
+id: prices_food
+title:
+  en: "Price level of food"
+  fr: "Niveau des prix de l'alimentation"
+source:
+  provider: eurostat
+  dataset: prc_ppp_ind
+  url: "https://ec.europa.eu/eurostat/databrowser/view/prc_ppp_ind/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  na_item: PLI_EU27_2020   # price level index, EU27_2020 = 100
+  ppp_cat: A0101           # food and non-alcoholic beverages
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: annual, from: 2008, to: 2024 }
+unit: { code: PLI_EU27_2020, label: "of the EU average" }
+scope:
+  en: "How expensive food and non-alcoholic drinks bought in shops are in the country, compared with the average of the 27 EU countries (100 is the EU average), from purchasing power parities. A price level, not a price."
+  fr: "Le niveau des prix de l'alimentation et des boissons non alcoolisées achetées en magasin, comparé à la moyenne des 27 pays de l'UE (100 est la moyenne de l'UE), d'après les parités de pouvoir d'achat. Un niveau de prix, pas un prix."
+pitfalls:
+  - "Food bought in shops, not meals out: for restaurants, use prices_restaurants_hotels."
+  - "No price of beer or wine here: alcoholic drinks are another category, not in the catalog."
+  - "A price level compares countries within one year, not one year with another: the EU average itself moves every year."
+  - "Montenegro starts in 2005. No United Kingdom after 2020. The latest year is 2024."
+theme: cost
+operations: [rank]

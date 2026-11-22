@@ -1,0 +1,29 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-21 (dataset
+# updated 2026-10-15). Title, scope and pitfalls are written by hand.
+id: municipal_waste
+title:
+  en: "Municipal waste per inhabitant"
+  fr: "Déchets municipaux par habitant"
+source:
+  provider: eurostat
+  dataset: env_wasmun
+  url: "https://ec.europa.eu/eurostat/databrowser/view/env_wasmun/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  freq: A              # annual
+  wst_oper: GEN        # waste generated (not recycled, landfilled or burnt)
+  unit: KG_HAB         # kilograms per inhabitant
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: annual, from: 2000, to: 2024 }
+unit: { code: KG_HAB, label: "kg per inhabitant" }
+scope:
+  en: "Municipal waste generated in the country in a year, per inhabitant: what households throw away, and similar waste from shops and offices collected the same way. How much waste, not how it is treated."
+  fr: "Les déchets municipaux produits dans le pays en un an, par habitant : ce que jettent les ménages, et les déchets semblables des commerces et des bureaux collectés de la même façon. Combien de déchets, pas ce qu'ils deviennent."
+pitfalls:
+  - "What counts as municipal waste differs from one country to another (how much waste from shops and offices is collected with that of households): compare countries with care."
+  - "Municipal waste is a small part of all waste: construction and industry are not in it."
+  - "Waste generated, not recycled: a high figure says nothing about recycling."
+  - "Some values are estimates. Some years are missing (Denmark 2010, Ireland 2013 and 2015, Iceland 2019, Croatia 2001 to 2003); Montenegro starts in 2011 and Romania stops in 2023."
+theme: other
+operations: [change, change_pct, rank]

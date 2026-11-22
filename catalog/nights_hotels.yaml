@@ -1,0 +1,30 @@
+# Catalog entry.
+# Factual fields (source, dimensions, geo, time, unit) checked against the Eurostat API on
+# 2026-11-11 (dataset updated 2026-10-12). Title, scope and pitfalls are written by hand.
+id: nights_hotels
+title:
+  en: "Nights spent in hotels"
+  fr: "Nuitées dans les hôtels"
+source:
+  provider: eurostat
+  dataset: tour_occ_ninat
+  url: "https://ec.europa.eu/eurostat/databrowser/view/tour_occ_ninat/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:            # frozen: the model only ever picks geo and time
+  c_resid: TOTAL       # residents and non-residents
+  nace_r2: I551        # hotels and similar accommodation
+  unit: NR             # number of nights
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: annual, from: 2008, to: 2025 }   # the EU27_2020 aggregate has gaps before 2008
+unit: { code: NR, label: "nights" }
+scope:
+  en: "Nights spent by residents and non-residents in hotels and similar accommodation (NACE I55.1). Holiday homes, campsites and short-term rentals booked through platforms are not included."
+  fr: "Nuitées des résidents et des non-résidents dans les hôtels et hébergements similaires (NACE I55.1), hors hébergements de vacances, campings et locations via des plateformes."
+pitfalls:
+  - "Hotels only: nights_total adds holiday homes and campsites. Ireland 2019-2024: -9.8% in hotels, +27.9% (estimated) in all accommodation."
+  - "Missing cells are refused, never filled in: Ireland 2017, Slovenia 2018, Switzerland 2020, Norway 2017-2019, Iceland 2017, 2018 and 2024."
+  - "Türkiye starts in 2013 (2017 missing); Montenegro starts in 2011 with many gaps (2013, 2014, 2018-2021). Comparisons with 2019 are not possible for Norway nor Montenegro."
+  - "No United Kingdom: Eurostat has no data after 2016."
+  - "Some values carry an Eurostat flag, 'e' (estimated) or 'u' (low reliability); the flag is shown next to the figure."
+theme: crowds
+operations: [change, change_pct, share, rank]

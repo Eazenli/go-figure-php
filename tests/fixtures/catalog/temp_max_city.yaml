@@ -1,0 +1,27 @@
+# Test catalog: a climate normal by city that Go Figure computes from the daily values of the source
+# (Open-Meteo, CERRA), with the source's query for each place ({place}) and its attribution.
+id: temp_max_city
+title:
+  en: "Average daily maximum temperature in the city"
+source:
+  provider: open_meteo
+  dataset: "Historical Weather API, CERRA reanalysis"
+  url: "https://archive-api.open-meteo.com/v1/archive?{place}&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max&models=cerra&timezone=GMT"
+  licence: "Open-Meteo.com, CC BY 4.0. Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains."
+  attribution:
+    - { text: "Weather data by Open-Meteo.com", url: "https://open-meteo.com/" }
+    - { text: "Contains modified Copernicus Climate Change Service information" }
+geo_map:
+  ES004C: "latitude=37.393&longitude=-5.956"
+  PT001C: "latitude=38.807&longitude=-9.174"
+geo: [ES004C, PT001C]
+places: { ES004C: Seville, PT001C: Lisbon }
+time: { granularity: month_of_year, normal: "1991-2020" }
+unit: { code: degC, label: "°C" }
+scope:
+  en: "Mean of the daily maximum temperature at one point of the city, adjusted to its elevation."
+method:
+  en: "Go Figure averages the daily maximum temperature of every day of that month over the reference period, from the daily values the source link returns."
+  fr: "Go Figure fait la moyenne des maximales journalières de chaque jour de ce mois sur la période de référence, à partir des valeurs journalières que renvoie le lien de la source."
+theme: weather
+operations: [rank]

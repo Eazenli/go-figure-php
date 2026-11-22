@@ -1,0 +1,31 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-18 (dataset
+# updated 2026-11-16). Title, scope and pitfalls are written by hand.
+id: air_passengers
+title:
+  en: "Air passengers"
+  fr: "Passagers aériens"
+source:
+  provider: eurostat
+  dataset: avia_paoc
+  url: "https://ec.europa.eu/eurostat/databrowser/view/avia_paoc/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  freq: A              # annual (the dataset also holds months and quarters)
+  unit: PAS            # passengers
+  tra_meas: PAS_CRD    # passengers carried (not passengers on board)
+  tra_cov: TOTAL       # national and international transport
+  schedule: TOTAL      # scheduled and charter flights
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: annual, from: 2008, to: 2025 }
+unit: { code: PAS, label: "passengers" }
+scope:
+  en: "Passengers carried by air, arriving at or leaving the airports of the country, national and international flights, scheduled and charter. How many people fly in and out, not how many tourists."
+  fr: "Passagers aériens transportés à l'arrivée ou au départ des aéroports du pays, vols nationaux et internationaux, réguliers et charters. Combien de personnes prennent l'avion, pas combien de touristes."
+pitfalls:
+  - "An international passenger counts at arrival and at departure: a return trip counts twice. A domestic passenger counts once, so the total is below what the airports of the country report."
+  - "Passengers carried: each flight counts its passengers once. A change of plane counts on both flights; a stop without leaving the plane counts once."
+  - "Türkiye starts in 2023 and Montenegro in 2016; the EU aggregate starts in 2008."
+  - "No United Kingdom: Eurostat has no data after 2019."
+theme: access
+operations: [change, change_pct, rank]

@@ -1,0 +1,30 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-18 (dataset
+# updated 2026-08-26). Title, scope and pitfalls are written by hand.
+id: train_share
+title:
+  en: "Share of trains in inland passenger transport"
+  fr: "Part du train dans le transport intérieur de voyageurs"
+source:
+  provider: eurostat
+  dataset: tran_hv_psmod
+  url: "https://ec.europa.eu/eurostat/databrowser/view/tran_hv_psmod/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  vehicle: TRN         # trains
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, LV, LT, LU, HU, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, TR, ME]
+# From 2013: for 2010-2012 Eurostat publishes France at 99.1% (cars at 0.9%), an error at the source
+# (France is about 10% before and after). Starting later keeps it off every page.
+time: { granularity: annual, from: 2013, to: 2024 }
+# The number carries the percent sign: the label says what it is a share of.
+unit: { code: PC, label: "of inland passenger-kilometres" }
+scope:
+  en: "The share of trains in the passenger-kilometres travelled in the country by car, bus and coach, and train. How much people travel by train rather than by road."
+  fr: "La part du train dans les voyageurs-kilomètres parcourus dans le pays en voiture, en autocar et bus, et en train. À quel point on voyage en train plutôt que par la route."
+pitfalls:
+  - "Cars, buses and trains only: planes, boats, bicycles and walking are not counted."
+  - "A share, not a number of travellers: a country can have many rail passengers and a small share."
+  - "No railways in Cyprus, Malta and Iceland. The series starts in 2013 here: Eurostat's values for France 2010-2012 are wrong (99.1%). The latest year is 2024."
+  - "No United Kingdom: Eurostat has no data after 2019."
+theme: access
+operations: [change, rank]

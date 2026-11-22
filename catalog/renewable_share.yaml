@@ -1,0 +1,29 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-21 (dataset
+# updated 2026-09-15). Title, scope and pitfalls are written by hand.
+id: renewable_share
+title:
+  en: "Share of renewable energy"
+  fr: "Part des énergies renouvelables"
+source:
+  provider: eurostat
+  dataset: nrg_ind_ren
+  url: "https://ec.europa.eu/eurostat/databrowser/view/nrg_ind_ren/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  freq: A              # annual
+  nrg_bal: REN         # renewable energy, overall (electricity, transport, heating and cooling)
+  unit: PC             # percentage
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, NO, IS, ME]
+time: { granularity: annual, from: 2004, to: 2024 }
+unit: { code: PC, label: "%" }
+scope:
+  en: "The share of energy from renewable sources in the gross final energy consumption of the country: electricity, transport, heating and cooling together. The indicator of the EU renewable energy directive."
+  fr: "La part de l'énergie issue de sources renouvelables dans la consommation finale brute d'énergie du pays : électricité, transports, chauffage et refroidissement réunis. L'indicateur de la directive européenne sur les énergies renouvelables."
+pitfalls:
+  - "All energy, not electricity alone: the share of renewable electricity is usually much higher than this figure."
+  - "Computed with the rules of the EU directive, which changed with the 2021 data: a step between 2020 and 2021 can come from the rules."
+  - "A country can count renewable energy bought from another one (statistical transfers), so the figure is not only what it produced."
+  - "A difference between two shares is in percentage points. Montenegro starts in 2005. No Switzerland or Türkiye in this dataset."
+theme: other
+operations: [change, rank]

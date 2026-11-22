@@ -1,0 +1,6 @@
+code,name,country,latitude,longitude,note
+ES004C,Seville,ES,37.393,-5.956,
+ES006C,Malaga,ES,36.768,-4.424,
+PT002C,Porto,PT,41.130,-8.556,
+NO001C,Oslo,NO,60.629,9.043,"A point far from the city: correct by hand before downloading"
+IT003C,Naples,IT,40.919,14.193,"Greater city label point, inland, about 10 km north-west of the centre: check on a map"

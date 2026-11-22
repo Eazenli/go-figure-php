@@ -1,0 +1,17 @@
+# Test catalog: a climate normal from a source whose page varies by place ({place}).
+id: temp_max
+title:
+  en: "Average daily maximum temperature"
+source:
+  provider: worldbank_cckp
+  dataset: tasmax
+  url: "https://cckpapi.worldbank.org/cckp/v1/tasmax/{place}?_format=json"
+  licence: "World Bank CCKP, CC BY 4.0."
+geo_map: { EL: GRC, FR: FRA }
+geo: [EL, FR]
+time: { granularity: month_of_year, normal: "1991-2020" }
+unit: { code: degC, label: "°C" }
+scope:
+  en: "Country-wide average of the daily maximum temperature, climate normal."
+theme: weather
+operations: [rank]

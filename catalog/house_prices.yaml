@@ -1,0 +1,29 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-21 (dataset
+# updated 2026-10-01). Title, scope and pitfalls are written by hand.
+id: house_prices
+title:
+  en: "House price index"
+  fr: "Indice des prix des logements"
+source:
+  provider: eurostat
+  dataset: prc_hpi_a
+  url: "https://ec.europa.eu/eurostat/databrowser/view/prc_hpi_a/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  freq: A              # annual
+  purchase: TOTAL      # new and existing dwellings
+  unit: I15_A_AVG      # annual average index, 2015 = 100
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, NO, IS, TR]
+time: { granularity: annual, from: 2010, to: 2025 }
+unit: { code: I15_A_AVG, label: "(index, 2015 = 100)" }
+scope:
+  en: "How the prices of the dwellings households buy, new and existing, have moved in the country since 2015 (the index is 100 in 2015 everywhere). A movement of prices, not a price."
+  fr: "L'évolution des prix des logements achetés par les ménages, neufs et anciens, dans le pays depuis 2015 (l'indice vaut 100 en 2015 partout). Une évolution des prix, pas un prix."
+pitfalls:
+  - "An index: 150 means prices are half as high again as in 2015 in that country. It does not say where housing is expensive, only where it rose most since 2015."
+  - "Purchases only, not rents."
+  - "A national average: a capital city can move very differently."
+  - "No Greece, Switzerland or Montenegro in this dataset. Türkiye stops in 2024."
+theme: other
+operations: [change_pct, rank]

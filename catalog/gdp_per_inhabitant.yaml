@@ -1,0 +1,29 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-21 (dataset
+# updated 2026-11-11). Title, scope and pitfalls are written by hand.
+id: gdp_per_inhabitant
+title:
+  en: "GDP per inhabitant"
+  fr: "PIB par habitant"
+source:
+  provider: eurostat
+  dataset: nama_10_pc
+  url: "https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  freq: A              # annual
+  na_item: B1GQ        # gross domestic product at market prices
+  unit: CP_EUR_HAB     # current prices, euro per inhabitant
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: annual, from: 2000, to: 2025 }
+unit: { code: CP_EUR_HAB, label: "euro per inhabitant" }
+scope:
+  en: "Gross domestic product at market prices divided by the population, in euro of the year. What the economy of the country produces per person, not what a person earns."
+  fr: "Le produit intérieur brut aux prix du marché divisé par la population, en euros de l'année. Ce que l'économie du pays produit par personne, pas ce qu'une personne gagne."
+pitfalls:
+  - "Current prices: a rise between two years includes inflation, it is not growth in volume."
+  - "In euro, not in purchasing power standards: the differences in price levels between countries are not removed, and outside the euro area the exchange rate moves the figure."
+  - "An average over the whole population: it says nothing about how income is shared."
+  - "The latest year is often provisional. Montenegro starts in 2006; Türkiye stops in 2024."
+theme: other
+operations: [change, change_pct, rank]

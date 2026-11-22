@@ -1,0 +1,29 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-21 (dataset
+# updated 2025-10-24). Title, scope and pitfalls are written by hand.
+id: forest_area
+title:
+  en: "Forest area"
+  fr: "Surface de forêt"
+source:
+  provider: eurostat
+  dataset: for_area
+  url: "https://ec.europa.eu/eurostat/databrowser/view/for_area/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  freq: A              # annual
+  indic_fo: FOR        # forest
+  unit: THS_HA         # thousand hectares
+geo: [BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, ME]
+time: { granularity: annual, from: 2000, to: 2025 }
+unit: { code: THS_HA, label: "thousand hectares" }
+scope:
+  en: "The area of the country covered by forest, in thousand hectares. An area, not a share of the country: a large country has more forest."
+  fr: "La surface du pays couverte de forêt, en milliers d'hectares. Une surface, pas une part du pays : un grand pays a plus de forêt."
+pitfalls:
+  - "In thousand hectares: 1 000 thousand hectares is 10 000 square kilometres."
+  - "An area, not a share of the land: to compare a small and a large country, the area of the country is needed, and it is not in the catalog."
+  - "Forest as defined for international reporting (land with trees above a minimum height and cover); parks in towns and orchards are not forest."
+  - "Published for 2000, 2010, 2015, 2020 and 2025 only: any other year has no value. No EU total, no Cyprus or Türkiye in this dataset."
+theme: other
+operations: [change, change_pct, rank]

@@ -1,0 +1,29 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-21 (dataset
+# updated 2026-02-06). Title, scope and pitfalls are written by hand.
+id: inflation
+title:
+  en: "Inflation"
+  fr: "Inflation"
+source:
+  provider: eurostat
+  dataset: prc_hicp_aind
+  url: "https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_aind/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  freq: A              # annual
+  coicop: CP00         # all items
+  unit: RCH_A_AVG      # annual average rate of change
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: annual, from: 2001, to: 2025 }
+unit: { code: RCH_A_AVG, label: "%" }
+scope:
+  en: "How much consumer prices rose in the year compared with the year before, all goods and services together, from the harmonised index of consumer prices (HICP). The annual average rate, in percent."
+  fr: "La hausse des prix à la consommation sur l'année par rapport à l'année précédente, tous biens et services confondus, d'après l'indice des prix à la consommation harmonisé (IPCH). Le taux annuel moyen, en pourcentage."
+pitfalls:
+  - "The annual average rate, not the rate of one month over the same month a year before: the two differ."
+  - "A rate, not a price level: a country with low inflation can still be expensive. For price levels, use prices_food or prices_restaurants_hotels."
+  - "The harmonised index is built to compare countries; it can differ from the national index a country publishes, and it leaves out the housing costs of owners."
+  - "A difference between two rates is in percentage points. Switzerland starts in 2006 and Montenegro in 2016."
+theme: other
+operations: [change, rank]

@@ -1,0 +1,27 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-18 (dataset
+# updated 2026-10-29). Title, scope and pitfalls are written by hand.
+id: rail_passenger_km
+title:
+  en: "Rail passenger-kilometres"
+  fr: "Voyageurs-kilomètres ferroviaires"
+source:
+  provider: eurostat
+  dataset: rail_pa_total
+  url: "https://ec.europa.eu/eurostat/databrowser/view/rail_pa_total/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  unit: MIO_PKM        # million passenger-kilometres
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, LV, LT, LU, HU, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, TR, ME]
+time: { granularity: annual, from: 2008, to: 2025 }
+unit: { code: MIO_PKM, label: "million passenger-kilometres" }
+scope:
+  en: "Distance travelled by rail passengers in the country, national and international journeys: one passenger over one kilometre is one passenger-kilometre. In millions."
+  fr: "Distance parcourue en train par les voyageurs dans le pays, trajets nationaux et internationaux : un voyageur sur un kilomètre fait un voyageur-kilomètre. En millions."
+pitfalls:
+  - "Distance, not passengers: the two can move apart (France 2025: -0.6% in passengers, +3.0% in passenger-kilometres). For passengers, use rail_passengers."
+  - "Missing years are refused: the EU aggregate except 2011 and 2018-2023, Belgium after 2011, France 2010-2011, Italy 2011, Luxembourg 2009, Hungary 2015-2023, the Netherlands 2008-2014, Poland 2018-2024. Montenegro starts in 2013, ends in 2024 and misses 2021."
+  - "No railways in Cyprus, Malta and Iceland."
+  - "No United Kingdom: Eurostat has no data after 2019."
+theme: access
+operations: [change, change_pct, rank]

@@ -1,0 +1,28 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-21 (dataset
+# updated 2026-10-06). Title, scope and pitfalls are written by hand.
+id: cars_per_inhabitant
+title:
+  en: "Car ownership"
+  fr: "Taux de motorisation"
+source:
+  provider: eurostat
+  dataset: road_eqs_carhab
+  url: "https://ec.europa.eu/eurostat/databrowser/view/road_eqs_carhab/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  freq: A              # annual
+  unit: NR             # number (of passenger cars per thousand inhabitants)
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: annual, from: 2010, to: 2025 }
+unit: { code: NR, label: "passenger cars per thousand inhabitants" }
+scope:
+  en: "The number of passenger cars registered in the country for every thousand inhabitants. How many cars there are, not how much they are driven."
+  fr: "Le nombre de voitures particulières immatriculées dans le pays pour mille habitants. Combien il y a de voitures, pas combien elles roulent."
+pitfalls:
+  - "Per thousand inhabitants: 500 means one car for two people, children included."
+  - "Registered cars, not cars in use, and not kilometres driven."
+  - "Company fleets registered in a country count there, wherever the cars are driven."
+  - "Passenger cars only: no vans, lorries or motorcycles. Montenegro has no value for 2010, 2012 and 2013, and Iceland none before 2013."
+theme: other
+operations: [change, change_pct, rank]

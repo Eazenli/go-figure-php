@@ -1,0 +1,30 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-18 (dataset
+# updated 2026-10-12). Title, scope and pitfalls are written by hand.
+id: tourism_intensity
+title:
+  en: "Tourism intensity"
+  fr: "Intensité touristique"
+source:
+  provider: eurostat
+  dataset: tour_occ_ninat
+  url: "https://ec.europa.eu/eurostat/databrowser/view/tour_occ_ninat/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  c_resid: TOTAL       # residents and non-residents
+  nace_r2: I551-I553   # all tourist accommodation
+  unit: P_THAB         # per thousand inhabitants
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: annual, from: 2008, to: 2025 }
+unit: { code: P_THAB, label: "nights per thousand inhabitants" }
+scope:
+  en: "Nights spent in all tourist accommodation per thousand inhabitants of the country: how many tourists a country holds for its size. Residents and non-residents."
+  fr: "Nuitées dans tous les hébergements touristiques pour mille habitants du pays : combien de touristes un pays accueille pour sa taille. Résidents et non-résidents."
+pitfalls:
+  - "A ratio for the whole country: a small country with one busy coast (Malta, Croatia, Cyprus) ranks high, a large one with crowded cities can rank low."
+  - "Not nights: to compare how many nights, use nights_total."
+  - "Missing cells are refused: the EU aggregate before 2008, Ireland 2017, Slovenia 2018, Switzerland 2008-2015 and 2020, Norway 2017-2019, Iceland 2017, 2018 and 2024, Türkiye before 2013 and 2017, Montenegro 2013, 2014 and 2018-2021."
+  - "Montenegro's series jumps in 2012 and falls in 2017 (a break in series): compare Montenegro over time with care."
+  - "No United Kingdom: Eurostat has no data after 2016."
+theme: crowds
+operations: [change, change_pct, rank]

@@ -1,0 +1,29 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-18 (dataset
+# updated 2026-11-16). Title, scope and pitfalls are written by hand.
+id: nights_monthly
+title:
+  en: "Nights spent in tourist accommodation, by month"
+  fr: "Nuitées dans les hébergements touristiques, par mois"
+source:
+  provider: eurostat
+  dataset: tour_occ_nim
+  url: "https://ec.europa.eu/eurostat/databrowser/view/tour_occ_nim/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  c_resid: TOTAL       # residents and non-residents
+  nace_r2: I551-I553   # all tourist accommodation
+  unit: NR             # number of nights
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: monthly, from: 2015-01, to: 2026-09 }
+unit: { code: NR, label: "nights" }
+scope:
+  en: "Nights spent each month by residents and non-residents in all tourist accommodation: hotels, holiday and other short-stay accommodation, campsites. Short-term rentals booked through platforms are not included."
+  fr: "Nuitées de chaque mois, résidents et non-résidents, dans tous les hébergements touristiques : hôtels, hébergements de vacances et de courte durée, campings, hors locations réservées via des plateformes."
+pitfalls:
+  - "The latest month differs by country: September 2026 for some, August for most, July for Cyprus, Malta and Türkiye, June for Switzerland. To compare places, take a month they all have."
+  - "Missing months are refused, never filled in: Ireland all of 2015, 2016 and 2019; Switzerland all of 2015; Türkiye before 2018; Greece March and December 2020 (confidential); Bulgaria and Estonia several months between 2017 and 2023."
+  - "A month is not a season: September follows August's peak in the south, and nights fall fast."
+  - "No United Kingdom: Eurostat has no data after July 2020."
+theme: crowds
+operations: [change, change_pct, rank]

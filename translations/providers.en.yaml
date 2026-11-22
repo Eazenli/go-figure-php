@@ -1,0 +1,6 @@
+# The names of the sources' providers (source.provider in the catalog), as the proof page writes them.
+"eurostat": "Eurostat"
+"open_meteo": "Open-Meteo"
+"worldbank_cckp": "the World Bank (CCKP)"
+"world_bank": "the World Bank"
+"your_file": "your file"

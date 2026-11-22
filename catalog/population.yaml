@@ -1,0 +1,30 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-21 (dataset
+# updated 2026-11-19). Title, scope and pitfalls are written by hand.
+id: population
+title:
+  en: "Population"
+  fr: "Population"
+source:
+  provider: eurostat
+  dataset: demo_pjan
+  url: "https://ec.europa.eu/eurostat/databrowser/view/demo_pjan/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  freq: A              # annual
+  sex: T               # total
+  age: TOTAL           # all ages
+  unit: NR             # number
+geo: [EU27_2020, BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, CY, LV, LT, LU, HU, MT, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, IS, TR, ME]
+time: { granularity: annual, from: 2000, to: 2025 }
+unit: { code: NR, label: "inhabitants" }
+scope:
+  en: "The number of people who usually live in the country on 1 January of the year. Residents, whatever their nationality; not visitors."
+  fr: "Le nombre de personnes qui résident habituellement dans le pays au 1er janvier de l'année. Les résidents, quelle que soit leur nationalité ; pas les visiteurs."
+pitfalls:
+  - "On 1 January: the figure of a year describes the very start of it."
+  - "A census can revise the series: a jump between two years is sometimes a correction, not a movement of people. Eurostat marks these as breaks in series."
+  - "The latest years are often provisional or estimated."
+  - "The whole country only, all ages together: no city, no age group in the catalog."
+theme: other
+operations: [change, change_pct, rank]

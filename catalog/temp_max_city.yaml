@@ -1,0 +1,65 @@
+# Catalog entry.
+# Monthly normals computed by Go Figure (data/weather.py) from the daily values of Open-Meteo, CERRA
+# reanalysis, 1991-2020, downloaded on 2026-11-18 and 2026-11-19 (make weather). The points: data/cities.csv, the
+# GISCO label point of each city.
+id: temp_max_city
+title:
+  en: "Average daily maximum temperature in the city"
+  fr: "Température maximale moyenne dans la ville"
+source:
+  provider: open_meteo
+  dataset: "Historical Weather API, CERRA reanalysis"
+  # {place} becomes the point of the city (geo_map): the link returns the daily values averaged.
+  url: "https://archive-api.open-meteo.com/v1/archive?{place}&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max&models=cerra&timezone=GMT"
+  # Shown on the proof, where numbers are allowed: the full notice of the Copernicus licence (5.1.2, 5.1.3).
+  licence: "Open-Meteo.com, CC BY 4.0. Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains."
+  # Shown under every page that shows one of these figures, and on the proof. No number.
+  attribution:
+    - { text: "Weather data by Open-Meteo.com", url: "https://open-meteo.com/" }
+    - { text: "Contains modified Copernicus Climate Change Service information" }
+geo_map:
+  ES004C: "latitude=37.393&longitude=-5.956"
+  PT001C: "latitude=38.807&longitude=-9.174"
+  HR005C: "latitude=43.521&longitude=16.514"
+  ES006C: "latitude=36.768&longitude=-4.424"
+  PT009C: "latitude=37.079&longitude=-7.923"
+  EL004C: "latitude=35.310&longitude=25.111"
+  FR008C: "latitude=43.701&longitude=7.220"
+  IT005C: "latitude=38.130&longitude=13.331"
+  ES003C: "latitude=39.471&longitude=-0.445"
+  ES002C: "latitude=41.416&longitude=2.166"
+  PT002C: "latitude=41.130&longitude=-8.556"
+  CY003C: "latitude=34.704&longitude=33.008"
+  BG003C: "latitude=43.199&longitude=27.883"
+  HR007C: "latitude=44.143&longitude=15.246"
+  IT026C: "latitude=39.244&longitude=9.205"
+  IT010C: "latitude=37.470&longitude=15.035"
+  FR004C: "latitude=43.303&longitude=5.459"
+  FR011C: "latitude=43.625&longitude=3.850"
+  ES001C: "latitude=40.443&longitude=-3.708"
+  FR001C: "latitude=48.841&longitude=2.315"
+  IT001C: "latitude=41.863&longitude=12.387"
+  EL001C: "latitude=38.023&longitude=23.756"
+  AT001C: "latitude=48.199&longitude=16.369"
+  DE001C: "latitude=52.502&longitude=13.402"
+  NL001C: "latitude=52.366&longitude=4.912"
+  DK001C: "latitude=55.719&longitude=12.514"
+  CZ001C: "latitude=50.067&longitude=14.466"
+  HU001C: "latitude=47.475&longitude=19.093"
+geo: [ES004C, PT001C, HR005C, ES006C, PT009C, EL004C, FR008C, IT005C, ES003C, ES002C, PT002C, CY003C, BG003C, HR007C, IT026C, IT010C, FR004C, FR011C, ES001C, FR001C, IT001C, EL001C, AT001C, DE001C, NL001C, DK001C, CZ001C, HU001C]
+places: { ES004C: Seville, PT001C: Lisbon, HR005C: Split, ES006C: Malaga, PT009C: Faro, EL004C: Heraklion, FR008C: Nice, IT005C: Palermo, ES003C: Valencia, ES002C: Barcelona, PT002C: Porto, CY003C: Limassol, BG003C: Varna, HR007C: Zadar, IT026C: Cagliari, IT010C: Catania, FR004C: Marseille, FR011C: Montpellier, ES001C: Madrid, FR001C: Paris, IT001C: Rome, EL001C: Athens, AT001C: Vienna, DE001C: Berlin, NL001C: Amsterdam, DK001C: Copenhagen, CZ001C: Prague, HU001C: Budapest }
+time: { granularity: month_of_year, normal: "1991-2020" }
+unit: { code: degC, label: "°C" }
+scope:
+  en: "Mean of the daily maximum temperature at one point of the city, over 1991-2020. CERRA reanalysis of Copernicus, adjusted by Open-Meteo to the elevation of the point."
+  fr: "Moyenne de la température maximale journalière en un point de la ville, sur 1991-2020. Réanalyse CERRA de Copernicus, ajustée par Open-Meteo à l'altitude du point."
+method:
+  en: "Go Figure averages the daily maximum temperature of every day of that month from 1991 to 2020, from the daily values the source link returns, and rounds half up to one decimal."
+  fr: "Go Figure fait la moyenne des températures maximales de tous les jours de ce mois de 1991 à 2020, d'après les valeurs journalières que renvoie le lien de la source, arrondie au dixième."
+pitfalls:
+  - "One point, not the whole city: the coast and the hills of a city can differ by several degrees. Lisbon's point is about 10 km north of the centre."
+  - "A reanalysis, not a weather station: a weather model held close to the observations."
+  - "A normal, not a forecast: an average over 30 years, and the recent years have been warmer."
+  - "Cities only: a country has no figure here. The places of the dataset are its cities."
+theme: weather
+operations: [change, rank]

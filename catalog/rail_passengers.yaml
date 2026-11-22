@@ -1,0 +1,27 @@
+# Catalog entry.
+# Factual fields drafted from the Eurostat API with data/catalog_draft.py on 2026-11-18 (dataset
+# updated 2026-10-29). Title, scope and pitfalls are written by hand.
+id: rail_passengers
+title:
+  en: "Rail passengers"
+  fr: "Voyageurs ferroviaires"
+source:
+  provider: eurostat
+  dataset: rail_pa_total
+  url: "https://ec.europa.eu/eurostat/databrowser/view/rail_pa_total/default/table"
+  licence: "Eurostat, reuse authorised with source acknowledgement"
+dimensions:
+  unit: THS_PAS        # thousand passengers
+geo: [BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, HR, IT, LV, LT, LU, HU, NL, AT, PL, PT, RO, SI, SK, FI, SE, CH, NO, TR, ME]
+time: { granularity: annual, from: 2008, to: 2025 }
+unit: { code: THS_PAS, label: "thousand passengers" }
+scope:
+  en: "Passengers carried by rail in the country, national and international journeys, in thousands. Every journey counts once, whatever its length."
+  fr: "Voyageurs transportés par le train dans le pays, trajets nationaux et internationaux, en milliers. Chaque trajet compte une fois, quelle que soit sa longueur."
+pitfalls:
+  - "Passengers, not distance: a short commute and a long trip count the same. For distance, use rail_passenger_km."
+  - "Missing years are refused: Belgium after 2011, France 2010-2011, Italy 2011, Hungary 2015-2023, the Netherlands 2008-2014, Poland 2018-2024. Montenegro starts in 2013, ends in 2024 and misses 2021."
+  - "No railways in Cyprus, Malta and Iceland, and no EU aggregate for this unit."
+  - "No United Kingdom: Eurostat has no data after 2019."
+theme: access
+operations: [change, change_pct, rank]
