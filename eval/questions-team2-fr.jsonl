@@ -1,0 +1,20 @@
+{"id": "espagne-septembre", "question": "Je voudrais partir en Espagne en septembre, est-ce qu'il fait encore chaud ?", "expected": [{"dataset": "temp_max_city", "geo": ["ES004C", "ES006C", "ES003C", "ES002C", "ES001C"], "time": ["M09"]}]}
+{"id": "restaurants-abordables", "question": "Quel est le pays où les restaurants sont les plus abordables par rapport à la moyenne européenne ?", "expected": [{"dataset": "prices_restaurants_hotels", "must": ["BG"]}]}
+{"id": "lisbonne-paris-juillet", "question": "Est-ce que Lisbonne est plus chaude que Paris en juillet ?", "expected": [{"dataset": "temp_max_city", "geo": ["PT001C", "FR001C"], "time": ["M07"]}]}
+{"id": "nuits-france", "question": "Combien de nuits les touristes passent-ils en moyenne en France chaque année ?", "expected": [{"dataset": "nights_total", "geo": ["FR"]}, {"dataset": "nights_hotels", "geo": ["FR"]}]}
+{"id": "hotels-pas-chers", "question": "Je cherche un pays où les hôtels ne coûtent pas trop cher, tu me conseilles lequel ?", "expected": [{"dataset": "prices_restaurants_hotels", "must": ["BG"]}]}
+{"id": "activite-touristique-2023", "question": "Quel pays européen a connu la plus forte activité touristique en 2023 ?", "expected": [{"dataset": "nights_total", "time": ["2023"], "must": ["ES"]}, {"dataset": "nights_hotels", "time": ["2023"], "must": ["ES"]}]}
+{"id": "restaurants-suisse-allemagne", "question": "Est-ce que les prix des restaurants sont plus élevés en Suisse ou en Allemagne ?", "expected": [{"dataset": "prices_restaurants_hotels", "geo": ["CH", "DE"]}]}
+{"id": "ville-chaude-aout", "question": "Quelle ville a les températures maximales les plus élevées en août ?", "expected": [{"dataset": "temp_max_city", "time": ["M08"], "must": ["ES004C"]}]}
+{"id": "train-le-plus-souvent", "question": "Quels sont les pays où les voyageurs prennent le plus souvent le train ?", "expected": [{"dataset": "train_share", "must": ["CH"]}]}
+{"id": "croatie-juillet-aout", "question": "Est-ce que la Croatie accueille davantage de touristes en juillet ou en août ?", "expected": [{"dataset": "nights_monthly", "geo": ["HR"]}]}
+{"id": "athenes-ete", "question": "C'est comment la météo à Athènes pendant les vacances d'été ?", "expected": [{"dataset": "temp_max_city", "geo": ["EL001C"], "time": ["M06", "M07", "M08"]}, {"dataset": "rain_city", "geo": ["EL001C"], "time": ["M06", "M07", "M08"]}]}
+{"id": "france-allemagne-manger", "question": "Entre la France et l'Allemagne, c'est lequel le plus cher pour manger ?", "expected": [{"dataset": "prices_food", "geo": ["FR", "DE"]}, {"dataset": "prices_restaurants_hotels", "geo": ["FR", "DE"]}]}
+{"id": "eviter-touristes-aout", "question": "Je veux éviter les endroits blindés de touristes en août, quels pays je devrais regarder ?", "expected": [{"dataset": "nights_monthly"}]}
+{"id": "ete-sec", "question": "Où est-ce qu'on a le plus de chances d'avoir un été sec en Europe ?", "expected": [{"dataset": "rain_city", "time": ["M06", "M07", "M08"], "must": ["CY003C"]}]}
+{"id": "portugal-espagne-pas-cher", "question": "Le Portugal est-il plus intéressant que l'Espagne pour des vacances pas trop chères ?", "expected": [{"dataset": "prices_restaurants_hotels", "geo": ["PT", "ES"]}, {"dataset": "prices_food", "geo": ["PT", "ES"]}]}
+{"id": "trap-salaire-infirmier", "question": "Combien gagne un infirmier en moyenne au Danemark ?", "expected": []}
+{"id": "trap-eau-nice", "question": "Quelle est la température de l'eau à Nice en août ?", "expected": []}
+{"id": "trap-metro-madrid", "question": "Combien coûte un abonnement mensuel au métro de Madrid ?", "expected": []}
+{"id": "trap-satisfaction", "question": "Quelle ville européenne a le meilleur taux de satisfaction des habitants ?", "expected": []}
+{"id": "trap-pluie-demain", "question": "Est-ce qu'il va pleuvoir demain à Amsterdam ?", "expected": []}

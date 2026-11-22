@@ -1,0 +1,30 @@
+{"id": "restaurants-cheapest", "question": "In which country is eating at a restaurant cheapest?", "expected": [{"dataset": "prices_restaurants_hotels", "must": ["BG"]}]}
+{"id": "groceries-cheapest", "question": "Where in Europe can I do my grocery shopping for the least money?", "expected": [{"dataset": "prices_food", "must": ["RO"]}]}
+{"id": "hottest-city-july", "question": "Which European city is the hottest in July?", "expected": [{"dataset": "temp_max_city", "time": ["M07"], "must": ["ES004C"]}]}
+{"id": "least-rain-august", "question": "Where does it rain the least in August?", "expected": [{"dataset": "rain_city", "time": ["M08"], "must": ["CY003C"]}]}
+{"id": "hotels-dearest", "question": "In which country are hotels the most expensive?", "expected": [{"dataset": "prices_restaurants_hotels", "must": ["CH"]}]}
+{"id": "most-tourists-year", "question": "Which country receives the most tourists each year?", "expected": [{"dataset": "nights_total", "must": ["IT"]}, {"dataset": "nights_hotels"}]}
+{"id": "tourists-per-population", "question": "Which country has the most tourists relative to its population?", "expected": [{"dataset": "tourism_intensity", "must": ["IS"]}]}
+{"id": "spain-nights-2023", "question": "How many tourist nights did Spain record in 2023?", "expected": [{"dataset": "nights_total", "geo": ["ES"], "time": ["2023"]}]}
+{"id": "cheapest-holiday", "question": "Which country is the cheapest to go on holiday?", "expected": [{"dataset": "prices_restaurants_hotels"}, {"dataset": "prices_food", "must": ["RO"]}]}
+{"id": "rome-june", "question": "What is the average maximum temperature in Rome in June?", "expected": [{"dataset": "temp_max_city", "geo": ["IT001C"], "time": ["M06"]}]}
+{"id": "most-air-passengers", "question": "Which country carries the most air passengers?", "expected": [{"dataset": "air_passengers", "must": ["ES"]}]}
+{"id": "most-train", "question": "Which countries use the train the most?", "expected": [{"dataset": "rail_passengers"}, {"dataset": "train_share"}, {"dataset": "rail_passenger_km"}]}
+{"id": "most-nights-august-2023", "question": "Which country recorded the most tourist nights in August 2023?", "expected": [{"dataset": "nights_monthly", "time": ["2023-08"], "must": ["FR"]}]}
+{"id": "hotel-cheapest", "question": "Where in Europe can I sleep in a hotel for the least money?", "expected": [{"dataset": "prices_restaurants_hotels", "must": ["BG"]}]}
+{"id": "most-tourists-summer", "question": "Which country receives the most tourists in summer?", "expected": [{"dataset": "nights_monthly"}]}
+{"id": "barcelona-summer", "question": "How hot is it in Barcelona in summer?", "expected": [{"dataset": "temp_max_city", "geo": ["ES002C"], "time": ["M06", "M07", "M08"]}]}
+{"id": "least-rain-winter", "question": "where does it rain the least in europe in winter?", "expected": [{"dataset": "rain_city", "time": ["M12", "M01", "M02"]}]}
+{"id": "cheapest-country-holidays", "question": "whats the cheapest country for holidays?", "expected": [{"dataset": "prices_restaurants_hotels"}, {"dataset": "prices_food", "must": ["RO"]}]}
+{"id": "spain-or-italy", "question": "Do tourists go more to Spain or to Italy?", "expected": [{"dataset": "nights_total", "geo": ["ES", "IT"]}, {"dataset": "nights_hotels", "geo": ["ES", "IT"]}]}
+{"id": "france-or-greece", "question": "Which country is more touristy, France or Greece?", "expected": [{"dataset": "nights_total", "geo": ["FR", "EL"]}, {"dataset": "tourism_intensity", "geo": ["FR", "EL"]}, {"dataset": "nights_hotels", "geo": ["FR", "EL"]}]}
+{"id": "hotel-price-three", "question": "hotel price portugal vs spain and italy?", "expected": [{"dataset": "prices_restaurants_hotels", "geo": ["PT", "ES", "IT"]}]}
+{"id": "plane-or-train-germany", "question": "Do people take the plane or the train more in Germany?", "expected": [{"dataset": "air_passengers", "geo": ["DE"]}, {"dataset": "rail_passengers", "geo": ["DE"]}]}
+{"id": "warm-and-dry-july", "question": "Where is it warm and not too rainy in July?", "expected": [{"dataset": "temp_max_city", "time": ["M07"]}, {"dataset": "rain_city", "time": ["M07"]}]}
+{"id": "trap-air-quality", "question": "What is the air quality in Paris today?", "expected": []}
+{"id": "trap-pizza", "question": "How much does a pizza cost in Rome?", "expected": []}
+{"id": "trap-salary", "question": "What is the average salary of a developer in Berlin?", "expected": []}
+{"id": "trap-new-york", "question": "What is the temperature in New York right now?", "expected": []}
+{"id": "trap-1950", "question": "How many tourists visited Spain in 1950?", "expected": []}
+{"id": "trap-crime", "question": "What is the crime rate in Spain?", "expected": []}
+{"id": "trap-train-ticket", "question": "What is the price of a train ticket between Paris and Lyon?", "expected": []}

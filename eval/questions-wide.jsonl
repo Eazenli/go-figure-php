@@ -1,0 +1,25 @@
+{"id": "gdp-rank", "question": "Which country has the highest GDP per capita?", "expected": [{"dataset": "gdp_per_inhabitant", "must": ["LU"]}]}
+{"id": "gdp-richer", "question": "Is Portugal or Spain richer?", "expected": [{"dataset": "gdp_per_inhabitant", "geo": ["PT", "ES"]}]}
+{"id": "inflation-since", "question": "Inflation in France and Germany since 2015", "expected": [{"dataset": "inflation", "geo": ["FR", "DE"]}]}
+{"id": "inflation-year", "question": "What was inflation in Poland in 2022?", "expected": [{"dataset": "inflation", "geo": ["PL"], "time": ["2022"]}]}
+{"id": "house-prices-since", "question": "House prices in Portugal since 2015", "expected": [{"dataset": "house_prices", "geo": ["PT"]}]}
+{"id": "house-prices-rank", "question": "Where did house prices rise the most?", "expected": [{"dataset": "house_prices", "must": ["HU"]}]}
+{"id": "renewables", "question": "Renewable energy in Sweden, Denmark and Poland", "expected": [{"dataset": "renewable_share", "geo": ["SE", "DK", "PL"]}]}
+{"id": "renewables-rank", "question": "Which country has the most green energy?", "expected": [{"dataset": "renewable_share", "must": ["IS"]}]}
+{"id": "waste-least", "question": "Which country produces the least waste per inhabitant?", "expected": [{"dataset": "municipal_waste", "must": ["PL"]}]}
+{"id": "forest", "question": "How much forest does Finland have?", "expected": [{"dataset": "forest_area", "geo": ["FI"]}]}
+{"id": "forest-rank", "question": "Which country has the most forest?", "expected": [{"dataset": "forest_area", "must": ["SE"]}]}
+{"id": "cars-per-inhabitant", "question": "Cars per inhabitant in Italy and the Netherlands", "expected": [{"dataset": "cars_per_inhabitant", "geo": ["IT", "NL"]}]}
+{"id": "population", "question": "Population of Germany, France and Italy", "expected": [{"dataset": "population", "geo": ["DE", "FR", "IT"]}]}
+{"id": "population-since", "question": "How has the population of Bulgaria changed since 2000?", "expected": [{"dataset": "population", "geo": ["BG"]}]}
+{"id": "population-smallest", "question": "Which countries have the smallest population?", "expected": [{"dataset": "population", "must": ["IS"]}]}
+{"id": "intensity-kept", "question": "Tourism relative to its population in Croatia", "expected": [{"dataset": "tourism_intensity", "geo": ["HR"]}]}
+{"id": "restaurants-kept", "question": "Restaurant prices in Spain and Italy", "expected": [{"dataset": "prices_restaurants_hotels", "geo": ["ES", "IT"]}]}
+{"id": "trap-city-population", "question": "How many people live in Lisbon?", "expected": []}
+{"id": "trap-city-forest", "question": "Forest in Madrid", "expected": []}
+{"id": "trap-house-prices-greece", "question": "House prices in Greece", "expected": []}
+{"id": "trap-rents", "question": "Where are rents highest?", "expected": []}
+{"id": "trap-wages", "question": "Average wage in Germany", "expected": []}
+{"id": "two-subjects", "question": "House prices and inflation in Portugal", "expected": [{"dataset": "house_prices", "geo": ["PT"]}, {"dataset": "inflation", "geo": ["PT"]}]}
+{"id": "intensity-and-another", "question": "Tourists per inhabitant and house prices in Croatia", "expected": [{"dataset": "tourism_intensity", "geo": ["HR"]}, {"dataset": "house_prices", "geo": ["HR"]}]}
+{"id": "trap-cheap-housing", "question": "Where is housing cheapest?", "expected": []}

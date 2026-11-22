@@ -1,0 +1,12 @@
+{"id": "short-month", "question": "Is Lisbon warm in Sep?", "expected": [{"dataset": "temp_max_city", "geo": ["PT001C"], "time": ["M09"]}]}
+{"id": "capital-word", "question": "Lisbon Weather in May", "expected": [{"dataset": "temp_max_city", "geo": ["PT001C"], "time": ["M05"]}, {"dataset": "rain_city", "geo": ["PT001C"], "time": ["M05"]}]}
+{"id": "air-temperature", "question": "air temperature in Lisbon", "expected": [{"dataset": "temp_max_city", "geo": ["PT001C"]}]}
+{"id": "nice-weather", "question": "Nice weather in Lisbon?", "expected": [{"dataset": "temp_max_city", "geo": ["PT001C"]}, {"dataset": "rain_city", "geo": ["PT001C"]}]}
+{"id": "month-and-year", "question": "Tourism in Portugal in August 2019", "expected": [{"dataset": "nights_monthly", "geo": ["PT"], "time": ["2019-08"]}]}
+{"id": "two-months", "question": "Temperature in Seville in July or August", "expected": [{"dataset": "temp_max_city", "geo": ["ES004C"], "time": ["M07", "M08"]}]}
+{"id": "country-synonym", "question": "Hotel nights in the Czech Republic", "expected": [{"dataset": "nights_hotels", "geo": ["CZ"]}]}
+{"id": "year-outside", "question": "Tourism in France in 1995", "expected": []}
+{"id": "french-question", "question": "Quel temps fait-il à Lisbonne en mai ?", "expected": [{"dataset": "temp_max_city", "geo": ["PT001C"], "time": ["M05"]}, {"dataset": "rain_city", "geo": ["PT001C"], "time": ["M05"]}]}
+{"id": "trap-cheap-flights", "question": "Cheap flights to Greece", "expected": []}
+{"id": "trap-nationality", "question": "Spanish hotels compared with Italian hotels", "expected": []}
+{"id": "trap-population-city", "question": "population of Madrid", "expected": []}

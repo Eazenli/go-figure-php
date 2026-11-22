@@ -1,0 +1,26 @@
+{"id": "warm-september", "question": "Is Lisbon or Seville warmer in September?", "expected": [{"dataset": "temp_max_city", "geo": ["PT001C", "ES004C"], "time": ["M09"]}]}
+{"id": "warm-lowercase", "question": "lisbon vs seville temperature september", "expected": [{"dataset": "temp_max_city", "geo": ["PT001C", "ES004C"], "time": ["M09"]}]}
+{"id": "rain-november", "question": "How much does it rain in Nice in November?", "expected": [{"dataset": "rain_city", "geo": ["FR008C"], "time": ["M11"]}]}
+{"id": "cold-january", "question": "How cold is Copenhagen in January?", "expected": [{"dataset": "temp_max_city", "geo": ["DK001C"], "time": ["M01"]}]}
+{"id": "dry-july", "question": "Is Malaga or Faro drier in July?", "expected": [{"dataset": "rain_city", "geo": ["ES006C", "PT009C"], "time": ["M07"]}]}
+{"id": "hot-august", "question": "How hot is Heraklion in August?", "expected": [{"dataset": "temp_max_city", "geo": ["EL004C"], "time": ["M08"]}]}
+{"id": "hotels-three", "question": "Which is busiest for hotels: Spain, Italy or Greece?", "expected": [{"dataset": "nights_hotels", "geo": ["ES", "IT", "EL"]}]}
+{"id": "tourism-two-readings", "question": "Tourism in France and Spain in 2024", "expected": [{"dataset": "nights_total", "geo": ["FR", "ES"], "time": ["2024"]}, {"dataset": "nights_hotels", "geo": ["FR", "ES"], "time": ["2024"]}]}
+{"id": "tourism-since", "question": "How has tourism in Portugal changed since 2015?", "expected": [{"dataset": "nights_total", "geo": ["PT"]}, {"dataset": "nights_hotels", "geo": ["PT"]}]}
+{"id": "busy-august", "question": "How busy is Spain in August?", "expected": [{"dataset": "nights_monthly", "geo": ["ES"]}]}
+{"id": "tourists-per-inhabitant", "question": "Which country has more tourists per inhabitant, Croatia or Spain?", "expected": [{"dataset": "tourism_intensity", "geo": ["HR", "ES"]}]}
+{"id": "restaurants-three", "question": "Which is cheaper for restaurants: Portugal, Spain or Croatia?", "expected": [{"dataset": "prices_restaurants_hotels", "geo": ["PT", "ES", "HR"]}]}
+{"id": "food-two", "question": "Is food more expensive in Denmark or in Germany?", "expected": [{"dataset": "prices_food", "geo": ["DK", "DE"]}]}
+{"id": "paris-restaurants", "question": "Is Paris expensive for restaurants?", "expected": [{"dataset": "prices_restaurants_hotels", "geo": ["FR"]}]}
+{"id": "air-greece", "question": "How many air passengers did Greece have in 2023?", "expected": [{"dataset": "air_passengers", "geo": ["EL"], "time": ["2023"]}]}
+{"id": "rail-two", "question": "Rail passengers in Germany and France", "expected": [{"dataset": "rail_passengers", "geo": ["DE", "FR"]}]}
+{"id": "rail-km", "question": "Rail passenger-kilometres in Italy in 2022", "expected": [{"dataset": "rail_passenger_km", "geo": ["IT"], "time": ["2022"]}]}
+{"id": "train-share", "question": "What is the share of trains in Austria?", "expected": [{"dataset": "train_share", "geo": ["AT"]}]}
+{"id": "hotels-year", "question": "Hotel nights in Portugal in 2019", "expected": [{"dataset": "nights_hotels", "geo": ["PT"], "time": ["2019"]}]}
+{"id": "weather-two", "question": "What is the weather like in Split in June?", "expected": [{"dataset": "temp_max_city", "geo": ["HR005C"], "time": ["M06"]}, {"dataset": "rain_city", "geo": ["HR005C"], "time": ["M06"]}]}
+{"id": "trap-beer", "question": "Where in Europe is beer cheapest?", "expected": []}
+{"id": "trap-unemployment", "question": "What is the unemployment rate in Spain?", "expected": []}
+{"id": "trap-population", "question": "How many people live in Lisbon?", "expected": []}
+{"id": "trap-salary", "question": "Average salary in Germany in 2023", "expected": []}
+{"id": "trap-unknown-place", "question": "Is Tokyo warmer than Lisbon in May?", "expected": []}
+{"id": "trap-life", "question": "What is the meaning of life?", "expected": []}

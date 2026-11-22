@@ -1,0 +1,12 @@
+{"id": "rainier-october", "question": "Is it rainier in Palermo or in Nice in October?", "expected": [{"dataset": "rain_city", "geo": ["IT005C", "FR008C"], "time": ["M10"]}]}
+{"id": "two-cities-july", "question": "Temperature in Madrid and Barcelona in July", "expected": [{"dataset": "temp_max_city", "geo": ["ES001C", "ES002C"], "time": ["M07"]}]}
+{"id": "more-flights", "question": "Which country gets more flights, Spain or Italy?", "expected": [{"dataset": "air_passengers", "geo": ["ES", "IT"]}]}
+{"id": "restaurants-cheaper", "question": "Are restaurants cheaper in Greece than in Italy?", "expected": [{"dataset": "prices_restaurants_hotels", "geo": ["EL", "IT"]}]}
+{"id": "groceries", "question": "Groceries in Portugal compared with France", "expected": [{"dataset": "prices_food", "geo": ["PT", "FR"]}]}
+{"id": "crowded-for-its-size", "question": "How crowded is Croatia for its size?", "expected": [{"dataset": "tourism_intensity", "geo": ["HR"]}]}
+{"id": "hotels-since", "question": "Nights in hotels in Greece since 2019", "expected": [{"dataset": "nights_hotels", "geo": ["EL"]}]}
+{"id": "take-the-train", "question": "How many people take the train in Spain?", "expected": [{"dataset": "rail_passengers", "geo": ["ES"]}]}
+{"id": "warm-in-winter", "question": "Is Faro warm in winter?", "expected": [{"dataset": "temp_max_city", "geo": ["PT009C"]}]}
+{"id": "gdp", "question": "What is the GDP of France?", "expected": [{"dataset": "gdp_per_inhabitant", "geo": ["FR"]}]}
+{"id": "trap-outside", "question": "Is Cairo warmer than Seville in March?", "expected": []}
+{"id": "trap-beer-lowercase", "question": "cheapest beer in prague", "expected": []}

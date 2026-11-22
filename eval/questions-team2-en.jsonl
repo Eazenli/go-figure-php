@@ -1,0 +1,20 @@
+{"id": "spain-september", "question": "I would like to go to Spain in September, is it still warm?", "expected": [{"dataset": "temp_max_city", "geo": ["ES004C", "ES006C", "ES003C", "ES002C", "ES001C"], "time": ["M09"]}]}
+{"id": "restaurants-affordable", "question": "In which country are restaurants the most affordable compared with the European average?", "expected": [{"dataset": "prices_restaurants_hotels", "must": ["BG"]}]}
+{"id": "lisbon-paris-july", "question": "Is Lisbon warmer than Paris in July?", "expected": [{"dataset": "temp_max_city", "geo": ["PT001C", "FR001C"], "time": ["M07"]}]}
+{"id": "nights-france", "question": "How many nights do tourists spend on average in France each year?", "expected": [{"dataset": "nights_total", "geo": ["FR"]}, {"dataset": "nights_hotels", "geo": ["FR"]}]}
+{"id": "hotels-not-expensive", "question": "I am looking for a country where hotels are not too expensive, which one do you recommend?", "expected": [{"dataset": "prices_restaurants_hotels", "must": ["BG"]}]}
+{"id": "tourism-activity-2023", "question": "Which European country had the highest tourism activity in 2023?", "expected": [{"dataset": "nights_total", "time": ["2023"], "must": ["ES"]}, {"dataset": "nights_hotels", "time": ["2023"], "must": ["ES"]}]}
+{"id": "restaurants-switzerland-germany", "question": "Are restaurant prices higher in Switzerland or in Germany?", "expected": [{"dataset": "prices_restaurants_hotels", "geo": ["CH", "DE"]}]}
+{"id": "hottest-city-august", "question": "Which city has the highest maximum temperatures in August?", "expected": [{"dataset": "temp_max_city", "time": ["M08"], "must": ["ES004C"]}]}
+{"id": "train-most-often", "question": "In which countries do travellers take the train most often?", "expected": [{"dataset": "train_share", "must": ["CH"]}]}
+{"id": "croatia-july-august", "question": "Does Croatia receive more tourists in July or in August?", "expected": [{"dataset": "nights_monthly", "geo": ["HR"]}]}
+{"id": "athens-summer", "question": "What is the weather like in Athens during the summer holidays?", "expected": [{"dataset": "temp_max_city", "geo": ["EL001C"], "time": ["M06", "M07", "M08"]}, {"dataset": "rain_city", "geo": ["EL001C"], "time": ["M06", "M07", "M08"]}]}
+{"id": "france-germany-eating", "question": "Between France and Germany, which one is more expensive for eating?", "expected": [{"dataset": "prices_food", "geo": ["FR", "DE"]}, {"dataset": "prices_restaurants_hotels", "geo": ["FR", "DE"]}]}
+{"id": "avoid-tourists-august", "question": "I want to avoid places packed with tourists in August, which countries should I look at?", "expected": [{"dataset": "nights_monthly"}]}
+{"id": "dry-summer", "question": "Where in Europe are you most likely to get a dry summer?", "expected": [{"dataset": "rain_city", "time": ["M06", "M07", "M08"], "must": ["CY003C"]}]}
+{"id": "portugal-spain-cheap", "question": "Is Portugal a better deal than Spain for holidays that are not too expensive?", "expected": [{"dataset": "prices_restaurants_hotels", "geo": ["PT", "ES"]}, {"dataset": "prices_food", "geo": ["PT", "ES"]}]}
+{"id": "trap-nurse-salary", "question": "How much does a nurse earn on average in Denmark?", "expected": []}
+{"id": "trap-water-nice", "question": "What is the water temperature in Nice in August?", "expected": []}
+{"id": "trap-metro-madrid", "question": "How much is a monthly metro pass in Madrid?", "expected": []}
+{"id": "trap-satisfaction", "question": "Which European city has the best satisfaction rate among its inhabitants?", "expected": []}
+{"id": "trap-rain-tomorrow", "question": "Is it going to rain tomorrow in Amsterdam?", "expected": []}
